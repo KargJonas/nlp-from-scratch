@@ -1,16 +1,16 @@
 package Layers;
 
+import Util.Activation;
 import Util.Initializers;
 
-public class Layer {
+public abstract class Layer<T extends Layer<T>> {
     private final int size;
-
     double[] weights;
     double[] biases;
     Integer weightSize;
     Integer biasSize;
-
-    Layer parentLayer;
+    Layer<?> parentLayer;
+    Activation.ActivationFn activationFn = Activation.IDENTITY;
 
     Initializers.Supplier weightInitializer = Initializers.RAND(0.1);
     Initializers.Supplier biasInitializer = Initializers.ZEROS();
@@ -19,16 +19,25 @@ public class Layer {
         this.size = size;
     }
 
-    public void setParentLayer(Layer parentLayer) {
+    protected abstract T getThis();
+
+    public void setParentLayer(Layer<?> parentLayer) {
         this.parentLayer = parentLayer;
     }
 
-    public void setWeightInitializer(Initializers.Supplier weightInitializer) {
+    public T setWeightInitializer(Initializers.Supplier weightInitializer) {
         this.weightInitializer = weightInitializer;
+        return getThis();
     }
 
-    public void setBiasInitializer(Initializers.Supplier biasInitializer) {
+    public T setBiasInitializer(Initializers.Supplier biasInitializer) {
         this.biasInitializer = biasInitializer;
+        return getThis();
+    }
+
+    public T setActivationFn(Activation.ActivationFn activationFn) {
+        this.activationFn = activationFn;
+        return getThis();
     }
 
     protected void setWBSizes(int weightSize, int biasSize) {
@@ -61,21 +70,5 @@ public class Layer {
 
     public int getSize() {
         return size;
-    }
-
-    protected static Layer build(int size) {
-        return new Layer(size);
-    }
-
-    protected static Layer build(int size, Initializers.Supplier weightInitializer) {
-        Layer builtLayer = new Layer(size);
-        builtLayer.setWeightInitializer(weightInitializer);
-        return builtLayer;
-    }
-
-    protected static Layer build(int size, Initializers.Supplier weightInitializer, Initializers.Supplier biasInitializer) {
-        Layer builtLayer = Layer.build(size, weightInitializer);
-        builtLayer.setBiasInitializer(biasInitializer);
-        return builtLayer;
     }
 }

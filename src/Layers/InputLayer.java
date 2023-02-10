@@ -2,12 +2,17 @@ package Layers;
 
 import Util.Shape;
 
-public class InputLayer extends Layer {
+public class InputLayer extends Layer<InputLayer> {
     Shape shape;
 
     public InputLayer(Shape shape) {
         super(shape.getSize());
         this.shape = shape;
+    }
+
+    @Override
+    protected InputLayer getThis() {
+        return this;
     }
 
     @Override

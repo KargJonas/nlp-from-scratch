@@ -2,6 +2,7 @@ import Data.PlainTextReader;
 import Data.Tokenizer;
 import Layers.DenseLayer;
 import Layers.InputLayer;
+import Util.Activation;
 import Util.Shape;
 
 public class Main {
@@ -28,7 +29,7 @@ public class Main {
 
         InputLayer il = InputLayer.build(Shape.build(16, 16));
         DenseLayer dl0 = DenseLayer.build(128);
-        DenseLayer dl1 = DenseLayer.build(10);
+        DenseLayer dl1 = DenseLayer.build(10).setActivationFn(Activation.SIGMOID);
 
         Model m = new Model()
                 .addLayer(il)

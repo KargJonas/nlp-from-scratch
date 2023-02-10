@@ -1,10 +1,13 @@
 package Layers;
 
-import Util.Initializers;
-
-public class DenseLayer extends Layer {
+public class DenseLayer extends Layer<DenseLayer> {
     DenseLayer(int size) {
         super(size);
+    }
+
+    @Override
+    protected DenseLayer getThis() {
+        return this;
     }
 
     /**
@@ -23,13 +26,5 @@ public class DenseLayer extends Layer {
 
     public static DenseLayer build(int size) {
         return new DenseLayer(size);
-    }
-
-    public static DenseLayer build(int size, Initializers.Supplier weightInitializer) {
-        return (DenseLayer)Layer.build(size, weightInitializer);
-    }
-
-    public static DenseLayer build(int size, Initializers.Supplier weightInitializer, Initializers.Supplier biasInitializer) {
-        return (DenseLayer)Layer.build(size, weightInitializer, biasInitializer);
     }
 }
