@@ -1,5 +1,6 @@
 package Layers;
 
+import Util.LayerType;
 import Util.Shape;
 
 public class InputLayer extends Layer<InputLayer> {
@@ -7,6 +8,7 @@ public class InputLayer extends Layer<InputLayer> {
 
     public InputLayer(Shape shape) {
         super(shape.getSize());
+        layerType = LayerType.INPUT;
         this.shape = shape;
     }
 
@@ -17,9 +19,12 @@ public class InputLayer extends Layer<InputLayer> {
 
     @Override
     public void initialize() {
-        setWBSizes(0, 0);
-        super.initialize();
+        // No need to initialize
+        activations = new double[size];
     }
+
+    @Override
+    public void initializeValues() { }
 
     public static InputLayer build(Shape shape) {
         return new InputLayer(shape);

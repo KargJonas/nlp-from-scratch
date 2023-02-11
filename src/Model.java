@@ -1,11 +1,16 @@
 import java.util.ArrayList;
 
 import Layers.Layer;
+import Util.LayerType;
 
 public class Model {
     ArrayList<Layer<?>> layers = new ArrayList<>();
 
     public Model addLayer(Layer<?> layer) {
+        if (layers.size() == 0 && layer.layerType != LayerType.INPUT) {
+            throw new RuntimeException("First layer must be of type InputLayer.");
+        }
+
         layers.add(layer);
         return this;
     }
@@ -18,7 +23,7 @@ public class Model {
      * Call Chain should look like this:
      * - setParentLayer()
      * - Dense/Input/RNN.initialize()
-     *      - Layer.setWBSizes()
+     *      - Layer.setWeightsPerUnit()
      *      - Layer.initialize()
      * - initializeValues()
      */
@@ -39,5 +44,15 @@ public class Model {
         }
 
         return this;
+    }
+
+    public double[] forwardPass(double[] input) {
+        layers.get(0).setActivations(input);
+
+        for (int i = 1; i < layers.size(); i++) {
+            layers.get(i).computeActivations();
+        }
+
+        return layers.get(layers.size() - 1).getActivations();
     }
 }

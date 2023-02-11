@@ -22,9 +22,9 @@ public class Main {
         Preprocessor.OneHotSentenceProvider oneHotSentenceProvider = preprocessor
                 .getOneHotSentenceProvider();
 
-        for (int i = 0; i < 10; i++) {
-            System.out.println(Arrays.deepToString(oneHotSentenceProvider.get()));
-        }
+//        for (int i = 0; i < 10; i++) {
+//            System.out.println(Arrays.deepToString(oneHotSentenceProvider.get()));
+//        }
 
         /*
          * model = keras.Sequential(
@@ -45,12 +45,17 @@ public class Main {
 
         InputLayer il = InputLayer.build(Shape.build(16, 16));
         DenseLayer dl0 = DenseLayer.build(128);
-        DenseLayer dl1 = DenseLayer.build(10).setActivationFn(Activation.SIGMOID);
+        DenseLayer dl1 = DenseLayer.build(10).setActivationFn(Activation.SOFTPLUS);
 
         Model m = new Model()
                 .addLayer(il)
                 .addLayer(dl0)
                 .addLayer(dl1)
                 .initialize();
+
+        double[] flattenedSentence = Arrays.stream(oneHotSentenceProvider.get()).flatMapToDouble(Arrays::stream).toArray();
+        double[] output = m.forwardPass(flattenedSentence);
+
+        System.out.println(Arrays.toString(output));
     }
 }
