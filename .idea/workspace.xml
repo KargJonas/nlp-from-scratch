@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="Replaced some builders for chainable methods for better readability.">
-      <change afterPath="$PROJECT_DIR$/src/Data/Preprocessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Tokenizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="Removed old files">
       <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1675699720752</updated>
       <workItem from="1675699722248" duration="1254000" />
-      <workItem from="1675944349238" duration="45594000" />
+      <workItem from="1675944349238" duration="46220000" />
     </task>
     <task id="LOCAL-00001" summary="Added InputLayer, DenseLayer, Model, Initializers, Activation">
       <created>1676065472857</created>
@@ -116,7 +112,28 @@
       <option name="project" value="LOCAL" />
       <updated>1676066916568</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Replaced some builders for chainable methods for better readability.">
+      <created>1676130488163</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676130488163</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added a Preprocessor">
+      <created>1676130515888</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1676130515888</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Removed old files">
+      <created>1676131093988</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1676131093988</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,6 +153,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added InputLayer, DenseLayer, Model, Initializers, Activation" />
     <MESSAGE value="Replaced some builders for chainable methods for better readability." />
-    <option name="LAST_COMMIT_MESSAGE" value="Replaced some builders for chainable methods for better readability." />
+    <MESSAGE value="Added a Preprocessor" />
+    <MESSAGE value="Removed old files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed old files" />
   </component>
 </project>
