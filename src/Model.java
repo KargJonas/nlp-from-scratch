@@ -3,9 +3,9 @@ import java.util.ArrayList;
 import Layers.Layer;
 
 public class Model {
-    ArrayList<Layer> layers = new ArrayList<>();
+    ArrayList<Layer<?>> layers = new ArrayList<>();
 
-    public Model addLayer(Layer layer) {
+    public Model addLayer(Layer<?> layer) {
         layers.add(layer);
         return this;
     }
@@ -30,7 +30,7 @@ public class Model {
             layers.get(i).setParentLayer(layers.get(i - 1));
         }
 
-        for (Layer layer : layers) {
+        for (Layer<?> layer : layers) {
             // Create arrays for weights and biases of appropriate size.
             layer.initialize(); // !! this must call initialize for
 

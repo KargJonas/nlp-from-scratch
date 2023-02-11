@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="Replaced some builders for chainable methods for better readability.">
+      <change afterPath="$PROJECT_DIR$/src/Data/Preprocessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layers/DenseLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/DenseLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layers/InputLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/InputLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layers/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/Layer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Tokenizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1675699720752</updated>
       <workItem from="1675699722248" duration="1254000" />
-      <workItem from="1675944349238" duration="38745000" />
+      <workItem from="1675944349238" duration="45594000" />
     </task>
     <task id="LOCAL-00001" summary="Added InputLayer, DenseLayer, Model, Initializers, Activation">
       <created>1676065472857</created>
@@ -109,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676065616311</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Replaced some builders for chainable methods for better readability.">
+      <created>1676066916567</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676066916568</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

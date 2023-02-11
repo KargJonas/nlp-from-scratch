@@ -1,14 +1,30 @@
 import Data.PlainTextReader;
+import Data.Preprocessor;
 import Data.Tokenizer;
 import Layers.DenseLayer;
 import Layers.InputLayer;
 import Util.Activation;
 import Util.Shape;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         PlainTextReader reader = new PlainTextReader("/home/jonas/code/nlp-1/src/nietzsche.txt");
-        Tokenizer tokenizer = new Tokenizer(reader);
+        Tokenizer tokenizer = new Tokenizer(reader, "\\W");
+        Preprocessor preprocessor = new Preprocessor(tokenizer,40, 3);
+        tokenizer.run();
+
+        // Should I make all of this "chainable" i.o.W.: should the Preprocessor also only read the tokens from
+        // The Tokenizer bit-by-bit? This way the net could also read bit-by-bit from the Preprocessor while training.
+        // This would mean unlimited dataset sizes.
+
+        Preprocessor.OneHotSentenceProvider oneHotSentenceProvider = preprocessor
+                .getOneHotSentenceProvider();
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println(Arrays.deepToString(oneHotSentenceProvider.get()));
+        }
 
         /*
          * model = keras.Sequential(

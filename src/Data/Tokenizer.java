@@ -4,17 +4,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Tokenizer {
-    private static final String delimiter = "\\W";
-//    private static final String delimiter = "((?=\\W))";
-
+    private final String delimiter;
     private final PlainTextReader reader;
     private int[] tokenizedText;
-
-    // token number => word
+    private int tokenReferenceSize;
     HashMap<Integer, String> tokenReference;
 
-    public Tokenizer(PlainTextReader reader) {
+    public Tokenizer(PlainTextReader reader, String delimiter) {
         this.reader = reader;
+        this.delimiter = delimiter;
     }
 
     public void run() {
@@ -52,6 +50,8 @@ public class Tokenizer {
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toCollection(ArrayList::new));
 
+        tokenReferenceSize = orderedTokenList.size();
+
         for (int i = 0; i < orderedTokenList.size(); i++) {
             String word = orderedTokenList.get(i);
 
@@ -70,5 +70,9 @@ public class Tokenizer {
 
     public HashMap<Integer, String> getTokenReference() {
         return tokenReference;
+    }
+
+    public int getTokenReferenceSize() {
+        return tokenReferenceSize;
     }
 }
