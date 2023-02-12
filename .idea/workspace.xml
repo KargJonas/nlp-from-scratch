@@ -4,15 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="Removed old files">
-      <change afterPath="$PROJECT_DIR$/src/Util/LayerType.java" afterDir="false" />
+    <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="Added Layer.computeActivations() and Model.forwardPass(), Better weight initialization, refactoring">
+      <change afterPath="$PROJECT_DIR$/src/Layers/SoftmaxLayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Util/ErrorFunctions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Layers/DenseLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/DenseLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Layers/InputLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/InputLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Layers/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/Layer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/Initializers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Initializers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/Activation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Activations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/LayerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/LayerType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -62,6 +64,9 @@
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ],
     "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
       "TEXT"
     ]
@@ -99,7 +104,7 @@
       <option name="presentableId" value="Default" />
       <updated>1675699720752</updated>
       <workItem from="1675699722248" duration="1254000" />
-      <workItem from="1675944349238" duration="54038000" />
+      <workItem from="1675944349238" duration="60299000" />
     </task>
     <task id="LOCAL-00001" summary="Added InputLayer, DenseLayer, Model, Initializers, Activation">
       <created>1676065472857</created>
@@ -150,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676131134617</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added Layer.computeActivations() and Model.forwardPass(), Better weight initialization, refactoring">
+      <created>1676153897275</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1676153897275</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,6 +184,7 @@
     <MESSAGE value="Replaced some builders for chainable methods for better readability." />
     <MESSAGE value="Added a Preprocessor" />
     <MESSAGE value="Removed old files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed old files" />
+    <MESSAGE value="Added Layer.computeActivations() and Model.forwardPass(), Better weight initialization, refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Layer.computeActivations() and Model.forwardPass(), Better weight initialization, refactoring" />
   </component>
 </project>

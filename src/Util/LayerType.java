@@ -1,5 +1,5 @@
 package Util;
 
 public enum LayerType {
-    INPUT, DENSE, ABSTRACT
+    INPUT, DENSE, SOFTMAX, ABSTRACT
 }

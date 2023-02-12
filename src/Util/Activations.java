@@ -1,6 +1,6 @@
 package Util;
 
-public class Activation {
+public class Activations {
     public interface ActivationFn {
         double f(double x);
     }

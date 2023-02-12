@@ -39,14 +39,13 @@ public class DenseLayer extends Layer<DenseLayer> {
     public void computeActivations() {
         if (parentLayer == null) return;
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < getSize(); i++) {
             double weightedSum = 0;
 
-            for (int j = 0; j < parentLayer.size; j++) {
+            for (int j = 0; j < parentLayer.getSize(); j++) {
                 weightedSum += parentLayer.activations[j] * weights[i][j];
             }
 
-            // TODO: This needs to be adjusted to work with functions such as SOFTMAX
             activations[i] = activationFn.f(weightedSum + biases[i]);
         }
     }

@@ -1,18 +1,18 @@
 package Layers;
 
-import Util.Activation;
+import Util.Activations;
 import Util.Initializers;
 import Util.LayerType;
 
 public abstract class Layer<T extends Layer<T>> {
     public LayerType layerType = LayerType.ABSTRACT;
-    protected final int size;
+    private final int size;
     protected double[][] weights;
     protected double[] biases;
     protected double[] activations;
     private Integer weightsPerUnit;
     protected Layer<?> parentLayer;
-    protected Activation.ActivationFn activationFn = Activation.IDENTITY;
+    protected Activations.ActivationFn activationFn = Activations.IDENTITY;
 
     private Initializers.Supplier weightInitializer;
     private Initializers.Supplier biasInitializer = Initializers.ZEROS();
@@ -44,7 +44,7 @@ public abstract class Layer<T extends Layer<T>> {
         return getThis();
     }
 
-    public T setActivationFn(Activation.ActivationFn activationFn) {
+    public T setActivationFn(Activations.ActivationFn activationFn) {
         this.activationFn = activationFn;
         return getThis();
     }

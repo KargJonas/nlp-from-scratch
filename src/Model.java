@@ -1,17 +1,30 @@
 import java.util.ArrayList;
 
 import Layers.Layer;
+import Util.ErrorFunctions.ErrorFn;
 import Util.LayerType;
 
 public class Model {
     ArrayList<Layer<?>> layers = new ArrayList<>();
+
+    ErrorFn errorFunction;
 
     public Model addLayer(Layer<?> layer) {
         if (layers.size() == 0 && layer.layerType != LayerType.INPUT) {
             throw new RuntimeException("First layer must be of type InputLayer.");
         }
 
+        if (layer.layerType == LayerType.SOFTMAX
+                && layers.get(layers.size() - 1).getSize() != layer.getSize()) {
+            throw new RuntimeException("Softmax layer must be same shape as the layer before it.");
+        }
+
         layers.add(layer);
+        return this;
+    }
+
+    public Model setErrorFunction(ErrorFn errorFunction) {
+        this.errorFunction = errorFunction;
         return this;
     }
 

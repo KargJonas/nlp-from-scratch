@@ -20,7 +20,7 @@ public class InputLayer extends Layer<InputLayer> {
     @Override
     public void initialize() {
         // No need to initialize
-        activations = new double[size];
+        activations = new double[getSize()];
     }
 
     @Override

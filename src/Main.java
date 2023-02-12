@@ -3,7 +3,9 @@ import Data.Preprocessor;
 import Data.Tokenizer;
 import Layers.DenseLayer;
 import Layers.InputLayer;
-import Util.Activation;
+import Layers.SoftmaxLayer;
+import Util.Activations;
+import Util.ErrorFunctions;
 import Util.Shape;
 
 import java.util.Arrays;
@@ -45,12 +47,15 @@ public class Main {
 
         InputLayer il = InputLayer.build(Shape.build(16, 16));
         DenseLayer dl0 = DenseLayer.build(128);
-        DenseLayer dl1 = DenseLayer.build(10).setActivationFn(Activation.SOFTPLUS);
+        DenseLayer dl1 = DenseLayer.build(10).setActivationFn(Activations.SOFTPLUS);
+        SoftmaxLayer sml = SoftmaxLayer.build(10);
 
         Model m = new Model()
                 .addLayer(il)
                 .addLayer(dl0)
                 .addLayer(dl1)
+                .addLayer(sml)
+                .setErrorFunction(ErrorFunctions.CATEGORICAL_CROSSENTROPY)
                 .initialize();
 
         double[] flattenedSentence = Arrays.stream(oneHotSentenceProvider.get()).flatMapToDouble(Arrays::stream).toArray();
