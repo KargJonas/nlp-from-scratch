@@ -16,6 +16,10 @@ public class Preprocessor {
         double[][] get();
     }
 
+    public interface FlatOneHotSentenceProvider {
+        double[] get();
+    }
+
     private final int maxSentenceLength;
     private final int stepOver;
     private final Tokenizer tokenizer;
@@ -48,7 +52,7 @@ public class Preprocessor {
         );
     }
 
-    public OneHotProvider getOneProvider(int tokenReferenceSize) {
+    public OneHotProvider getOneHotProvider(int tokenReferenceSize) {
         return (token) -> {
             double[] oneHotVector = new double[tokenReferenceSize];
             oneHotVector[token] = 1;
@@ -58,7 +62,7 @@ public class Preprocessor {
 
     public OneHotSentenceProvider getOneHotSentenceProvider() {
         Preprocessor.SentenceProvider sentenceProvider = getSentenceProvider(tokenizer.getTokenizedText());
-        Preprocessor.OneHotProvider oneHotProvider = getOneProvider(tokenizer.getTokenReferenceSize());
+        Preprocessor.OneHotProvider oneHotProvider = getOneHotProvider(tokenizer.getTokenReferenceSize());
 
         return () -> {
             int[] sentence = sentenceProvider.get();
@@ -66,6 +70,26 @@ public class Preprocessor {
 
             for (int i = 0; i < sentence.length; i++) {
                 oneHotSentence[i] = oneHotProvider.get(sentence[i]);
+            }
+
+            return oneHotSentence;
+        };
+    }
+
+    public FlatOneHotSentenceProvider getFlatOneHotSentenceProvider() {
+        Preprocessor.SentenceProvider sentenceProvider = getSentenceProvider(tokenizer.getTokenizedText());
+        Preprocessor.OneHotProvider oneHotProvider = getOneHotProvider(tokenizer.getTokenReferenceSize());
+
+        return () -> {
+            double[] oneHotSentence = new double[maxSentenceLength * tokenizer.getTokenReferenceSize()];
+            int[] sentence = sentenceProvider.get();
+
+            for (int i = 0; i < sentence.length; i++) {
+                double[] oneHotToken = oneHotProvider.get(sentence[i]);
+
+                for (int j = 0; j < oneHotToken.length; j++) {
+                    oneHotSentence[i * j] = oneHotToken[j];
+                }
             }
 
             return oneHotSentence;
