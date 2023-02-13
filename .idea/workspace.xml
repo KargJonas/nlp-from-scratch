@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="Added SoftmaxLayer and ErrorFunctions, also some refactoring">
+    <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="Misc changes to the Preprocessor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Data/Preprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Preprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Tokenizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/ErrorFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/ErrorFunctions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +101,7 @@
       <updated>1675699720752</updated>
       <workItem from="1675699722248" duration="1254000" />
       <workItem from="1675944349238" duration="67175000" />
-      <workItem from="1676292870684" duration="3202000" />
+      <workItem from="1676292870684" duration="10241000" />
     </task>
     <task id="LOCAL-00001" summary="Added InputLayer, DenseLayer, Model, Initializers, Activation">
       <created>1676065472857</created>
@@ -163,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676161602435</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Misc changes to the Preprocessor">
+      <created>1676304455080</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1676304455080</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,6 +198,23 @@
     <MESSAGE value="Added Layer.computeActivations() and Model.forwardPass(), Better weight initialization, refactoring" />
     <MESSAGE value="Added SoftmaxLayer and CategoricalCrossentropy," />
     <MESSAGE value="Added SoftmaxLayer and ErrorFunctions, also some refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added SoftmaxLayer and ErrorFunctions, also some refactoring" />
+    <MESSAGE value="Misc changes to the Preprocessor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Misc changes to the Preprocessor" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
+          <option name="timeStamp" value="3" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Data.Tokenizer" memberName="tokenReference" />
+        <PinnedItemInfo parentTag="Data.Tokenizer" memberName="tokenReferenceSize" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

@@ -37,8 +37,8 @@ public class Preprocessor {
         this.tokenizer = tokenizer;
     }
 
-    public SentenceProvider getSentenceProvider(int[] tokens) {
-        AtomicInteger currentToken = new AtomicInteger(0);
+    public SentenceProvider getSentenceProvider(int[] tokens, int initialIndex) {
+        AtomicInteger currentToken = new AtomicInteger(initialIndex);
 
         /*
          * From token list get subarray starting at currentToken until (currentToken + maxSentenceLength) or
@@ -60,8 +60,8 @@ public class Preprocessor {
         };
     }
 
-    public OneHotSentenceProvider getOneHotSentenceProvider() {
-        Preprocessor.SentenceProvider sentenceProvider = getSentenceProvider(tokenizer.getTokenizedText());
+    public OneHotSentenceProvider getOneHotSentenceProvider(int initialIndex) {
+        Preprocessor.SentenceProvider sentenceProvider = getSentenceProvider(tokenizer.getTokenizedText(), initialIndex);
         Preprocessor.OneHotProvider oneHotProvider = getOneHotProvider(tokenizer.getTokenReferenceSize());
 
         return () -> {
@@ -76,8 +76,8 @@ public class Preprocessor {
         };
     }
 
-    public FlatOneHotSentenceProvider getFlatOneHotSentenceProvider() {
-        Preprocessor.SentenceProvider sentenceProvider = getSentenceProvider(tokenizer.getTokenizedText());
+    public FlatOneHotSentenceProvider getFlatOneHotSentenceProvider(int initialIndex) {
+        Preprocessor.SentenceProvider sentenceProvider = getSentenceProvider(tokenizer.getTokenizedText(), initialIndex);
         Preprocessor.OneHotProvider oneHotProvider = getOneHotProvider(tokenizer.getTokenReferenceSize());
 
         return () -> {
@@ -86,10 +86,7 @@ public class Preprocessor {
 
             for (int i = 0; i < sentence.length; i++) {
                 double[] oneHotToken = oneHotProvider.get(sentence[i]);
-
-                for (int j = 0; j < oneHotToken.length; j++) {
-                    oneHotSentence[i * j] = oneHotToken[j];
-                }
+                System.arraycopy(oneHotToken, 0, oneHotSentence, i * oneHotToken.length, oneHotToken.length);
             }
 
             return oneHotSentence;

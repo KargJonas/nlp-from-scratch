@@ -14,4 +14,14 @@ public class ErrorFunctions {
 
         return crossEntropy;
     };
+
+    public static ErrorFn MEAN_SQUARED_ERROR = (x, y) -> {
+        double sum = 0;
+
+        for (int i = 0; i < y.length; i++) {
+            sum += Math.pow(x[i] - y[i], 2);
+        }
+
+        return sum;
+    };
 }

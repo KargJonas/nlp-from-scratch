@@ -29,7 +29,7 @@ public class Tokenizer {
             // Split line into words and punctuation characters.
             Arrays
                     .stream(line.toLowerCase().split(delimiter))
-                    .map(String::trim)
+//                    .map(String::trim)
                     .filter(word -> word.length() > 0)
                     .forEach(word -> {
                         words.add(word);

@@ -59,13 +59,20 @@ public class Model {
         return this;
     }
 
-    public double[] forwardPass(double[] input) {
+    public void forwardPass(double[] input) {
         layers.get(0).setActivations(input);
 
         for (int i = 1; i < layers.size(); i++) {
             layers.get(i).computeActivations();
         }
+    }
 
+    public double computeCost(double[] label) {
+        double[] output = getOutput();
+        return errorFunction.f(output, label);
+    }
+
+    public double[] getOutput() {
         return layers.get(layers.size() - 1).getActivations();
     }
 }
