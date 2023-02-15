@@ -29,4 +29,7 @@ public class InputLayer extends Layer<InputLayer> {
     public static InputLayer build(Shape shape) {
         return new InputLayer(shape);
     }
+
+    @Override
+    public void backprop(double[] errors, double learningRate) { }
 }

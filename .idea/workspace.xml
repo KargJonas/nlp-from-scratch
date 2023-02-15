@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="Misc changes to the Preprocessor">
+    <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Preprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Preprocessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Tokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layers/DenseLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/DenseLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layers/InputLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/InputLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layers/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/Layer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Layers/SoftmaxLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/SoftmaxLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/ErrorFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/ErrorFunctions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/Activations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Activations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Util/ErrorFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/LossFunctions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,39 +38,42 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2LN7Wd1zwzdBqu9l1x46vZ9bx7z" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/jonas/Downloads/json-20220924.jar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
+    "last_opened_file_path": "/home/jonas/Downloads/json-20220924.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "inlay.hints",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ],
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TEXT&quot;
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
@@ -101,7 +107,8 @@
       <updated>1675699720752</updated>
       <workItem from="1675699722248" duration="1254000" />
       <workItem from="1675944349238" duration="67175000" />
-      <workItem from="1676292870684" duration="10241000" />
+      <workItem from="1676292870684" duration="12078000" />
+      <workItem from="1676392771671" duration="17585000" />
     </task>
     <task id="LOCAL-00001" summary="Added InputLayer, DenseLayer, Model, Initializers, Activation">
       <created>1676065472857</created>
@@ -173,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676304455080</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added a initialIndex to the preprocessor for label generation. Bug fix in GetFlatOneHotSentenceProvider(). Added a cost function demo.">
+      <created>1676321224159</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1676321224159</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,6 +205,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Added InputLayer, DenseLayer, Model, Initializers, Activation" />
     <MESSAGE value="Replaced some builders for chainable methods for better readability." />
     <MESSAGE value="Added a Preprocessor" />
@@ -199,7 +214,8 @@
     <MESSAGE value="Added SoftmaxLayer and CategoricalCrossentropy," />
     <MESSAGE value="Added SoftmaxLayer and ErrorFunctions, also some refactoring" />
     <MESSAGE value="Misc changes to the Preprocessor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Misc changes to the Preprocessor" />
+    <MESSAGE value="Added a initialIndex to the preprocessor for label generation. Bug fix in GetFlatOneHotSentenceProvider(). Added a cost function demo." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a initialIndex to the preprocessor for label generation. Bug fix in GetFlatOneHotSentenceProvider(). Added a cost function demo." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

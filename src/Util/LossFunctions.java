@@ -1,11 +1,11 @@
 package Util;
 
-public class ErrorFunctions {
-    public interface ErrorFn {
+public class LossFunctions {
+    public interface LossFn {
         double f(double[] prediction, double[] truth);
     }
 
-    public static ErrorFn CATEGORICAL_CROSSENTROPY = (x, y) -> {
+    public static LossFn CATEGORICAL_CROSSENTROPY = (x, y) -> {
         double crossEntropy = 0;
 
         for (int i = 0; i < y.length; i++) {
@@ -15,7 +15,7 @@ public class ErrorFunctions {
         return crossEntropy;
     };
 
-    public static ErrorFn MEAN_SQUARED_ERROR = (x, y) -> {
+    public static LossFn MEAN_SQUARED_ERROR = (x, y) -> {
         double sum = 0;
 
         for (int i = 0; i < y.length; i++) {

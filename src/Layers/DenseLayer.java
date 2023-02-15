@@ -23,7 +23,7 @@ public class DenseLayer extends Layer<DenseLayer> {
     @Override
     public void initialize() {
         int parentLayerSize = parentLayer == null ? 0 : parentLayer.getSize();
-        setWeightsPerUnit(getSize() * parentLayerSize);
+        setWeightsPerUnit(parentLayerSize);
 
         super.initialize();
     }

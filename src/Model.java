@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 
+import Data.Preprocessor;
 import Layers.Layer;
-import Util.ErrorFunctions.ErrorFn;
+import Util.LossFunctions.LossFn;
 import Util.LayerType;
 
 public class Model {
     ArrayList<Layer<?>> layers = new ArrayList<>();
 
-    ErrorFn errorFunction;
+    LossFn lossFunction;
 
     public Model addLayer(Layer<?> layer) {
         if (layers.size() == 0 && layer.layerType != LayerType.INPUT) {
@@ -15,16 +16,18 @@ public class Model {
         }
 
         if (layer.layerType == LayerType.SOFTMAX
-                && layers.get(layers.size() - 1).getSize() != layer.getSize()) {
+                && getLastLayer().getSize() != layer.getSize()) {
             throw new RuntimeException("Softmax layer must be same shape as the layer before it.");
         }
+
+        layer.setLayerIndex(layers.size());
 
         layers.add(layer);
         return this;
     }
 
-    public Model setErrorFunction(ErrorFn errorFunction) {
-        this.errorFunction = errorFunction;
+    public Model setLossFunction(LossFn lossFunction) {
+        this.lossFunction = lossFunction;
         return this;
     }
 
@@ -41,7 +44,12 @@ public class Model {
      * - initializeValues()
      */
     public Model initialize() {
-        if (layers.size() < 1) return this;
+        System.out.println("Initializing model ...");
+
+        if (layers.size() < 1) {
+            System.out.println("\tNo layers in model. Aborting.");
+            return this;
+        }
 
         // Set parent layers
         for (int i = 1; i < layers.size(); i++) {
@@ -56,6 +64,8 @@ public class Model {
             layer.initializeValues();
         }
 
+        System.out.println("\tDone.");
+
         return this;
     }
 
@@ -67,12 +77,77 @@ public class Model {
         }
     }
 
-    public double computeCost(double[] label) {
-        double[] output = getOutput();
-        return errorFunction.f(output, label);
+    /**
+     * Returns the error between the activations of the last layer and the label.
+     * @param label Target output.
+     * @return Error vector (output - label).
+     */
+    public double[] computeError(double[] label) {
+        double[] prediction = getOutput();
+        double[] error = new double[label.length];
+
+        for (int i = 0; i < label.length; i++) {
+            error[i] = prediction[i] - label[i];
+        }
+
+        return error;
     }
 
+    /**
+     * Applies the loss function to the label and the activations of the last layer.
+     * @param label Target output.
+     * @return Loss value (scalar),
+     */
+    public double computeLoss(double[] label) {
+        double[] output = getOutput();
+        return lossFunction.f(output, label);
+    }
+
+    /**
+     * @return Activations of the last layer.
+     */
     public double[] getOutput() {
-        return layers.get(layers.size() - 1).getActivations();
+        return getLastLayer().getActivations();
+    }
+
+    public Layer<?> getLastLayer() {
+        return layers.get(layers.size() - 1);
+    }
+
+    public Model train(
+            Preprocessor.FlatOneHotSentenceProvider inputProvider,
+            Preprocessor.FlatOneHotSentenceProvider labelProvider,
+            int batchSize,
+            int epochSize,
+            double learningRate
+    ) {
+        int n_batches = epochSize / batchSize;
+
+        System.out.println("Training model ...");
+        System.out.printf("\tEpoch size: %s\tBatch size: %s\n", epochSize, batchSize);
+        System.out.printf("\tNumber of batches %s\n\n", n_batches);
+
+        for (int i = 0; i < n_batches; i++) {
+            double meanError = 0;
+
+            for (int j = 0; j < batchSize; j++) {
+                double[] input = inputProvider.get();
+                double[] label = labelProvider.get();
+
+                forwardPass(input);
+                meanError += computeLoss(label);
+                getLastLayer().backprop(computeError(label), learningRate);
+            }
+
+            meanError /= batchSize;
+
+            System.out.printf(
+                    "\tBatch (%s/%s - %s%%): Mean error: %s\n",
+                    i, n_batches,
+                    Math.round((i / (double)n_batches) * 10000d) / 100d,
+                    meanError);
+        }
+
+        return this;
     }
 }

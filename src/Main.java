@@ -5,10 +5,8 @@ import Layers.DenseLayer;
 import Layers.InputLayer;
 import Layers.SoftmaxLayer;
 import Util.Activations;
-import Util.ErrorFunctions;
+import Util.LossFunctions;
 import Util.Shape;
-
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -40,20 +38,8 @@ public class Main {
                 .addLayer(dl0)
                 .addLayer(dl1)
                 .addLayer(sml)
-                .setErrorFunction(ErrorFunctions.CATEGORICAL_CROSSENTROPY)
-                .initialize();
-
-        double[] flattenedSentence = oneHotSentenceProvider.get();
-        double[] label = oneHotLabelProvider.get();
-        m.forwardPass(flattenedSentence);
-
-        System.out.print("Prediction: ");
-        System.out.println(Arrays.toString(m.getOutput()));
-
-        System.out.print("Label: ");
-        System.out.println(Arrays.toString(label));
-
-        System.out.print("Cost: ");
-        System.out.println(m.computeCost(label));
+                .setLossFunction(LossFunctions.CATEGORICAL_CROSSENTROPY)
+                .initialize()
+                .train(oneHotSentenceProvider, oneHotLabelProvider, 30, 200000, 0.01);
     }
 }
