@@ -13,11 +13,11 @@ public class Preprocessor {
     }
 
     public interface OneHotSentenceProvider {
-        double[][] get();
+        double[][] next();
     }
 
     public interface FlatOneHotSentenceProvider {
-        double[] get();
+        double[] next();
     }
 
     private final int maxSentenceLength;
@@ -45,11 +45,15 @@ public class Preprocessor {
          * EOF, whichever is smaller. This prevents returning arrays with partially empty array elements.
          * This is also the reason why maxSentenceLength is called the way it is called.
          */
-        return () -> Arrays.copyOfRange(
-                tokens,
-                Math.min(currentToken.get(), tokens.length),
-                Math.min(currentToken.getAndAdd(stepOver) + maxSentenceLength, tokens.length)
-        );
+        return () -> {
+            if (currentToken.get() - tokens.length == 0) return null;
+
+            return Arrays.copyOfRange(
+              tokens,
+              Math.min(currentToken.get(), tokens.length),
+              Math.min(currentToken.getAndAdd(stepOver) + maxSentenceLength, tokens.length)
+            );
+        };
     }
 
     public OneHotProvider getOneHotProvider(int tokenReferenceSize) {
@@ -77,6 +81,8 @@ public class Preprocessor {
 
         return () -> {
             int[] sentence = sentenceProvider.get();
+            if (sentence == null) return null;
+
             double[][] oneHotSentence = new double[sentence.length][];
 
             for (int i = 0; i < sentence.length; i++) {
@@ -92,8 +98,10 @@ public class Preprocessor {
         Preprocessor.OneHotProvider oneHotProvider = getOneHotProvider(tokenizer.getTokenReferenceSize());
 
         return () -> {
-            double[] oneHotSentence = new double[maxSentenceLength * tokenizer.getTokenReferenceSize()];
             int[] sentence = sentenceProvider.get();
+            if (sentence == null) return null;
+
+            double[] oneHotSentence = new double[maxSentenceLength * tokenizer.getTokenReferenceSize()];
 
             for (int i = 0; i < sentence.length; i++) {
                 double[] oneHotToken = oneHotProvider.get(sentence[i]);

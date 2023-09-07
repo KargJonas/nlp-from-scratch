@@ -115,37 +115,53 @@ public class Model {
     }
 
     public Model train(
-            Preprocessor.FlatOneHotSentenceProvider inputProvider,
-            Preprocessor.FlatOneHotSentenceProvider labelProvider,
+//            TrainingDataProvider trainingDataProvider,
+      Preprocessor.FlatOneHotSentenceProvider sampleProvider,
+      Preprocessor.FlatOneHotSentenceProvider labelProvider,
             int batchSize,
-            int epochSize,
+            int nEpochs,
             double learningRate
     ) {
-        int n_batches = epochSize / batchSize;
+//        int n_batches = epochSize / batchSize;
 
         System.out.println("Training model ...");
-        System.out.printf("\tEpoch size: %s\tBatch size: %s\n", epochSize, batchSize);
-        System.out.printf("\tNumber of batches %s\n\n", n_batches);
+        System.out.printf("\tNumber of epochs: %s\tBatch size: %s\n", nEpochs, batchSize);
 
-        for (int i = 0; i < n_batches; i++) {
-            double meanError = 0;
+        // Go through the entire training data nEpochs times
+        for (int epochNumber = 0; epochNumber < nEpochs; epochNumber++) {
 
-            for (int j = 0; j < batchSize; j++) {
-                double[] input = inputProvider.get();
-                double[] label = labelProvider.get();
+            double[] input = sampleProvider.next();
+            double[] label = labelProvider.next();
 
-                forwardPass(input);
-                meanError += computeLoss(label);
-                getLastLayer().backprop(computeError(label), learningRate);
+            int batchNumber = 0;
+
+            outer:
+            while (input != null && label != null) {
+                double batchError = 0;
+                int j;
+                batchNumber++;
+
+                for (j = 0; j < batchSize; j++) {
+                    if (label == null || input == null) break outer;
+
+                    forwardPass(input);
+                    batchError += computeLoss(label);
+                    getLastLayer().backprop(computeError(label), learningRate);
+
+                    input = sampleProvider.next();
+                    label = labelProvider.next();
+                }
+
+                batchError /= (j + 1);
+
+                System.out.printf(
+                  "\tBatch %s, Epoch %s/%s = %s%%, Batch error: %s\n",
+                  batchNumber,
+                  epochNumber,
+                  nEpochs,
+                  Math.round((epochNumber / (double)nEpochs) * 10000d) / 100d,
+                  batchError);
             }
-
-            meanError /= batchSize;
-
-            System.out.printf(
-                    "\tBatch (%s/%s - %s%%): Loss: %s\n",
-                    i, n_batches,
-                    Math.round((i / (double)n_batches) * 10000d) / 100d,
-                    meanError);
         }
 
         return this;

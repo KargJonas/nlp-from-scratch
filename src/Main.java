@@ -12,24 +12,25 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        PlainTextReader reader = new PlainTextReader("/home/jonas/code/nlp-from-scratch/src/nietzsche.txt");
-//        PlainTextReader reader = new PlainTextReader("/home/jonas/code/nlp-from-scratch/src/bla.txt");
+//        PlainTextReader reader = new PlainTextReader("/home/jonas/code/nlp-from-scratch/src/nietzsche.txt");
+        PlainTextReader reader = new PlainTextReader("/home/jonas/code/nlp-from-scratch/src/bla.txt");
 //        PlainTextReader reader = new PlainTextReader("/home/jonas/code/nlp-from-scratch/src/boot.txt");
 //        PlainTextReader reader = new PlainTextReader("/home/jonas/code/nlp-from-scratch/src/mein_name.txt");
 //        Tokenizer tokenizer = new Tokenizer(reader, "\\W");
         Tokenizer tokenizer = new Tokenizer(reader, "(?!^)");
-        Preprocessor preprocessor = new Preprocessor(tokenizer,40, 3);
-        Preprocessor labelPreprocessor = new Preprocessor(tokenizer, 1, 3);
+        Preprocessor samplePreprocessor = new Preprocessor(tokenizer,40, 3);
+        Preprocessor labelPreprocessor  = new Preprocessor(tokenizer, 1, 3);
+
         tokenizer.run();
 
-        LanguageModel m = new LanguageModel();
+        LanguageModel model = new LanguageModel();
 
         // Should I make all of this "chainable" i.o.W.: should the Preprocessor also only read the tokens from
         // The Tokenizer bit-by-bit? This way the net could also read bit-by-bit from the Preprocessor while training.
         // This would mean unlimited dataset sizes.
 
-        var oneHotSentenceProvider = preprocessor.getFlatOneHotSentenceProvider(0);
-        var oneHotLabelProvider    = labelPreprocessor.getFlatOneHotSentenceProvider(40);
+        var sampleProvider = samplePreprocessor.getFlatOneHotSentenceProvider(0);
+        var labelProvider  = labelPreprocessor.getFlatOneHotSentenceProvider(40);
 
         InputLayer il = InputLayer.build(Shape.build(40, tokenizer.getTokenReferenceSize()));
         DenseLayer dl0 = DenseLayer.build(128);
@@ -37,14 +38,14 @@ public class Main {
                 .setActivationFn(Activations.SOFTPLUS);
         SoftmaxLayer sml = SoftmaxLayer.build(tokenizer.getTokenReferenceSize());
 
-        m
+        model
                 .addLayer(il)
                 .addLayer(dl0)
                 .addLayer(dl1)
                 .addLayer(sml)
                 .setLossFunction(LossFunctions.CATEGORICAL_CROSSENTROPY)
                 .initialize()
-                .train(oneHotSentenceProvider, oneHotLabelProvider, 5, 20000, 0.05);
+                .train(sampleProvider, labelProvider, 20, 10, 0.05);
 
 
     }
