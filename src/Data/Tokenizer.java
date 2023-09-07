@@ -3,6 +3,10 @@ package Data;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Reads words from a data source (PlainTextReader), builds a reference of
+ * tokens and words, and splits the input text into a sequence of token numbers.
+ */
 public class Tokenizer {
     private final String delimiter;
     private final PlainTextReader reader;
@@ -15,6 +19,10 @@ public class Tokenizer {
         this.delimiter = delimiter;
     }
 
+    /**
+     * Builds a dictionary which relates tokens (numbers) with words (strings).
+     * And converts the input data into an array of tokens.
+     */
     public void run() {
         HashMap<String, Integer> tokenOccurrences = new HashMap<>();
         ArrayList<String> words = new ArrayList<>();
@@ -64,15 +72,36 @@ public class Tokenizer {
         }
     }
 
+    /**
+     * Returns the tokenized text.
+     * @return an integer array where each integer represents a word from a dictionary.
+     */
     public int[] getTokenizedText() {
         return tokenizedText;
     }
 
+    /**
+     * Returns the token dictionary.
+     * @return a HashMap which relates a token (integer) to a word (string).
+     */
     public HashMap<Integer, String> getTokenReference() {
         return tokenReference;
     }
 
+    /**
+     * Returns the number of distinct words in the token reference.
+     * @return size of the token reference.
+     */
     public int getTokenReferenceSize() {
         return tokenReferenceSize;
+    }
+
+    /**
+     * Converts a token (number) to a word (string).
+     * @param token Token reference number
+     * @return Word
+     */
+    public String decode(int token) {
+        return tokenReference.get(token);
     }
 }

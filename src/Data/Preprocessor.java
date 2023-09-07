@@ -60,6 +60,17 @@ public class Preprocessor {
         };
     }
 
+    public static int getTokenFromOneHot(double[] oneHotVector) {
+        int highestIndex = 0;
+
+        // Find vector component with the highest activation
+        for (int i = 0; i < oneHotVector.length; i++) {
+            if (oneHotVector[i] > oneHotVector[highestIndex]) highestIndex = i;
+        }
+
+        return highestIndex;
+    }
+
     public OneHotSentenceProvider getOneHotSentenceProvider(int initialIndex) {
         Preprocessor.SentenceProvider sentenceProvider = getSentenceProvider(tokenizer.getTokenizedText(), initialIndex);
         Preprocessor.OneHotProvider oneHotProvider = getOneHotProvider(tokenizer.getTokenReferenceSize());

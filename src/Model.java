@@ -142,7 +142,7 @@ public class Model {
             meanError /= batchSize;
 
             System.out.printf(
-                    "\tBatch (%s/%s - %s%%): Mean error: %s\n",
+                    "\tBatch (%s/%s - %s%%): Loss: %s\n",
                     i, n_batches,
                     Math.round((i / (double)n_batches) * 10000d) / 100d,
                     meanError);

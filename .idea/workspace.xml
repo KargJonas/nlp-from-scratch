@@ -5,15 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/LanguageModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bla.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/boot.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/mein_name.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layers/DenseLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/DenseLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layers/InputLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/InputLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Preprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Preprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Tokenizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Layers/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/Layer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Layers/SoftmaxLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Layers/SoftmaxLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/Activations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/Activations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Util/ErrorFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Util/LossFunctions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +55,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "openjdk-19",
-    "last_opened_file_path": "/home/jonas/Downloads/json-20220924.jar",
+    "last_opened_file_path": "/home/jonas/code/nlp-from-scratch/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -75,6 +77,9 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/Data" />
@@ -109,6 +114,13 @@
       <workItem from="1675944349238" duration="67175000" />
       <workItem from="1676292870684" duration="12078000" />
       <workItem from="1676392771671" duration="17585000" />
+      <workItem from="1678399182831" duration="57000" />
+      <workItem from="1678439904645" duration="17000" />
+      <workItem from="1678440681547" duration="814000" />
+      <workItem from="1678442653655" duration="5000" />
+      <workItem from="1679560688033" duration="454000" />
+      <workItem from="1679561387394" duration="26000" />
+      <workItem from="1694025450705" duration="6656000" />
     </task>
     <task id="LOCAL-00001" summary="Added InputLayer, DenseLayer, Model, Initializers, Activation">
       <created>1676065472857</created>

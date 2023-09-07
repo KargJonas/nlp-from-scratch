@@ -97,7 +97,7 @@ public abstract class Layer<T extends Layer<T>> {
         }
 
         for (int i = 0; i < size; i++) {
-            biases[i] = activationInitializer.get();
+            activations[i] = activationInitializer.get();
         }
     }
 
