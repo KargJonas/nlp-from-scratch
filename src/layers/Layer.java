@@ -1,8 +1,8 @@
-package Layers;
+package layers;
 
-import Util.Activations;
-import Util.Initializers;
-import Util.LayerType;
+import util.Activations;
+import util.Initializers;
+import util.LayerType;
 
 public abstract class Layer<T extends Layer<T>> {
     public LayerType layerType = LayerType.ABSTRACT;

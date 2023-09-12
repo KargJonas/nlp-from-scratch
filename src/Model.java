@@ -1,169 +1,189 @@
 import java.util.ArrayList;
 
-import Data.Preprocessor;
-import Layers.Layer;
-import Util.LossFunctions.LossFn;
-import Util.LayerType;
+import layers.Layer;
+import preprocessing.vectorization.Sample;
+import util.LossFunctions.LossFn;
+import util.LayerType;
+import preprocessing.Preprocessor;
 
 public class Model {
-    ArrayList<Layer<?>> layers = new ArrayList<>();
+  ArrayList<Layer<?>> layers = new ArrayList<>();
 
-    LossFn lossFunction;
+  LossFn lossFunction;
 
-    public Model addLayer(Layer<?> layer) {
-        if (layers.size() == 0 && layer.layerType != LayerType.INPUT) {
-            throw new RuntimeException("First layer must be of type InputLayer.");
+  public Model addLayer(Layer<?> layer) {
+    if (layers.size() == 0 && layer.layerType != LayerType.INPUT) {
+      throw new RuntimeException("First layer must be of type InputLayer.");
+    }
+
+    if (layer.layerType == LayerType.SOFTMAX
+      && getLastLayer().getSize() != layer.getSize()) {
+      throw new RuntimeException("Softmax layer must be same shape as the layer before it.");
+    }
+
+    layer.setLayerIndex(layers.size());
+
+    layers.add(layer);
+    return this;
+  }
+
+  public Model setLossFunction(LossFn lossFunction) {
+    this.lossFunction = lossFunction;
+    return this;
+  }
+
+  /**
+   * Tells the layers who their parents are,
+   * allocates memory for the weights and biases,
+   * initializes the weights and biases using the provided initializers.
+   * //
+   * Call Chain should look like this:
+   * - setParentLayer()
+   * - Dense/Input/RNN.initialize()
+   * - Layer.setWeightsPerUnit()
+   * - Layer.initialize()
+   * - initializeValues()
+   */
+  public Model initialize() {
+    System.out.println("Initializing model ...");
+
+    if (layers.size() < 1) {
+      System.out.println("\tNo layers in model. Aborting.");
+      return this;
+    }
+
+    // Set parent layers
+    for (int i = 1; i < layers.size(); i++) {
+      layers.get(i).setParentLayer(layers.get(i - 1));
+    }
+
+    for (Layer<?> layer : layers) {
+      // Create arrays for weights and biases of appropriate size.
+      layer.initialize(); // !! this must call initialize for
+
+      // Initialize the values in the arrays using the provided/default Initializers.
+      layer.initializeValues();
+    }
+
+    System.out.println("\tDone.");
+
+    return this;
+  }
+
+  public void forwardPass(double[] input) {
+    layers.get(0).setActivations(input);
+
+    for (int i = 1; i < layers.size(); i++) {
+      layers.get(i).computeActivations();
+    }
+  }
+
+  /**
+   * Returns the error between the activations of the last layer and the label.
+   *
+   * @param label Target output.
+   * @return Error vector (output - label).
+   */
+  public double[] computeError(double[] label) {
+    double[] prediction = getOutput();
+    double[] error = new double[label.length];
+
+    for (int i = 0; i < label.length; i++) {
+      error[i] = prediction[i] - label[i];
+    }
+
+    return error;
+  }
+
+  /**
+   * Applies the loss function to the label and the activations of the last layer.
+   *
+   * @param label Target output.
+   * @return Loss value (scalar),
+   */
+  public double computeLoss(double[] label) {
+    double[] output = getOutput();
+    return lossFunction.f(output, label);
+  }
+
+  /**
+   * @return Activations of the last layer.
+   */
+  public double[] getOutput() {
+    return getLastLayer().getActivations();
+  }
+
+  public Layer<?> getLastLayer() {
+    return layers.get(layers.size() - 1);
+  }
+
+  public Model train(
+    Preprocessor preprocessor,
+    int batchSize,
+    int nEpochs,
+    double learningRate
+  ) {
+    System.out.println("Training model ...");
+    System.out.printf("\tNumber of epochs: %s\tBatch size: %s\n", nEpochs, batchSize);
+
+    // Go through the entire training data nEpochs times
+    for (int epochNumber = 0; epochNumber < nEpochs; epochNumber++) {
+
+      for (Sample[] batch : preprocessor) {
+        double batchError = 0;
+
+        for (Sample sample : batch) {
+
+          forwardPass(sample.data());
+          batchError += computeLoss(sample.label());
+          getLastLayer().backprop(computeError(sample.label()), learningRate);
         }
 
-        if (layer.layerType == LayerType.SOFTMAX
-                && getLastLayer().getSize() != layer.getSize()) {
-            throw new RuntimeException("Softmax layer must be same shape as the layer before it.");
-        }
+        batchError /= preprocessor.getBatchSize();
 
-        layer.setLayerIndex(layers.size());
+        System.out.printf(
+          "\tBatch %s, Epoch %s/%s = %s%%, Batch error: %s\n",
+          0,
+          epochNumber,
+          nEpochs,
+          Math.round((epochNumber / (double) nEpochs) * 10000d) / 100d,
+          batchError);
+      }
 
-        layers.add(layer);
-        return this;
+//      double[] input = sampleProvider.next();
+//      double[] label = labelProvider.next();
+//
+//      int batchNumber = 0;
+//
+//      outer:
+//      while (input != null && label != null) {
+//        double batchError = 0;
+//        int j;
+//        batchNumber++;
+//
+//        for (j = 0; j < batchSize; j++) {
+//          if (label == null || input == null) break outer;
+//
+//          forwardPass(input);
+//          batchError += computeLoss(label);
+//          getLastLayer().backprop(computeError(label), learningRate);
+//
+//          input = sampleProvider.next();
+//          label = labelProvider.next();
+//        }
+//
+//        batchError /= (j + 1);
+//
+//        System.out.printf(
+//          "\tBatch %s, Epoch %s/%s = %s%%, Batch error: %s\n",
+//          batchNumber,
+//          epochNumber,
+//          nEpochs,
+//          Math.round((epochNumber / (double) nEpochs) * 10000d) / 100d,
+//          batchError);
+//      }
     }
 
-    public Model setLossFunction(LossFn lossFunction) {
-        this.lossFunction = lossFunction;
-        return this;
-    }
-
-    /**
-     * Tells the layers who their parents are,
-     * allocates memory for the weights and biases,
-     * initializes the weights and biases using the provided initializers.
-     * //
-     * Call Chain should look like this:
-     * - setParentLayer()
-     * - Dense/Input/RNN.initialize()
-     *      - Layer.setWeightsPerUnit()
-     *      - Layer.initialize()
-     * - initializeValues()
-     */
-    public Model initialize() {
-        System.out.println("Initializing model ...");
-
-        if (layers.size() < 1) {
-            System.out.println("\tNo layers in model. Aborting.");
-            return this;
-        }
-
-        // Set parent layers
-        for (int i = 1; i < layers.size(); i++) {
-            layers.get(i).setParentLayer(layers.get(i - 1));
-        }
-
-        for (Layer<?> layer : layers) {
-            // Create arrays for weights and biases of appropriate size.
-            layer.initialize(); // !! this must call initialize for
-
-            // Initialize the values in the arrays using the provided/default Initializers.
-            layer.initializeValues();
-        }
-
-        System.out.println("\tDone.");
-
-        return this;
-    }
-
-    public void forwardPass(double[] input) {
-        layers.get(0).setActivations(input);
-
-        for (int i = 1; i < layers.size(); i++) {
-            layers.get(i).computeActivations();
-        }
-    }
-
-    /**
-     * Returns the error between the activations of the last layer and the label.
-     * @param label Target output.
-     * @return Error vector (output - label).
-     */
-    public double[] computeError(double[] label) {
-        double[] prediction = getOutput();
-        double[] error = new double[label.length];
-
-        for (int i = 0; i < label.length; i++) {
-            error[i] = prediction[i] - label[i];
-        }
-
-        return error;
-    }
-
-    /**
-     * Applies the loss function to the label and the activations of the last layer.
-     * @param label Target output.
-     * @return Loss value (scalar),
-     */
-    public double computeLoss(double[] label) {
-        double[] output = getOutput();
-        return lossFunction.f(output, label);
-    }
-
-    /**
-     * @return Activations of the last layer.
-     */
-    public double[] getOutput() {
-        return getLastLayer().getActivations();
-    }
-
-    public Layer<?> getLastLayer() {
-        return layers.get(layers.size() - 1);
-    }
-
-    public Model train(
-//            TrainingDataProvider trainingDataProvider,
-      Preprocessor.FlatOneHotSentenceProvider sampleProvider,
-      Preprocessor.FlatOneHotSentenceProvider labelProvider,
-            int batchSize,
-            int nEpochs,
-            double learningRate
-    ) {
-//        int n_batches = epochSize / batchSize;
-
-        System.out.println("Training model ...");
-        System.out.printf("\tNumber of epochs: %s\tBatch size: %s\n", nEpochs, batchSize);
-
-        // Go through the entire training data nEpochs times
-        for (int epochNumber = 0; epochNumber < nEpochs; epochNumber++) {
-
-            double[] input = sampleProvider.next();
-            double[] label = labelProvider.next();
-
-            int batchNumber = 0;
-
-            outer:
-            while (input != null && label != null) {
-                double batchError = 0;
-                int j;
-                batchNumber++;
-
-                for (j = 0; j < batchSize; j++) {
-                    if (label == null || input == null) break outer;
-
-                    forwardPass(input);
-                    batchError += computeLoss(label);
-                    getLastLayer().backprop(computeError(label), learningRate);
-
-                    input = sampleProvider.next();
-                    label = labelProvider.next();
-                }
-
-                batchError /= (j + 1);
-
-                System.out.printf(
-                  "\tBatch %s, Epoch %s/%s = %s%%, Batch error: %s\n",
-                  batchNumber,
-                  epochNumber,
-                  nEpochs,
-                  Math.round((epochNumber / (double)nEpochs) * 10000d) / 100d,
-                  batchError);
-            }
-        }
-
-        return this;
-    }
+    return this;
+  }
 }

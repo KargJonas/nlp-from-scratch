@@ -1,6 +1,6 @@
-package Layers;
+package layers;
 
-import Util.LayerType;
+import util.LayerType;
 
 public class SoftmaxLayer extends Layer<SoftmaxLayer> {
     SoftmaxLayer(int size) {

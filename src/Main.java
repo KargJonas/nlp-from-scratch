@@ -1,40 +1,38 @@
-import Data.FileReader;
-import Data.Preprocessor;
-import Data.Tokenizer;
-import Layers.DenseLayer;
-import Layers.InputLayer;
-import Layers.SoftmaxLayer;
-import Util.Activations;
-import Util.LossFunctions;
-import Util.Shape;
+import layers.DenseLayer;
+import layers.InputLayer;
+import layers.SoftmaxLayer;
+import util.Activations;
+import util.LossFunctions;
+import util.Shape;
+import preprocessing.Preprocessor;
+import preprocessing.datasources.TextFileReader;
+import preprocessing.tokenization.CharTokenizer;
+import preprocessing.vectorization.OneHotVectorizer;
+import preprocessing.vectorization.Sample;
+
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-////        PlainTextReader reader = new PlainTextReader("/home/jonas/code/nlp-from-scratch/src/nietzsche.txt");
-        FileReader reader = new FileReader("/home/jonas/code/nlp-from-scratch/src/bla.txt");
-//////        PlainTextReader reader = new PlainTextReader("/home/jonas/code/nlp-from-scratch/src/boot.txt");
-//////        PlainTextReader reader = new PlainTextReader("/home/jonas/code/nlp-from-scratch/src/mein_name.txt");
-////        Tokenizer tokenizer = new Tokenizer(reader, "\\W");
-//        Tokenizer tokenizer = new Tokenizer(reader, "(?!^)");
-//        Preprocessor samplePreprocessor = new Preprocessor(tokenizer,40, 3);
-//        Preprocessor labelPreprocessor  = new Preprocessor(tokenizer, 1, 3);
+        var reader       = new TextFileReader("/home/jonas/code/nlp-from-scratch/src/bla.txt", 10);
+        var preprocessor = new Preprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), 40, 1, 5);
+        var model        = new LanguageModel();
+
+        var nTokens = preprocessor.getNTokens();
+
+        for (Sample[] sample : preprocessor) {
+            System.out.println(Arrays.toString(sample));
+        }
+
+////        var sampleProvider = samplePreprocessor.getFlatOneHotSentenceProvider(0);
+////        var labelProvider  = labelPreprocessor.getFlatOneHotSentenceProvider(40);
+////
 //
-//        tokenizer.buildTokenReference();
-//
-//        LanguageModel model = new LanguageModel();
-//
-//        // Should I make all of this "chainable" i.o.W.: should the Preprocessor also only read the tokens from
-//        // The Tokenizer bit-by-bit? This way the net could also read bit-by-bit from the Preprocessor while training.
-//        // This would mean unlimited dataset sizes.
-//
-//        var sampleProvider = samplePreprocessor.getFlatOneHotSentenceProvider(0);
-//        var labelProvider  = labelPreprocessor.getFlatOneHotSentenceProvider(40);
-//
-//        InputLayer il = InputLayer.build(Shape.build(40, tokenizer.getTokenReferenceSize()));
-//        DenseLayer dl0 = DenseLayer.build(128);
-//        DenseLayer dl1 = DenseLayer.build(tokenizer.getTokenReferenceSize())
+//        var il = InputLayer.build(Shape.build(40, nTokens));
+//        var dl0 = DenseLayer.build(128);
+//        var dl1 = DenseLayer.build(nTokens)
 //                .setActivationFn(Activations.SOFTPLUS);
-//        SoftmaxLayer sml = SoftmaxLayer.build(tokenizer.getTokenReferenceSize());
+//        var sml = SoftmaxLayer.build(nTokens);
 //
 //        model
 //                .addLayer(il)
@@ -43,11 +41,7 @@ public class Main {
 //                .addLayer(sml)
 //                .setLossFunction(LossFunctions.CATEGORICAL_CROSSENTROPY)
 //                .initialize()
-//                .train(sampleProvider, labelProvider, 20, 10, 0.05);
-
-        for (String line : reader) {
-            System.out.println(line);
-        }
+//                .train(preprocessor, 20, 10, 0.05);
 
     }
 }

@@ -1,7 +1,7 @@
-package Layers;
+package layers;
 
-import Util.LayerType;
-import Util.Shape;
+import util.LayerType;
+import util.Shape;
 
 public class InputLayer extends Layer<InputLayer> {
     Shape shape;
