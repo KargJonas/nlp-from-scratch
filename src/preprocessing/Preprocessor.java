@@ -19,9 +19,9 @@ import java.util.Iterator;
  */
 public class Preprocessor implements Iterable<Sample[]> {
 
-  Tokenizer tokenizer;
-  TokenReference tokenReference;
-  Vectorizer vectorizer;
+  public Tokenizer tokenizer;
+  public TokenReference tokenReference;
+  public Vectorizer vectorizer;
   SampleAggregator sampleAggregator;
   Batcher batcher;
   Shape inputShape;
@@ -49,12 +49,16 @@ public class Preprocessor implements Iterable<Sample[]> {
     return inputShape;
   }
 
-  public int getNTokens() {
+  public int getTokenReferenceSize() {
     return tokenReference.getTokenReferenceSize();
   }
 
   public double getBatchSize() {
     return batchSize;
+  }
+
+  public String decode(double[] vector) {
+    return tokenReference.decode(vectorizer.decode(vector));
   }
 
   @Override

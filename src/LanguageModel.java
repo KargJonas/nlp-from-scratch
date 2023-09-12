@@ -5,10 +5,13 @@
  */
 public class LanguageModel extends Model {
 
-//  public String generateOutput(String prompt) {
+//  public String generateOutput(String prompt, int outputLength) {
+//    if (prompt.length() != 40) return "Prompt length not 40 chars";
+//
 //    StringBuilder sb = new StringBuilder();
 //
-//    for (int i = 0; i < 100; i++) {
+//
+//    for (int i = 0; i < outputLength; i++) {
 //      double[] input = oneHotSentenceProvider.get();
 //      forwardPass(input);
 //      double[] outputVector = m.getOutput();

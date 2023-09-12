@@ -8,40 +8,53 @@ import preprocessing.Preprocessor;
 import preprocessing.datasources.TextFileReader;
 import preprocessing.tokenization.CharTokenizer;
 import preprocessing.vectorization.OneHotVectorizer;
-import preprocessing.vectorization.Sample;
-
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+        int inputSize = 40;
+
         var reader       = new TextFileReader("/home/jonas/code/nlp-from-scratch/src/bla.txt", 10);
-        var preprocessor = new Preprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), 40, 1, 5);
+        var preprocessor = new Preprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), inputSize, 1, 1);
         var model        = new LanguageModel();
 
-        var nTokens = preprocessor.getNTokens();
+        var tokenRefSize = preprocessor.getTokenReferenceSize();
 
-        for (Sample[] sample : preprocessor) {
-            System.out.println(Arrays.toString(sample));
-        }
+        var il = InputLayer.build(Shape.build(inputSize, tokenRefSize));
+        var dl0 = DenseLayer.build(128);
+        var dl1 = DenseLayer.build(tokenRefSize)
+                .setActivationFn(Activations.SOFTPLUS);
+        var sml = SoftmaxLayer.build(tokenRefSize);
 
-////        var sampleProvider = samplePreprocessor.getFlatOneHotSentenceProvider(0);
-////        var labelProvider  = labelPreprocessor.getFlatOneHotSentenceProvider(40);
-////
+        model
+                .addLayer(il)
+                .addLayer(dl0)
+                .addLayer(dl1)
+                .addLayer(sml)
+                .setLossFunction(LossFunctions.CATEGORICAL_CROSSENTROPY)
+                .initialize()
+                .train(preprocessor, 20000, 0.01);
+
+
+
+
+//        for (Sample[] batch : preprocessor) {
 //
-//        var il = InputLayer.build(Shape.build(40, nTokens));
-//        var dl0 = DenseLayer.build(128);
-//        var dl1 = DenseLayer.build(nTokens)
-//                .setActivationFn(Activations.SOFTPLUS);
-//        var sml = SoftmaxLayer.build(nTokens);
+//            for (Sample sample : batch) {
 //
-//        model
-//                .addLayer(il)
-//                .addLayer(dl0)
-//                .addLayer(dl1)
-//                .addLayer(sml)
-//                .setLossFunction(LossFunctions.CATEGORICAL_CROSSENTROPY)
-//                .initialize()
-//                .train(preprocessor, 20, 10, 0.05);
-
+//                double[][] data = sample.data();
+//                double[] label = sample.label();
+//
+//                StringBuilder sb = new StringBuilder();
+//
+//                for (double[] token : data) {
+//                    sb.append(preprocessor.decode(token));
+//                }
+//
+//                sb.append(" -> ");
+//                sb.append(preprocessor.decode(label));
+//
+//                System.out.println(sb);
+//            }
+//        }
     }
 }
