@@ -1,6 +1,5 @@
 package preprocessing;
 
-import preprocessing.batching.Batcher;
 import util.Shape;
 import preprocessing.datasources.TextSource;
 import preprocessing.tokenization.TokenReference;
@@ -11,38 +10,73 @@ import preprocessing.vectorization.SampleAggregator;
 import preprocessing.vectorization.VectorizationStrategy;
 import preprocessing.vectorization.Vectorizer;
 
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Reads data from a text file, splits it into tokens, encodes those to vectors
  * and then collects the vectors into portions that can be passed into a network.
  */
-public class Preprocessor implements Iterable<Sample[]> {
+public abstract class Preprocessor {
 
+  protected TokenizationStrategy tokenizationStrategy;
+  protected VectorizationStrategy vectorizationStrategy;
+
+  protected final SampleAggregator sampleAggregator;
   public Tokenizer tokenizer;
   public TokenReference tokenReference;
   public Vectorizer vectorizer;
-  SampleAggregator sampleAggregator;
-  Batcher batcher;
+
   Shape inputShape;
-  int batchSize;
+  int inputSize;
+  int stepOver;
 
   public Preprocessor(
     TextSource textSource,
     TokenizationStrategy tokenizationStrategy,
     VectorizationStrategy vectorizationStrategy,
     int inputSize,
-    int stepOver,
-    int batchSize
+    int stepOver
   ) {
+    this.tokenizationStrategy = tokenizationStrategy;
+    this.vectorizationStrategy = vectorizationStrategy;
+
     tokenizer = new Tokenizer(textSource, tokenizationStrategy);
     tokenReference = tokenizer.getTokenReference();
     vectorizationStrategy.setTokenReference(tokenReference);
     vectorizer = new Vectorizer(tokenizer, vectorizationStrategy);
     sampleAggregator = new SampleAggregator(vectorizer, inputSize, stepOver);
-    batcher = new Batcher(sampleAggregator, batchSize);
     inputShape = Shape.build(inputSize, tokenReference.getTokenReferenceSize());
-    this.batchSize = batchSize;
+
+    this.inputSize = inputSize;
+    this.stepOver = stepOver;
+  }
+
+  public Preprocessor(
+    TextSource textSource,
+    Preprocessor preprocessor
+  ) {
+    // Use config directly from provided preprocessor.
+    tokenizationStrategy  = preprocessor.tokenizationStrategy;
+    vectorizationStrategy = preprocessor.vectorizationStrategy;
+    inputSize = preprocessor.inputSize;
+    stepOver  = preprocessor.stepOver;
+
+    // TODO: Don't forget that tokenReference.wordCount still refers to training data word count
+    tokenReference = preprocessor.tokenReference;
+
+    // Create a new tokenizer with the provided text source but old tokenReference
+    tokenizer        = new Tokenizer(textSource, preprocessor.tokenizationStrategy, tokenReference);
+    vectorizer       = new Vectorizer(tokenizer, vectorizationStrategy);
+    sampleAggregator = new SampleAggregator(vectorizer, preprocessor.inputSize, preprocessor.stepOver);
+
+    // TODO: This is the problem: 40 chars + 1 label = 41 chars > 40 input chars => hasNext() == false
+
+    for (Sample sample : sampleAggregator) {
+      System.out.println(decode(sample));
+    }
+
+    inputShape = Shape.build(preprocessor.inputSize, tokenReference.getTokenReferenceSize());
   }
 
   public Shape getInputShape() {
@@ -53,28 +87,15 @@ public class Preprocessor implements Iterable<Sample[]> {
     return tokenReference.getTokenReferenceSize();
   }
 
-  public double getBatchSize() {
-    return batchSize;
-  }
-
   public String decode(double[] vector) {
-    return tokenReference.decode(vectorizer.decode(vector));
+    return tokenReference.decode(vectorizer.decode(vector)).replace("\n", "\\n");
   }
 
-  @Override
-  public Iterator<Sample[]> iterator() {
-    return new Iterator<>() {
-      final Iterator<Sample[]> batchIterator = batcher.iterator();
+  public String decode(double[][] vector) {
+    return Arrays.stream(vector).map(this::decode).collect(Collectors.joining());
+  }
 
-      @Override
-      public boolean hasNext() {
-        return batchIterator.hasNext();
-      }
-
-      @Override
-      public Sample[] next() {
-        return batchIterator.next();
-      }
-    };
+  public String decode(Sample sample) {
+    return String.format("%s -> %s", decode(sample.data()), decode(sample.label()));
   }
 }

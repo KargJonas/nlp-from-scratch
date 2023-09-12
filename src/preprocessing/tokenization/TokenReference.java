@@ -99,4 +99,15 @@ public class TokenReference {
   public int encode(String word) {
     return tokenBackReference.get(word);
   }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+
+    for (Map.Entry<Integer, String> entry : tokenReference.entrySet()) {
+      sb.append(String.format("%s: %s\n", entry.getKey(), entry.getValue().replace("\n", "\\n")));
+    }
+
+    return sb.toString();
+  }
 }

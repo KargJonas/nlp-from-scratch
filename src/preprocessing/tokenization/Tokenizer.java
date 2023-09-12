@@ -15,10 +15,15 @@ public class Tokenizer implements Iterable<Integer> {
   private final TextSource textSource;
   private final TokenizationStrategy strategy;
 
+  public Tokenizer(TextSource textSource, TokenizationStrategy strategy, TokenReference tokenReference) {
+    this.textSource = textSource;
+    this.strategy = strategy;
+    this.tokenReference = tokenReference;
+  }
+
   public Tokenizer(TextSource textSource, TokenizationStrategy strategy) {
     this.textSource = textSource;
     this.strategy = strategy;
-
     tokenReference = new TokenReference(textSource, this);
   }
 

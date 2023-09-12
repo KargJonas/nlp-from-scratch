@@ -1,11 +1,11 @@
+import layers.Layer;
+import preprocessing.BatchedPreprocessor;
+import preprocessing.vectorization.Sample;
+import util.LayerType;
+import util.LossFunctions.LossFn;
+
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import layers.Layer;
-import preprocessing.vectorization.Sample;
-import util.LossFunctions.LossFn;
-import util.LayerType;
-import preprocessing.Preprocessor;
 
 public class Model {
   ArrayList<Layer<?>> layers = new ArrayList<>();
@@ -118,118 +118,48 @@ public class Model {
     return layers.get(layers.size() - 1);
   }
 
-//  public Model train(
-//    Preprocessor preprocessor,
-//    int nEpochs,
-//    double learningRate
-//  ) {
-//
-//    System.out.println("Training model ...");
-//
-//    // Go through the entire training data nEpochs times
-//    for (int epochNumber = 0; epochNumber < nEpochs; epochNumber++) {
-//
-//      double loss = 0;
-//      int batchNumber = 0;
-//
-//      for (Sample[] batch : preprocessor) {
-//        double batchError = 0;
-//
-//        for (Sample sample : batch) {
-//
-//          // TODO: This just here for testing purposes and is a MAJOR bottleneck
-//          double[] data = Arrays.stream(sample.data())
-//              .flatMapToDouble(Arrays::stream)
-//                .toArray();
-//
-//          forwardPass(data);
-//          batchError += computeLoss(sample.label());
-//          getLastLayer().backprop(computeError(sample.label()), learningRate);
-//        }
-//
-//        batchError /= preprocessor.getBatchSize();
-//        loss = (loss * batchNumber + batchError) / (batchNumber + 1);
-//
-////        System.out.printf("Batch %s   Epoch %s/%s %.0f%%)   Batch error: %.8f\n",
-////          batchNumber, epochNumber, nEpochs, (epochNumber + 1.) / nEpochs * 100., batchError);
-//
-//        batchNumber++;
-//      }
-//
-//      System.out.printf("Epoch %s/%s %.0f%%)   Loss: %.8f\n",
-//        epochNumber, nEpochs, (epochNumber + 1.) / nEpochs * 100., loss);
-//
-////      double[] input = sampleProvider.next();
-////      double[] label = labelProvider.next();
-////
-////      int batchNumber = 0;
-////
-////      outer:
-////      while (input != null && label != null) {
-////        double batchError = 0;
-////        int j;
-////        batchNumber++;
-////
-////        for (j = 0; j < batchSize; j++) {
-////          if (label == null || input == null) break outer;
-////
-////          forwardPass(input);
-////          batchError += computeLoss(label);
-////          getLastLayer().backprop(computeError(label), learningRate);
-////
-////          input = sampleProvider.next();
-////          label = labelProvider.next();
-////        }
-////
-////        batchError /= (j + 1);
-////
-////        System.out.printf(
-////          "\tBatch %s, Epoch %s/%s = %s%%, Batch error: %s\n",
-////          batchNumber,
-////          epochNumber,
-////          nEpochs,
-////          Math.round((epochNumber / (double) nEpochs) * 10000d) / 100d,
-////          batchError);
-////      }
-//    }
+  public Model train(
 
-    public Model train(
+    BatchedPreprocessor preprocessor,
+    int nEpochs,
+    double learningRate
+  ) {
+    System.out.println("Training model ...");
+    System.out.printf("\tNumber of epochs: %s\tBatch size: %s\n\n", nEpochs, preprocessor.getBatchSize());
 
-      Preprocessor preprocessor,
-      int nEpochs,
-      double learningRate
-    ) {
-      System.out.println("Training model ...");
+    for (int i = 0; i < nEpochs; i++) {
+      for (Sample[] batch : preprocessor) {
 
-      for (int i = 0; i < nEpochs; i++) {
-        long start = System.nanoTime();
+        double meanError = 0;
 
+        for (Sample sample : batch) {
 
-        for (Sample[] batch : preprocessor) {
+          // TODO: This just here for testing purposes and is a MAJOR bottleneck
+          double[] input = Arrays.stream(sample.data())
+            .flatMapToDouble(Arrays::stream)
+            .toArray();
 
-          double meanError = 0;
+          double[] label = sample.label();
 
-          for (Sample sample : batch) {
-            double[] input = Arrays.stream(sample.data())
-              .flatMapToDouble(Arrays::stream)
-              .toArray();
-            double[] label = sample.label();
+          forwardPass(input);
+          double x = computeLoss(label);
+          meanError += x;
+          getLastLayer().backprop(computeError(label), learningRate);
 
-            forwardPass(input);
-            meanError += computeLoss(label);
-            getLastLayer().backprop(computeError(label), learningRate);
-          }
+//            System.out.println(x + "  " + preprocessor.decode(sample) + " Prediction: " + preprocessor.decode(getOutput()));
 
-          meanError /= preprocessor.getBatchSize();
-
-//          System.out.printf("\tLoss: %s\n", meanError);
+//            if (meanError / preprocessor.getBatchSize() > 0.2) {
+//              System.out.printf("%s (Prediction was: \"%s\")\n", preprocessor.decode(sample), preprocessor.decode(getOutput()));
+//            }
         }
 
-        long stop = System.nanoTime();
+        meanError /= preprocessor.getBatchSize();
 
-        System.out.println((stop - start) / 1_000_000. + "ms");
+        float percentage = ((float) i / nEpochs) * 100;
+        System.out.printf("Epoch: %s/%s (%.0f%%)   Batch loss: %s\n", i, nEpochs, percentage, meanError);
       }
-
-      return this;
     }
+
+    return this;
+  }
 }
