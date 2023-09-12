@@ -14,7 +14,7 @@ public class Main {
         int inputSize = 40;
 
         var reader       = new TextFileReader("/home/jonas/code/nlp-from-scratch/src/bla.txt", 10);
-        var preprocessor = new Preprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), inputSize, 1, 1);
+        var preprocessor = new Preprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), inputSize, 1, 20);
         var model        = new LanguageModel();
 
         var tokenRefSize = preprocessor.getTokenReferenceSize();
@@ -32,7 +32,7 @@ public class Main {
                 .addLayer(sml)
                 .setLossFunction(LossFunctions.CATEGORICAL_CROSSENTROPY)
                 .initialize()
-                .train(preprocessor, 20000, 0.01);
+                .train(preprocessor, 20000, 0.05);
 
 
 

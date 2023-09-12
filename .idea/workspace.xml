@@ -5,13 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/telemetry/TrainingMonitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/preprocessing/tokenization/CachedTokenizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LanguageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LanguageModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bla.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/bla.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/Preprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/Preprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/tokenization/TokenReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/tokenization/TokenReference.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

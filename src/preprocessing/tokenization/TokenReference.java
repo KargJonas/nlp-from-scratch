@@ -13,6 +13,8 @@ public class TokenReference {
   private final TextSource textSource;
   private final Tokenizer tokenizer;
 
+  int wordCount = 0;
+
   public TokenReference(TextSource textSource, Tokenizer tokenizer) {
     this.textSource = textSource;
     this.tokenizer = tokenizer;
@@ -33,6 +35,7 @@ public class TokenReference {
         .stream(tokenizer.splitSectionByDelimiter(section))
         .filter(word -> !word.isEmpty())
         .forEach(word -> {
+          wordCount++;
           tokenOccurrences.putIfAbsent(word, 0);
           tokenOccurrences.put(word, tokenOccurrences.get(word) + 1);
         });
@@ -57,6 +60,10 @@ public class TokenReference {
       tokenReference.put(i, word);
       tokenBackReference.put(word, i);
     }
+  }
+
+  public int getWordCount() {
+    return wordCount;
   }
 
   /**
