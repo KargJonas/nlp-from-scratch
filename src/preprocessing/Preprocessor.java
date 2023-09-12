@@ -6,23 +6,22 @@ import preprocessing.tokenization.TokenReference;
 import preprocessing.tokenization.TokenizationStrategy;
 import preprocessing.tokenization.Tokenizer;
 import preprocessing.vectorization.Sample;
-import preprocessing.vectorization.SampleAggregator;
 import preprocessing.vectorization.VectorizationStrategy;
 import preprocessing.vectorization.Vectorizer;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.stream.Collectors;
 
 /**
  * Reads data from a text file, splits it into tokens, encodes those to vectors
  * and then collects the vectors into portions that can be passed into a network.
  */
-public abstract class Preprocessor {
+public class Preprocessor {
 
   protected TokenizationStrategy tokenizationStrategy;
   protected VectorizationStrategy vectorizationStrategy;
 
-  protected final SampleAggregator sampleAggregator;
   public Tokenizer tokenizer;
   public TokenReference tokenReference;
   public Vectorizer vectorizer;
@@ -45,7 +44,6 @@ public abstract class Preprocessor {
     tokenReference = tokenizer.getTokenReference();
     vectorizationStrategy.setTokenReference(tokenReference);
     vectorizer = new Vectorizer(tokenizer, vectorizationStrategy);
-    sampleAggregator = new SampleAggregator(vectorizer, inputSize, stepOver);
     inputShape = Shape.build(inputSize, tokenReference.getTokenReferenceSize());
 
     this.inputSize = inputSize;
@@ -68,13 +66,6 @@ public abstract class Preprocessor {
     // Create a new tokenizer with the provided text source but old tokenReference
     tokenizer        = new Tokenizer(textSource, preprocessor.tokenizationStrategy, tokenReference);
     vectorizer       = new Vectorizer(tokenizer, vectorizationStrategy);
-    sampleAggregator = new SampleAggregator(vectorizer, preprocessor.inputSize, preprocessor.stepOver);
-
-    // TODO: This is the problem: 40 chars + 1 label = 41 chars > 40 input chars => hasNext() == false
-
-    for (Sample sample : sampleAggregator) {
-      System.out.println(decode(sample));
-    }
 
     inputShape = Shape.build(preprocessor.inputSize, tokenReference.getTokenReferenceSize());
   }

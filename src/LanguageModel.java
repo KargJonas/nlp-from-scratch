@@ -1,9 +1,9 @@
 import preprocessing.Preprocessor;
+import preprocessing.PromptPreprocessor;
 import preprocessing.datasources.StringReader;
-import preprocessing.BasicPreprocessor;
-import preprocessing.vectorization.Sample;
 
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 
 /**
@@ -12,41 +12,34 @@ import java.util.Deque;
  */
 public class LanguageModel extends Model {
 
-  public String generateOutput(String prompt, int outputLength, Preprocessor preprocessor) {
-    if (prompt.length() != 40) return "Prompt length not 40 chars";
+  Preprocessor preprocessor;
 
-    StringReader  stringReader = new StringReader(prompt, 40);
-    StringBuilder sb = new StringBuilder();
-    Deque<float[]> deque = new ArrayDeque<>();
+  public LanguageModel(Preprocessor preprocessor) {
+    this.preprocessor = preprocessor;
+  }
 
-//    for (String section : stringReader) {
-//      System.out.println("##" + section);
-//      deque.add()
-//    }
+  public String generateOutput(String prompt, int outputLength) {
+    if (prompt.length() > 40) return "Max prompt size exceeded";
 
-    BasicPreprocessor inputPreProc = new BasicPreprocessor(stringReader, preprocessor);
+    // TODO: If the original dataset does not include space, this will cause errors.
+    prompt = " ".repeat(40 - prompt.length()) + prompt;
 
-    for (Sample sample : inputPreProc) {
-      System.out.println(preprocessor.decode(sample));
+    var stringBuilder = new StringBuilder();
+    var promptPreprocessor = new PromptPreprocessor(preprocessor);
+    double[][] encodedPrompt = promptPreprocessor.encode(prompt);
+
+    for (int i = 0; i < outputLength; i++) {
+      double[] flatEncodedPrompt = Arrays.stream(encodedPrompt)
+        .flatMapToDouble(Arrays::stream)
+        .toArray();
+
+      forwardPass(flatEncodedPrompt);
+      double[] prediction = getOutput();
+      stringBuilder.append(preprocessor.decode(prediction));
+      System.arraycopy(encodedPrompt, 1, encodedPrompt, 0, encodedPrompt.length - 1);
+      encodedPrompt[encodedPrompt.length - 1] = prediction.clone();
     }
 
-//    System.out.println(inputPreProc);
-
-//    float[][] vectorizedInput = preprocessor.
-//
-//    for (int i = 0; i < outputLength; i++) {
-//      double[] input = oneHotSentenceProvider.get();
-//      forwardPass(input);
-//      double[] outputVector = m.getOutput();
-//
-//      int tokenIndex = Preprocessor.getTokenFromOneHot(outputVector);
-//      String token = tokenizer.decode(tokenIndex);
-//
-//      sb.append(token);
-//    }
-//
-//    return sb.toString();
-
-    return "";
+    return stringBuilder.toString();
   }
 }

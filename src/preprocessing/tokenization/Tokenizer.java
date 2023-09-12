@@ -31,6 +31,10 @@ public class Tokenizer implements Iterable<Integer> {
     return strategy.apply(section);
   }
 
+  public TokenReference getTokenReference() {
+    return tokenReference;
+  }
+
   @Override
   public Iterator<Integer> iterator() {
     return new Iterator<>() {
@@ -61,9 +65,5 @@ public class Tokenizer implements Iterable<Integer> {
         return token;
       }
     };
-  }
-
-  public TokenReference getTokenReference() {
-    return tokenReference;
   }
 }

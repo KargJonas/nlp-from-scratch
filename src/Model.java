@@ -1,5 +1,5 @@
 import layers.Layer;
-import preprocessing.BatchedPreprocessor;
+import preprocessing.TrainingDataPreprocessor;
 import preprocessing.vectorization.Sample;
 import util.LayerType;
 import util.LossFunctions.LossFn;
@@ -119,8 +119,7 @@ public class Model {
   }
 
   public Model train(
-
-    BatchedPreprocessor preprocessor,
+    TrainingDataPreprocessor preprocessor,
     int nEpochs,
     double learningRate
   ) {
