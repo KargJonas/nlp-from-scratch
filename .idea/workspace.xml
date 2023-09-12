@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Data/Preprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Preprocessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LanguageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LanguageModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/PlainTextReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/FileReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Data/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Data/Tokenizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bla.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/bla.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -116,6 +115,7 @@
       <workItem from="1679560688033" duration="454000" />
       <workItem from="1679561387394" duration="26000" />
       <workItem from="1694025450705" duration="6656000" />
+      <workItem from="1694099303426" duration="2119000" />
     </task>
     <task id="LOCAL-00001" summary="Added InputLayer, DenseLayer, Model, Initializers, Activation">
       <created>1676065472857</created>

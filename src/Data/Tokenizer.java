@@ -7,14 +7,14 @@ import java.util.stream.Collectors;
  * Reads words from a data source (PlainTextReader), builds a reference of
  * tokens and words, and splits the input text into a sequence of token numbers.
  */
-public class Tokenizer {
+public class Tokenizer implements Iterable<int[]> {
     private final String delimiter;
-    private final PlainTextReader reader;
-    private int[] tokenizedText;
+    private final Iterable<String> reader;
     private int tokenReferenceSize;
     HashMap<Integer, String> tokenReference;
+    HashMap<String, Integer> tokenBackReference;
 
-    public Tokenizer(PlainTextReader reader, String delimiter) {
+    public Tokenizer(Iterable<String> reader, String delimiter) {
         this.reader = reader;
         this.delimiter = delimiter;
     }
@@ -23,22 +23,16 @@ public class Tokenizer {
      * Builds a dictionary which relates tokens (numbers) with words (strings).
      * And converts the input data into an array of tokens.
      */
-    public void run() {
+    public void buildTokenReference() {
         HashMap<String, Integer> tokenOccurrences = new HashMap<>();
         ArrayList<String> words = new ArrayList<>();
 
-        while (true) {
-            // Read a line from the dataset
-            String line = reader.readLine();
-
-            // EOF reached
-            if (line == null) break;
+        for (String line : reader) {
 
             // Split line into words and punctuation characters.
             Arrays
                     .stream(line.toLowerCase().split(delimiter))
-//                    .map(String::trim)
-                    .filter(word -> word.length() > 0)
+                    .filter(word -> !word.isEmpty())
                     .forEach(word -> {
                         words.add(word);
                         tokenOccurrences.putIfAbsent(word, 0);
@@ -46,10 +40,9 @@ public class Tokenizer {
                     });
         }
 
+        // Maps for translating back and forth
         tokenReference = new HashMap<>();
-        tokenizedText = new int[words.size()];
-
-        HashMap<String, Integer> tokenBackReference = new HashMap<>();
+        tokenBackReference = new HashMap<>();
 
         // This list contains an ordered (by occurrence, descending) version of all tokens.
         ArrayList<String> orderedTokenList = tokenOccurrences.entrySet()
@@ -66,18 +59,6 @@ public class Tokenizer {
             tokenReference.put(i, word);
             tokenBackReference.put(word, i);
         }
-
-        for (int i = 0; i < tokenizedText.length; i++) {
-            tokenizedText[i] = tokenBackReference.get(words.get(i));
-        }
-    }
-
-    /**
-     * Returns the tokenized text.
-     * @return an integer array where each integer represents a word from a dictionary.
-     */
-    public int[] getTokenizedText() {
-        return tokenizedText;
     }
 
     /**
@@ -103,5 +84,29 @@ public class Tokenizer {
      */
     public String decode(int token) {
         return tokenReference.get(token);
+    }
+
+    @Override
+    public Iterator<int[]> iterator() {
+//        for (int i = 0; i < tokenizedText.length; i++) {
+//            tokenizedText[i] = tokenBackReference.get(words.get(i));
+//        }
+
+        return new Iterator<>() {
+            Iterator<String> fileIterator = reader.iterator();
+            String line = fileIterator.next();
+
+
+
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            @Override
+            public int[] next() {
+                return new int[0];
+            }
+        };
     }
 }
