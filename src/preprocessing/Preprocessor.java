@@ -10,7 +10,6 @@ import preprocessing.vectorization.VectorizationStrategy;
 import preprocessing.vectorization.Vectorizer;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.stream.Collectors;
 
 /**
@@ -76,6 +75,10 @@ public class Preprocessor {
 
   public int getTokenReferenceSize() {
     return tokenReference.getTokenReferenceSize();
+  }
+
+  public long getTokenCount() {
+    return tokenReference.getTokenCount();
   }
 
   public String decode(double[] vector) {

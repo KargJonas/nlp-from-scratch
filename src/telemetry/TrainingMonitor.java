@@ -1,30 +1,64 @@
 package telemetry;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class TrainingMonitor {
 
-  File file;
+  static final SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy-HHmmss");
+  final Date now = new Date();
 
-  public TrainingMonitor(String outPath) {
-    file = new File(outPath);
+  ArrayList<Double> metric = new ArrayList<>();
 
-    String type;
+  String outDirectory;
+  File directory;
+
+  public TrainingMonitor(String outDirectory) {
+    this.outDirectory = outDirectory;
+    directory = new File(outDirectory);
+
+//    String type;
+//
+//    try {
+//      type = Files.probeContentType(directory.toPath());
+//    } catch (IOException e) {
+//      throw new RuntimeException(e);
+//    }
+
+    if (!directory.exists()) {
+      throw new RuntimeException("The provided directory does not exist.");
+    }
+
+    if (!directory.isDirectory()) {
+      throw new RuntimeException("The provided path references a non-directory object.");
+    }
+  }
+
+  public void add(double loss) {
+    metric.add(loss);
+  }
+
+  public void commit() {
+    String fileName = String.format("%s/%s.csv", outDirectory, sdf.format(now));
+    PrintWriter writer;
 
     try {
-      type = Files.probeContentType(file.toPath());
+      writer = new PrintWriter(new FileWriter(fileName, true));
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
 
-    if (!file.exists()) {
-      throw new RuntimeException("The provided file does not exist.");
+    for (Double dataPoint : metric) {
+      writer.println(dataPoint);
     }
 
-    if (file.isDirectory() || type == null || !type.startsWith("text")) {
-      throw new RuntimeException("The provided path references an invalid file.");
-    }
+    writer.close();
   }
 }

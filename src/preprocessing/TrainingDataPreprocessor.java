@@ -37,6 +37,10 @@ public class TrainingDataPreprocessor extends Preprocessor implements Iterable<S
     return batchSize;
   }
 
+  public long getBatchCount() {
+    return tokenReference.getTokenCount() / batchSize;
+  }
+
   @Override
   public Iterator<Sample[]> iterator() {
     return new Iterator<>() {

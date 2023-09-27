@@ -12,7 +12,8 @@ public class CachedTokenizer extends Tokenizer {
 
   @Override
   public Iterator<Integer> iterator() {
-    final int[] tokens = new int[getTokenReference().getWordCount()];
+    // TODO: Fix this
+    final int[] tokens = new int[(int)getTokenReference().getTokenCount()];
     Iterator<Integer> iterator = super.iterator();
 
     for (int i = 0; i < tokens.length; i++) {

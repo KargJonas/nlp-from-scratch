@@ -13,7 +13,7 @@ public class TokenReference {
   private final TextSource textSource;
   private final Tokenizer tokenizer;
 
-  int wordCount = 0;
+  long wordCount = 0;
 
   public TokenReference(TextSource textSource, Tokenizer tokenizer) {
     this.textSource = textSource;
@@ -62,7 +62,7 @@ public class TokenReference {
     }
   }
 
-  public int getWordCount() {
+  public long getTokenCount() {
     return wordCount;
   }
 
