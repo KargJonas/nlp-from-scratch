@@ -23,9 +23,6 @@ public class InputLayer extends Layer<InputLayer> {
         activations = new float[getSize()];
     }
 
-    @Override
-    public void initializeValues() { }
-
     public static InputLayer build(Shape shape) {
         return new InputLayer(shape);
     }

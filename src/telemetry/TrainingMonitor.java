@@ -1,18 +1,15 @@
 package telemetry;
 
-import util.FsHandler;
+import util.DirectoryHandler;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
 import java.text.SimpleDateFormat;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class TrainingMonitor extends FsHandler {
+public class TrainingMonitor extends DirectoryHandler {
 
   static final SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy-HHmmss");
   final Date now = new Date();

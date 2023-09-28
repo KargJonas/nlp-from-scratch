@@ -1,7 +1,9 @@
 package util;
 
+import java.io.Serializable;
+
 public class LossFunctions {
-    public interface LossFn {
+    public interface LossFn extends Serializable {
         float f(float[] prediction, float[] truth);
     }
 

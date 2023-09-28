@@ -1,15 +1,29 @@
 package checkpoint;
 
 import models.Model;
-import util.FsHandler;
+import util.DirectoryHandler;
 
-public class CheckpointManager extends FsHandler {
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+public class CheckpointManager extends DirectoryHandler {
+
+  ObjectOutputStream objectOutputStream;
 
   public CheckpointManager(String outDirectory) {
     super(outDirectory);
   }
 
-  public long createCheckpoint(Model model) {
+  public void createCheckpoint(Model model) {
+    String fileName = String.format("%s/%s.bin", outDirectory, "test");
 
+    try {
+      FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+      objectOutputStream = new ObjectOutputStream(fileOutputStream);
+      objectOutputStream.writeObject(model);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

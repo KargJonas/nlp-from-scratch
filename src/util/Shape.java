@@ -1,9 +1,10 @@
 package util;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class Shape {
+public class Shape implements Serializable {
     private final int[] dimensions;
     private int size = 0;
 

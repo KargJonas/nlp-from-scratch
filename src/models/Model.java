@@ -1,5 +1,6 @@
 package models;
 
+import checkpoint.CheckpointManager;
 import layers.Layer;
 import preprocessing.TrainingDataPreprocessor;
 import preprocessing.vectorization.Sample;
@@ -7,17 +8,19 @@ import telemetry.TrainingMonitor;
 import util.LayerType;
 import util.LossFunctions.LossFn;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Model {
+public class Model implements Serializable {
 
-  TrainingMonitor trainingMonitor;
+  transient TrainingMonitor trainingMonitor;
+  transient CheckpointManager checkpointManager;
   ArrayList<Layer<?>> layers = new ArrayList<>();
   LossFn lossFunction;
   long checkpointNumber = 0;
 
   public Model addLayer(Layer<?> layer) {
-    if (layers.size() == 0 && layer.layerType != LayerType.INPUT) {
+    if (layers.isEmpty() && layer.layerType != LayerType.INPUT) {
       throw new RuntimeException("First layer must be of type InputLayer.");
     }
 
@@ -42,6 +45,11 @@ public class Model {
     return this;
   }
 
+  public Model attachCheckpointManager(CheckpointManager checkpointManager) {
+    this.checkpointManager = checkpointManager;
+    return this;
+  }
+
   /**
    * Tells the layers who their parents are,
    * allocates memory for the weights and biases,
@@ -57,7 +65,7 @@ public class Model {
   public Model initialize() {
     System.out.println("Initializing model ...");
 
-    if (layers.size() < 1) {
+    if (layers.isEmpty()) {
       System.out.println("\tNo layers in model. Aborting.");
       return this;
     }
@@ -72,7 +80,7 @@ public class Model {
       layer.initialize(); // !! this must call initialize for
 
       // Initialize the values in the arrays using the provided/default Initializers.
-      layer.initializeValues();
+//      layer.initializeValues();
     }
 
     System.out.println("\tDone.");
@@ -137,7 +145,7 @@ public class Model {
       System.out.printf("\tNumber of epochs: %s\tBatch size: %s\n\n", nEpochs, preprocessor.getBatchSize());
 
       long totalBatches = nEpochs * preprocessor.getBatchCount();
-      float lastBatchLoss = Float.POSITIVE_INFINITY;
+      float lastBatchLoss = Float.POSITIVE_INFINITY; // TODO: For num. instab. detection
 
       for (int i = 0; i < nEpochs; i++) {
         int batchNumber = 0;
@@ -150,10 +158,6 @@ public class Model {
 
             // TODO: This just here for testing purposes and is a MAJOR bottleneck
             float[] input = floatFlat(sample.data());
-//            float[] input = Arrays.stream(sample.data())
-//              .flatMapToDouble(Arrays::stream)
-//              .toArray();
-
             float[] label = sample.label();
 
             forwardPass(input);
@@ -169,7 +173,6 @@ public class Model {
             trainingMonitor.add(meanError);
           }
 
-//        float percentage = ((float) i / nEpochs) * 100;
           float percentage = ((float) batchNumber / totalBatches) * 100;
           System.out.printf("Epoch: %s/%s (%.0f%%)   Batch loss: %s\n", i, nEpochs, percentage, meanError);
 
@@ -184,9 +187,8 @@ public class Model {
       System.out.println("Training failed:");
       System.out.println(e);
     } finally {
-      if (trainingMonitor != null) {
-        trainingMonitor.commit();
-      }
+      commitMetrics();
+      createCheckpoint();
     }
 
     return this;
@@ -201,5 +203,13 @@ public class Model {
     }
 
     return flatArray;
+  }
+
+  public void commitMetrics() {
+    if (trainingMonitor != null) trainingMonitor.commit();
+  }
+
+  public void createCheckpoint() {
+    if (checkpointManager != null) checkpointManager.createCheckpoint(this);
   }
 }

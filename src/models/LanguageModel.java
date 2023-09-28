@@ -10,10 +10,21 @@ import preprocessing.PromptPreprocessor;
  */
 public class LanguageModel extends Model {
 
-  Preprocessor preprocessor;
+  transient Preprocessor preprocessor;
 
-  public LanguageModel(Preprocessor preprocessor) {
+  public LanguageModel() {}
+
+  public LanguageModel(Model model) {
+    this.trainingMonitor = model.trainingMonitor;
+    this.checkpointManager = model.checkpointManager;
+    this.layers = model.layers;
+    this.lossFunction = model.lossFunction;
+    this.checkpointNumber = model.checkpointNumber;
+  }
+
+  public LanguageModel setPreprocessor(Preprocessor preprocessor) {
     this.preprocessor = preprocessor;
+    return this;
   }
 
   public String generateOutput(String prompt, int outputLength) {

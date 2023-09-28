@@ -1,5 +1,7 @@
 package util;
 
-public enum LayerType {
+import java.io.Serializable;
+
+public enum LayerType implements Serializable {
     INPUT, DENSE, SOFTMAX, ABSTRACT
 }

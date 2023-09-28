@@ -1,7 +1,9 @@
 package util;
 
+import java.io.Serializable;
+
 public class Activations {
-    public interface ActivationFn {
+    public interface ActivationFn extends Serializable {
         float f(float x);
 
         float df(float x);

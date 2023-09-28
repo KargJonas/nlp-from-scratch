@@ -19,9 +19,6 @@ public class SoftmaxLayer extends Layer<SoftmaxLayer> {
         activations = new float[getSize()];
     }
 
-    @Override
-    public void initializeValues() { }
-
     public static SoftmaxLayer build(int size) {
         return new SoftmaxLayer(size);
     }

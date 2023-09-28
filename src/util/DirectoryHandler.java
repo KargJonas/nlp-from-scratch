@@ -2,12 +2,12 @@ package util;
 
 import java.io.File;
 
-public class FsHandler {
+public class DirectoryHandler {
 
   protected String outDirectory;
   protected File directory;
 
-  public FsHandler(String outDirectory) {
+  public DirectoryHandler(String outDirectory) {
     this.outDirectory = outDirectory;
     directory = new File(outDirectory);
 

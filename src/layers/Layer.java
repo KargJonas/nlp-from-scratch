@@ -4,13 +4,15 @@ import util.Activations;
 import util.Initializers;
 import util.LayerType;
 
-public abstract class Layer<T extends Layer<T>> {
+import java.io.Serializable;
+
+public abstract class Layer<T extends Layer<T>> implements Serializable {
     public LayerType layerType = LayerType.ABSTRACT;
     private int layerIndex;
     private final int size;
     protected float[][] weights;
     protected float[] biases;
-    protected float[] activations;
+    transient protected float[] activations;
     private Integer weightsPerUnit;
     protected Layer<?> parentLayer;
     protected Activations.ActivationFn activationFn = Activations.IDENTITY;
@@ -69,37 +71,60 @@ public abstract class Layer<T extends Layer<T>> {
     }
 
     /**
-     * Allocates memory for weights[], biases[] and activations[].
+     * Allocates memory for weights[], biases[] and activations[] and initializes their
+     * values using their respective initializers if necessary.
      */
     public void initialize() {
         if (weightsPerUnit == null) {
             throw new RuntimeException("Layer.initialize() called before setWeightsPerUnit()");
         }
 
-        weights = new float[size][weightsPerUnit];
-        biases = new float[size];
-        activations = new float[size];
-    }
+        if (weights == null) {
+            weights = new float[size][weightsPerUnit];
 
-    /**
-     * Initializes the values of weights[], biases[] and activations[] using their respective initializers.
-     * This method may only be called when weights[], biases[] and activations[] have been initialized.
-     */
-    public void initializeValues() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < weightsPerUnit; j++) {
-                weights[i][j] = weightInitializer.get();
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; j < weightsPerUnit; j++) {
+                    weights[i][j] = weightInitializer.get();
+                }
             }
         }
 
-        for (int i = 0; i < size; i++) {
-            biases[i] = biasInitializer.get();
+        if (biases == null) {
+            biases = new float[size];
+
+            for (int i = 0; i < size; i++) {
+                biases[i] = biasInitializer.get();
+            }
         }
 
-        for (int i = 0; i < size; i++) {
-            activations[i] = activationInitializer.get();
+        if (activations == null) {
+            activations = new float[size];
+
+            for (int i = 0; i < size; i++) {
+                activations[i] = activationInitializer.get();
+            }
         }
     }
+
+//    /**
+//     * Initializes the values of weights[], biases[] and activations[] using their respective initializers.
+//     * This method may only be called when weights[], biases[] and activations[] have been initialized.
+//     */
+//    public void initializeValues() {
+//        for (int i = 0; i < size; i++) {
+//            for (int j = 0; j < weightsPerUnit; j++) {
+//                weights[i][j] = weightInitializer.get();
+//            }
+//        }
+//
+//        for (int i = 0; i < size; i++) {
+//            biases[i] = biasInitializer.get();
+//        }
+//
+//        for (int i = 0; i < size; i++) {
+//            activations[i] = activationInitializer.get();
+//        }
+//    }
 
     public void setActivations(float[] activations) {
         this.activations = activations;

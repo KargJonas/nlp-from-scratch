@@ -1,9 +1,10 @@
 package util;
 
+import java.io.Serializable;
 import java.util.Random;
 
 public class Initializers {
-    public interface Supplier {
+    public interface Supplier extends Serializable {
         float get();
     }
 
