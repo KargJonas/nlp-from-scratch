@@ -20,7 +20,7 @@ public class InputLayer extends Layer<InputLayer> {
     @Override
     public void initialize() {
         // No need to initialize
-        activations = new double[getSize()];
+        activations = new float[getSize()];
     }
 
     @Override
@@ -31,5 +31,5 @@ public class InputLayer extends Layer<InputLayer> {
     }
 
     @Override
-    public void backprop(double[] errors, double learningRate) { }
+    public void backprop(float[] errors, float learningRate) { }
 }

@@ -1,5 +1,7 @@
 package telemetry;
 
+import util.FsHandler;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,38 +12,17 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class TrainingMonitor {
+public class TrainingMonitor extends FsHandler {
 
   static final SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy-HHmmss");
   final Date now = new Date();
-
-  ArrayList<Double> metric = new ArrayList<>();
-
-  String outDirectory;
-  File directory;
+  ArrayList<Float> metric = new ArrayList<>();
 
   public TrainingMonitor(String outDirectory) {
-    this.outDirectory = outDirectory;
-    directory = new File(outDirectory);
-
-//    String type;
-//
-//    try {
-//      type = Files.probeContentType(directory.toPath());
-//    } catch (IOException e) {
-//      throw new RuntimeException(e);
-//    }
-
-    if (!directory.exists()) {
-      throw new RuntimeException("The provided directory does not exist.");
-    }
-
-    if (!directory.isDirectory()) {
-      throw new RuntimeException("The provided path references a non-directory object.");
-    }
+    super(outDirectory);
   }
 
-  public void add(double loss) {
+  public void add(float loss) {
     metric.add(loss);
   }
 
@@ -55,7 +36,7 @@ public class TrainingMonitor {
       throw new RuntimeException(e);
     }
 
-    for (Double dataPoint : metric) {
+    for (float dataPoint : metric) {
       writer.println(dataPoint);
     }
 

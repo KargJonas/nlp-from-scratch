@@ -10,14 +10,14 @@ public class OneHotVectorizer implements VectorizationStrategy {
   TokenReference tokenReference;
 
   @Override
-  public double[] encode(int token) {
-    double[] vector = new double[tokenReference.getTokenReferenceSize()];
+  public float[] encode(int token) {
+    float[] vector = new float[tokenReference.getTokenReferenceSize()];
     vector[token] = 1;
     return vector;
   }
 
   @Override
-  public int decode(double[] vector) {
+  public int decode(float[] vector) {
     int likeliestToken = 0;
 
     for (int i = 0; i < vector.length; i++) {

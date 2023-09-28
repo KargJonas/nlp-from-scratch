@@ -13,11 +13,11 @@ public class PromptPreprocessor {
     this.parentPreprocessor = preprocessor;
   }
 
-  public double[][] encode(String prompt) {
+  public float[][] encode(String prompt) {
     TextSource textSource = new StringReader(prompt, prompt.length());
     Preprocessor preprocessor = new Preprocessor(textSource, parentPreprocessor);
-    Iterator<double[]> vectorIterator = preprocessor.vectorizer.iterator();
-    double[][] vector = new double[preprocessor.inputSize][preprocessor.getTokenReferenceSize()];
+    Iterator<float[]> vectorIterator = preprocessor.vectorizer.iterator();
+    float[][] vector = new float[preprocessor.inputSize][preprocessor.getTokenReferenceSize()];
 
     for (int i = 0; i < preprocessor.inputSize; i++) {
       vector[i] = vectorIterator.next();

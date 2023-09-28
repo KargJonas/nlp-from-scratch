@@ -40,7 +40,7 @@ public class DenseLayer extends Layer<DenseLayer> {
         if (parentLayer == null) return;
 
         for (int i = 0; i < getSize(); i++) {
-            double weightedSum = 0;
+            float weightedSum = 0;
 
             for (int j = 0; j < parentLayer.getSize(); j++) {
                 weightedSum += parentLayer.activations[j] * weights[i][j];

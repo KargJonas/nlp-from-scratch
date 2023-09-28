@@ -1,3 +1,5 @@
+package models;
+
 import layers.Layer;
 import preprocessing.TrainingDataPreprocessor;
 import preprocessing.vectorization.Sample;
@@ -6,13 +8,13 @@ import util.LayerType;
 import util.LossFunctions.LossFn;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Model {
 
   TrainingMonitor trainingMonitor;
   ArrayList<Layer<?>> layers = new ArrayList<>();
   LossFn lossFunction;
+  long checkpointNumber = 0;
 
   public Model addLayer(Layer<?> layer) {
     if (layers.size() == 0 && layer.layerType != LayerType.INPUT) {
@@ -78,7 +80,7 @@ public class Model {
     return this;
   }
 
-  public void forwardPass(double[] input) {
+  public void forwardPass(float[] input) {
     layers.get(0).setActivations(input);
 
     for (int i = 1; i < layers.size(); i++) {
@@ -92,9 +94,9 @@ public class Model {
    * @param label Target output.
    * @return Error vector (output - label).
    */
-  public double[] computeError(double[] label) {
-    double[] prediction = getOutput();
-    double[] error = new double[label.length];
+  public float[] computeError(float[] label) {
+    float[] prediction = getOutput();
+    float[] error = new float[label.length];
 
     for (int i = 0; i < label.length; i++) {
       error[i] = prediction[i] - label[i];
@@ -109,15 +111,15 @@ public class Model {
    * @param label Target output.
    * @return Loss value (scalar),
    */
-  public double computeLoss(double[] label) {
-    double[] output = getOutput();
+  public float computeLoss(float[] label) {
+    float[] output = getOutput();
     return lossFunction.f(output, label);
   }
 
   /**
    * @return Activations of the last layer.
    */
-  public double[] getOutput() {
+  public float[] getOutput() {
     return getLastLayer().getActivations();
   }
 
@@ -128,35 +130,37 @@ public class Model {
   public Model train(
     TrainingDataPreprocessor preprocessor,
     int nEpochs,
-    double learningRate
+    float learningRate
   ) {
     try {
       System.out.println("Training model ...");
       System.out.printf("\tNumber of epochs: %s\tBatch size: %s\n\n", nEpochs, preprocessor.getBatchSize());
 
       long totalBatches = nEpochs * preprocessor.getBatchCount();
-      double lastBatchLoss = Double.POSITIVE_INFINITY;
+      float lastBatchLoss = Float.POSITIVE_INFINITY;
 
       for (int i = 0; i < nEpochs; i++) {
         int batchNumber = 0;
 
         for (Sample[] batch : preprocessor) {
 
-          double meanError = 0;
+          float meanError = 0;
 
           for (Sample sample : batch) {
 
             // TODO: This just here for testing purposes and is a MAJOR bottleneck
-            double[] input = Arrays.stream(sample.data())
-              .flatMapToDouble(Arrays::stream)
-              .toArray();
+            float[] input = floatFlat(sample.data());
+//            float[] input = Arrays.stream(sample.data())
+//              .flatMapToDouble(Arrays::stream)
+//              .toArray();
 
-            double[] label = sample.label();
+            float[] label = sample.label();
 
             forwardPass(input);
-            double x = computeLoss(label);
+            float x = computeLoss(label);
             meanError += x;
             getLastLayer().backprop(computeError(label), learningRate);
+            checkpointNumber++;
           }
 
           meanError /= preprocessor.getBatchSize();
@@ -171,6 +175,9 @@ public class Model {
 
           lastBatchLoss = meanError;
           batchNumber++;
+
+          // TODO remove. this is for testing
+          if (batchNumber > 350) break;
         }
       }
     } catch (Exception e) {
@@ -183,5 +190,16 @@ public class Model {
     }
 
     return this;
+  }
+
+  public static float[] floatFlat(float[][] input) {
+    final int cols = input[0].length;
+    float[] flatArray = new float[input.length * cols];
+
+    for (int i = 0; i < input.length; i++) {
+      System.arraycopy(input[i], 0, flatArray, i * cols, cols);
+    }
+
+    return flatArray;
   }
 }

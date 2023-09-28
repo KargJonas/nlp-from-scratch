@@ -4,8 +4,8 @@ import preprocessing.tokenization.TokenReference;
 
 public interface VectorizationStrategy {
 
-  double[] encode(int token);
-  int decode(double[] vector);
+  float[] encode(int token);
+  int decode(float[] vector);
   int getVectorSize();
   void setTokenReference(TokenReference tokenReference);
 

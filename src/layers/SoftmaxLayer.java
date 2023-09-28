@@ -16,7 +16,7 @@ public class SoftmaxLayer extends Layer<SoftmaxLayer> {
     @Override
     public void initialize() {
         // No need to initialize
-        activations = new double[getSize()];
+        activations = new float[getSize()];
     }
 
     @Override
@@ -30,23 +30,23 @@ public class SoftmaxLayer extends Layer<SoftmaxLayer> {
     public void computeActivations() {
         if (parentLayer == null) return;
 
-        double[] parentLayerActivations = parentLayer.getActivations();
-        double softmaxCoefficient = 0;
+        float[] parentLayerActivations = parentLayer.getActivations();
+        float softmaxCoefficient = 0;
 
         for (int j = 0; j < parentLayer.getSize(); j++) {
             softmaxCoefficient += Math.pow(Math.E, parentLayerActivations[j]);
         }
 
         for (int i = 0; i < getSize(); i++) {
-            activations[i] = Math.pow(Math.E, parentLayerActivations[i]) / softmaxCoefficient;
+            activations[i] = (float) (Math.pow(Math.E, parentLayerActivations[i]) / softmaxCoefficient);
         }
     }
 
     @Override
-    public void backprop(double[] errors, double learningRate) {
+    public void backprop(float[] errors, float learningRate) {
         // No need to update weights and biases for this layer as there are none.
 
-        double[] parentError = new double[parentLayer.getSize()];
+        float[] parentError = new float[parentLayer.getSize()];
 
         for (int i = 0; i < getSize(); i++) {
             for (int j = 0; j < parentLayer.getSize(); j++) {

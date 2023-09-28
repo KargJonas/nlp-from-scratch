@@ -1,6 +1,7 @@
 import layers.DenseLayer;
 import layers.InputLayer;
 import layers.SoftmaxLayer;
+import models.LanguageModel;
 import preprocessing.TrainingDataPreprocessor;
 import telemetry.TrainingMonitor;
 import util.Activations;
@@ -36,7 +37,7 @@ public class Main {
                 .setLossFunction(LossFunctions.CATEGORICAL_CROSSENTROPY)
                 .initialize()
                 .attachTelemetry(trainingMonitor)
-                .train(preprocessor, 1, 0.1);
+                .train(preprocessor, 2, 0.1f);
 
         String output = model.generateOutput("for there are scoffers who maintain", 1000);
         System.out.printf("\nOutput START\n%s\nOutput END", output);

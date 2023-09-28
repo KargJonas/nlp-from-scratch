@@ -1,10 +1,11 @@
+package models;
+
+import models.Model;
 import preprocessing.Preprocessor;
 import preprocessing.PromptPreprocessor;
 
-import java.util.Arrays;
-
 /**
- * An extension of the Model class which handles some of the language-model-specific configuration and setup.
+ * An extension of the models.Model class which handles some of the language-model-specific configuration and setup.
  * Also provides a method generateOutput() which simplifies prompting the model.
  */
 public class LanguageModel extends Model {
@@ -23,15 +24,22 @@ public class LanguageModel extends Model {
 
     var stringBuilder = new StringBuilder();
     var promptPreprocessor = new PromptPreprocessor(preprocessor);
-    double[][] encodedPrompt = promptPreprocessor.encode(prompt);
+    float[][] encodedPrompt = promptPreprocessor.encode(prompt);
 
     for (int i = 0; i < outputLength; i++) {
-      double[] flatEncodedPrompt = Arrays.stream(encodedPrompt)
-        .flatMapToDouble(Arrays::stream)
-        .toArray();
+//      double[] flatEncodedPrompt = Arrays.stream(encodedPrompt)
+//        .flatMapToDouble(Arrays::stream)
+//        .toArray();
+
+//      float[] flatEncodedPrompt = Arrays.stream(encodedPrompt)
+//        .flatMapToDouble(Arrays::stream)
+//        .mapToObj(d -> (float) d)
+//        .toArray(Float[]::new);
+
+      float[] flatEncodedPrompt = floatFlat(encodedPrompt);
 
       forwardPass(flatEncodedPrompt);
-      double[] prediction = getOutput();
+      float[] prediction = getOutput();
       stringBuilder.append(preprocessor.decode(prediction));
       System.arraycopy(encodedPrompt, 1, encodedPrompt, 0, encodedPrompt.length - 1);
       encodedPrompt[encodedPrompt.length - 1] = prediction.clone();

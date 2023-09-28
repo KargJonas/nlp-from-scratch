@@ -22,11 +22,11 @@ public class SampleAggregator implements Iterable<Sample> {
   @Override
   public Iterator<Sample> iterator() {
     return new Iterator<>() {
-      final Iterator<double[]> vectorIterator = vectorizer.iterator();
+      final Iterator<float[]> vectorIterator = vectorizer.iterator();
       boolean hasNext = true;
 
-      final double[][] data = new double[nInputTokens][vectorizer.getVectorSize()];
-      double[] label;
+      final float[][] data = new float[nInputTokens][vectorizer.getVectorSize()];
+      float[] label;
 
       {
 
@@ -63,7 +63,7 @@ public class SampleAggregator implements Iterable<Sample> {
       }
 
       private Sample getSample() {
-        double[][] newData = new double[nInputTokens][vectorizer.getVectorSize()];
+        float[][] newData = new float[nInputTokens][vectorizer.getVectorSize()];
 
         // TODO: Warning: the token vectors are heap elements, modifying them in one place will cause changes elsewhere.
         System.arraycopy(data, 0, newData, 0, nInputTokens);

@@ -8,16 +8,16 @@ public abstract class Layer<T extends Layer<T>> {
     public LayerType layerType = LayerType.ABSTRACT;
     private int layerIndex;
     private final int size;
-    protected double[][] weights;
-    protected double[] biases;
-    protected double[] activations;
+    protected float[][] weights;
+    protected float[] biases;
+    protected float[] activations;
     private Integer weightsPerUnit;
     protected Layer<?> parentLayer;
     protected Activations.ActivationFn activationFn = Activations.IDENTITY;
 
     private Initializers.Supplier weightInitializer;
     private Initializers.Supplier biasInitializer = Initializers.ZEROS();
-    private Initializers.Supplier activationInitializer = Initializers.GAUSSIAN(0, 0.01);
+    private Initializers.Supplier activationInitializer = Initializers.GAUSSIAN(0, 0.01f);
 
     Layer(int size) {
         this.size = size;
@@ -76,9 +76,9 @@ public abstract class Layer<T extends Layer<T>> {
             throw new RuntimeException("Layer.initialize() called before setWeightsPerUnit()");
         }
 
-        weights = new double[size][weightsPerUnit];
-        biases = new double[size];
-        activations = new double[size];
+        weights = new float[size][weightsPerUnit];
+        biases = new float[size];
+        activations = new float[size];
     }
 
     /**
@@ -101,7 +101,7 @@ public abstract class Layer<T extends Layer<T>> {
         }
     }
 
-    public void setActivations(double[] activations) {
+    public void setActivations(float[] activations) {
         this.activations = activations;
     }
 
@@ -116,18 +116,18 @@ public abstract class Layer<T extends Layer<T>> {
         return size;
     }
 
-    public double[] getActivations() {
+    public float[] getActivations() {
         return activations;
     }
 
-    public void backprop(double[] errors, double learningRate) {
-        double[] newBiases = new double[size];
-        double[][] newWeights = new double[size][weightsPerUnit];
-        double[] parentActivations = parentLayer.getActivations();
+    public void backprop(float[] errors, float learningRate) {
+        float[] newBiases = new float[size];
+        float[][] newWeights = new float[size][weightsPerUnit];
+        float[] parentActivations = parentLayer.getActivations();
 
         for (int i = 0; i < size; i++) {
             // Compute delta for the output layer
-            double delta = errors[i] * activationFn.df(activations[i]);
+            float delta = errors[i] * activationFn.df(activations[i]);
 
             // Update biases
             newBiases[i] = biases[i] - learningRate * delta;
@@ -142,7 +142,7 @@ public abstract class Layer<T extends Layer<T>> {
         weights = newWeights;
 
         // Compute delta for the hidden layer
-        double[] parentErrors = new double[parentLayer.getSize()];
+        float[] parentErrors = new float[parentLayer.getSize()];
 
         for (int j = 0; j < weightsPerUnit; j++) {
             for (int i = 0; i < size; i++) {

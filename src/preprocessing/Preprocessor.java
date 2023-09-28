@@ -81,11 +81,11 @@ public class Preprocessor {
     return tokenReference.getTokenCount();
   }
 
-  public String decode(double[] vector) {
+  public String decode(float[] vector) {
     return tokenReference.decode(vectorizer.decode(vector)).replace("\n", "\\n");
   }
 
-  public String decode(double[][] vector) {
+  public String decode(float[][] vector) {
     return Arrays.stream(vector).map(this::decode).collect(Collectors.joining());
   }
 

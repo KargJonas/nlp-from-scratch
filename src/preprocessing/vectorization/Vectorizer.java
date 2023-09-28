@@ -7,7 +7,7 @@ import java.util.Iterator;
 /**
  * Converts tokens (integers which represent tokens) to vectors (float arrays).
  */
-public class Vectorizer implements Iterable<double[]> {
+public class Vectorizer implements Iterable<float[]> {
 
   VectorizationStrategy strategy;
   Tokenizer tokenizer;
@@ -22,12 +22,12 @@ public class Vectorizer implements Iterable<double[]> {
   }
 
   // TODO: Find a real solution for backwards vectorization
-  public int decode(double[] vector) {
+  public int decode(float[] vector) {
     return strategy.decode(vector);
   }
 
   @Override
-  public Iterator<double[]> iterator() {
+  public Iterator<float[]> iterator() {
     return new Iterator<>() {
       final Iterator<Integer> tokenIterator = tokenizer.iterator();
 
@@ -37,7 +37,7 @@ public class Vectorizer implements Iterable<double[]> {
       }
 
       @Override
-      public double[] next() {
+      public float[] next() {
         return strategy.encode(tokenIterator.next());
       }
     };

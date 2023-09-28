@@ -5,21 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/odyssey.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/odyssey_short.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/test.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/270923-225159.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/270923-225302.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/270923-230500.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/270923-233841.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/280923-001509.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/checkpoint/CheckpointManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/FsHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LanguageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LanguageModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/nietzsche.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/nietzsche.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/odyssey.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/odyssey.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LanguageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/LanguageModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/DenseLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/DenseLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/InputLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/InputLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/Layer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/SoftmaxLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/SoftmaxLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/preprocessing/Preprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/Preprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/PromptPreprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/PromptPreprocessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/preprocessing/TrainingDataPreprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/TrainingDataPreprocessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/tokenization/CachedTokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/tokenization/CachedTokenizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/tokenization/TokenReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/tokenization/TokenReference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/vectorization/OneHotVectorizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/vectorization/OneHotVectorizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/vectorization/Sample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/vectorization/Sample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/vectorization/SampleAggregator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/vectorization/SampleAggregator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/vectorization/VectorizationStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/vectorization/VectorizationStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/vectorization/Vectorizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/vectorization/Vectorizer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/telemetry/TrainingMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/telemetry/TrainingMonitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Activations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Activations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Initializers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Initializers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/LossFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/LossFunctions.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +162,7 @@
       <workItem from="1694518184584" duration="5614000" />
       <workItem from="1694552869456" duration="98000" />
       <workItem from="1694714596328" duration="40000" />
-      <workItem from="1695837717546" duration="7181000" />
+      <workItem from="1695837717546" duration="11647000" />
     </task>
     <task id="LOCAL-00001" summary="Added InputLayer, DenseLayer, Model, Initializers, Activation">
       <created>1676065472857</created>
