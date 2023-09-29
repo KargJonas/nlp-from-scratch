@@ -1,4 +1,5 @@
 import models.LanguageModel;
+import models.Model;
 import preprocessing.PromptPreprocessor;
 import preprocessing.TrainingDataPreprocessor;
 import preprocessing.datasources.StringReader;
@@ -13,10 +14,9 @@ public class Inference {
     int inputSize = 40;
     var pp = new TrainingDataPreprocessor(new StringReader(" ", 1), CharTokenizer.build(), OneHotVectorizer.build(), inputSize, 1, 20);
 //    var preprocessor = new PromptPreprocessor(pp);
-    var modelReader = new ModelReader<>();
+    var modelReader = new ModelReader();
 
-    LanguageModel importedModel = modelReader
-      .read(dir + "checkpoints/basic-lm.300923-002156.model")
+    LanguageModel importedModel = ((LanguageModel)modelReader.read(dir + "checkpoints/basic-lm.300923-002156.model"))
       .initialize();
 
     String output1 = importedModel.generateOutput("for there are scoffers who maintain", 1000);

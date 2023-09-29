@@ -5,24 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/checkpoints/basic-lm.300923-000624.model" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoints/basic-lm.300923-000902.model" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoints/basic-lm.300923-001740.model" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoints/basic-lm.300923-001840.model" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoints/basic-lm.300923-001845.model" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoints/basic-lm.300923-002156.model" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-002156.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Inference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/checkpoint/CheckpointManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/checkpoint/CheckpointManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/LanguageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/LanguageModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/TrainingDataPreprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/TrainingDataPreprocessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/batching/Batcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/batching/Batcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/datasources/TextSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/datasources/TextSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/tokenization/TokenReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/tokenization/TokenReference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/tokenization/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/tokenization/Tokenizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/vectorization/SampleAggregator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/vectorization/SampleAggregator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/vectorization/Vectorizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/vectorization/Vectorizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Model.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/ModelReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/ModelReader.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,35 +60,35 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/jonas/code/nlp-from-scratch/assets&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
+    "last_opened_file_path": "/home/jonas/code/nlp-from-scratch/assets",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ],
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TEXT&quot;
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/assets" />
@@ -119,7 +105,7 @@
       <recent name="preprocessing" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Inference">
+  <component name="RunManager" selected="Application.Train">
     <configuration name="Inference" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Inference" />
       <module name="nlp-1" />
@@ -291,11 +277,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="27" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/models/Model.java</url>
-          <line>215</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/preprocessing/Preprocessor.java</url>
           <line>57</line>

@@ -1,17 +1,14 @@
 package util;
 
-import models.LanguageModel;
-import models.Model;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.nio.file.Files;
 
-public class ModelReader<T extends LanguageModel> {
+public class ModelReader {
 
-  public T read(String path) {
+  public Object read(String path) {
 
     File file = new File(path);
     String type;
@@ -25,19 +22,19 @@ public class ModelReader<T extends LanguageModel> {
     if (!file.exists())     throw new RuntimeException("The provided file does not exist.");
     if (file.isDirectory()) throw new RuntimeException("The provided path references an invalid object.");
 
-    T model = null;
+    Object model = null;
 
     try {
       FileInputStream fileIn = new FileInputStream(file);
       ObjectInputStream in = new ObjectInputStream(fileIn);
 
-      model = (T) in.readObject();
+      model = in.readObject();
     } catch (Exception e) {
       System.out.println(e);
     }
 
     if (model == null) {
-      System.out.println("Failed to read model");
+      throw new RuntimeException("Failed to read model");
     }
 
     return model;

@@ -7,11 +7,12 @@ import preprocessing.vectorization.Sample;
 import telemetry.TrainingMonitor;
 import util.LayerType;
 import util.LossFunctions.LossFn;
+import util.ModelReader;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Model implements Serializable {
+public class Model<T extends Model<?>> implements Serializable {
 
   public String name;
   transient TrainingMonitor trainingMonitor;
@@ -67,12 +68,11 @@ public class Model implements Serializable {
    * - Layer.initialize()
    * - initializeValues()
    */
-  public Model initialize() {
+  public T initialize() {
     System.out.println("Initializing model ...");
 
     if (layers.isEmpty()) {
-      System.out.println("\tNo layers in model. Aborting.");
-      return this;
+      throw new RuntimeException("No layers in model. Aborting.");
     }
 
     // Set parent layers
@@ -90,7 +90,7 @@ public class Model implements Serializable {
 
     System.out.println("\tDone.");
 
-    return this;
+    return (T)this;
   }
 
   public void forwardPass(float[] input) {

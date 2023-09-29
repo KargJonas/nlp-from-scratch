@@ -8,7 +8,7 @@ import preprocessing.PromptPreprocessor;
  * An extension of the models.Model class which handles some of the language-model-specific configuration and setup.
  * Also provides a method generateOutput() which simplifies prompting the model.
  */
-public class LanguageModel extends Model {
+public class LanguageModel extends Model<LanguageModel> {
 
   Preprocessor preprocessor;
 
