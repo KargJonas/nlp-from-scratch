@@ -35,6 +35,8 @@ public class TrainingMonitor extends DirectoryHandler {
       writer.println(dataPoint);
     }
 
+    System.out.printf("Successfully committed training metrics: \"%s\"\n", fileName);
+
     writer.close();
   }
 }

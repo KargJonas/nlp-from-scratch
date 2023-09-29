@@ -2,65 +2,38 @@ package models;
 
 import checkpoint.CheckpointManager;
 import layers.Layer;
+import preprocessing.Preprocessor;
 import preprocessing.TrainingDataPreprocessor;
-import preprocessing.vectorization.Sample;
 import telemetry.TrainingMonitor;
-import util.LayerType;
-import util.LossFunctions.LossFn;
-import util.ModelReader;
+import util.LossFunctions;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+public interface Model {
 
-public class Model<T extends Model<?>> implements Serializable {
+  Model addLayer(Layer<?> layer);
 
-  public String name;
-  transient TrainingMonitor trainingMonitor;
-  transient CheckpointManager checkpointManager;
-  ArrayList<Layer<?>> layers = new ArrayList<>();
-  LossFn lossFunction;
-  long checkpointNumber = 0;
+  CheckpointManager getCheckpointManager();
 
-  public Model(String name) {
-    this.name = name;
-  }
+  Model setName(String name);
 
-  public Model addLayer(Layer<?> layer) {
-    if (layers.isEmpty() && layer.layerType != LayerType.INPUT) {
-      throw new RuntimeException("First layer must be of type InputLayer.");
-    }
-
-    if (layer.layerType == LayerType.SOFTMAX
-      && getLastLayer().getSize() != layer.getSize()) {
-      throw new RuntimeException("Softmax layer must be same shape as the layer before it.");
-    }
-
-    layer.setLayerIndex(layers.size());
-
-    layers.add(layer);
-    return this;
-  }
-
-  public Model setLossFunction(LossFn lossFunction) {
-    this.lossFunction = lossFunction;
-    return this;
-  }
-
-  public Model attachTelemetry(TrainingMonitor trainingMonitor) {
-    this.trainingMonitor = trainingMonitor;
-    return this;
-  }
-
-  public Model attachCheckpointManager(CheckpointManager checkpointManager) {
-    this.checkpointManager = checkpointManager;
-    return this;
-  }
+  Model setLossFunction(LossFunctions.LossFn lossFunction);
 
   /**
-   * Tells the layers who their parents are,
-   * allocates memory for the weights and biases,
-   * initializes the weights and biases using the provided initializers.
-   * //
+   * Attaches a training monitor for collecting metrics during training.
+   * @param trainingMonitor The training monitor
+   */
+  Model attachTelemetry(TrainingMonitor trainingMonitor);
+
+  /**
+   * Attaches a checkpointManager for creating "snapshots" of the model.
+   * @param checkpointManager The checkpoint manager
+   */
+  Model attachCheckpointManager(CheckpointManager checkpointManager);
+
+  /**
+   * Tells the layers who their parents are, allocates memory for
+   * the weights, biases and activations and populates the with
+   * initial data according to their respective initializers.
+   * *
    * Call Chain should look like this:
    * - setParentLayer()
    * - Dense/Input/RNN.initialize()
@@ -68,38 +41,9 @@ public class Model<T extends Model<?>> implements Serializable {
    * - Layer.initialize()
    * - initializeValues()
    */
-  public T initialize() {
-    System.out.println("Initializing model ...");
+  Model initialize();
 
-    if (layers.isEmpty()) {
-      throw new RuntimeException("No layers in model. Aborting.");
-    }
-
-    // Set parent layers
-    for (int i = 1; i < layers.size(); i++) {
-      layers.get(i).setParentLayer(layers.get(i - 1));
-    }
-
-    for (Layer<?> layer : layers) {
-      // Create arrays for weights and biases of appropriate size.
-      layer.initialize(); // !! this must call initialize for
-
-      // Initialize the values in the arrays using the provided/default Initializers.
-//      layer.initializeValues();
-    }
-
-    System.out.println("\tDone.");
-
-    return (T)this;
-  }
-
-  public void forwardPass(float[] input) {
-    layers.get(0).setActivations(input);
-
-    for (int i = 1; i < layers.size(); i++) {
-      layers.get(i).computeActivations();
-    }
-  }
+  void forwardPass(float[] input);
 
   /**
    * Returns the error between the activations of the last layer and the label.
@@ -107,16 +51,7 @@ public class Model<T extends Model<?>> implements Serializable {
    * @param label Target output.
    * @return Error vector (output - label).
    */
-  public float[] computeError(float[] label) {
-    float[] prediction = getOutput();
-    float[] error = new float[label.length];
-
-    for (int i = 0; i < label.length; i++) {
-      error[i] = prediction[i] - label[i];
-    }
-
-    return error;
-  }
+  float[] computeError(float[] label);
 
   /**
    * Applies the loss function to the label and the activations of the last layer.
@@ -124,77 +59,31 @@ public class Model<T extends Model<?>> implements Serializable {
    * @param label Target output.
    * @return Loss value (scalar),
    */
-  public float computeLoss(float[] label) {
-    float[] output = getOutput();
-    return lossFunction.f(output, label);
-  }
+  float computeLoss(float[] label);
 
   /**
    * @return Activations of the last layer.
    */
-  public float[] getOutput() {
-    return getLastLayer().getActivations();
-  }
+  float[] getOutput();
 
-  public Layer<?> getLastLayer() {
-    return layers.get(layers.size() - 1);
-  }
+  Model train(TrainingDataPreprocessor preprocessor, int nEpochs, float learningRate);
 
-  public Model train(
-    TrainingDataPreprocessor preprocessor,
-    int nEpochs,
-    float learningRate
-  ) {
-    try {
-      System.out.println("Training model ...");
-      System.out.printf("\tNumber of epochs: %s\tBatch size: %s\n\n", nEpochs, preprocessor.getBatchSize());
+  /**
+   * Writes metrics collected during training to disk.
+   */
+  Model commitMetrics();
 
-      long totalBatches = nEpochs * preprocessor.getBatchCount();
+  /**
+   * Serializes the current state of the network and writes it to disk.
+   */
+  Model createCheckpoint();
 
-      for (int i = 0; i < nEpochs; i++) {
-        int batchNumber = 0;
-
-        for (Sample[] batch : preprocessor) {
-
-          float meanError = 0;
-
-          for (Sample sample : batch) {
-
-            // TODO: This just here for testing purposes and is a MAJOR bottleneck
-            float[] input = floatFlat(sample.data());
-            float[] label = sample.label();
-
-            forwardPass(input);
-            float x = computeLoss(label);
-            meanError += x;
-            getLastLayer().backprop(computeError(label), learningRate);
-            checkpointNumber++;
-          }
-
-          meanError /= preprocessor.getBatchSize();
-
-          if (trainingMonitor != null) {
-            trainingMonitor.add(meanError);
-          }
-
-          float percentage = ((float) batchNumber / totalBatches) * 100;
-          System.out.printf("Epoch: %s/%s (%.0f%%)   Batch loss: %s\n", i, nEpochs, percentage, meanError);
-
-          batchNumber++;
-
-          // TODO remove. this is for testing
-          if (batchNumber > 350) break;
-        }
-      }
-    } catch (Exception e) {
-      System.out.println("Training failed:");
-      throw e;
-    }
-
-    return this;
-  }
-
-  public static float[] floatFlat(float[][] input) {
+  /**
+   * Flattens a float[][] array.
+   * @param input Nested float array of the form float[][]
+   * @return Flattened array of the form float[]
+   */
+  static float[] floatFlat(float[][] input) {
     final int cols = input[0].length;
     float[] flatArray = new float[input.length * cols];
 
@@ -205,15 +94,5 @@ public class Model<T extends Model<?>> implements Serializable {
     return flatArray;
   }
 
-  public Model commitMetrics() {
-    if (trainingMonitor == null) throw new RuntimeException("Cant commit training metrics: No training monitor configured.");
-    trainingMonitor.commit();
-    return this;
-  }
-
-  public Model createCheckpoint() {
-    if (checkpointManager == null) throw new RuntimeException("Cant create checkpoint: No checkpoint manager configured.");
-    checkpointManager.createCheckpoint(this);
-    return this;
-  }
+  String getName();
 }

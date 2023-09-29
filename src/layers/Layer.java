@@ -106,26 +106,6 @@ public abstract class Layer<T extends Layer<T>> implements Serializable {
         }
     }
 
-//    /**
-//     * Initializes the values of weights[], biases[] and activations[] using their respective initializers.
-//     * This method may only be called when weights[], biases[] and activations[] have been initialized.
-//     */
-//    public void initializeValues() {
-//        for (int i = 0; i < size; i++) {
-//            for (int j = 0; j < weightsPerUnit; j++) {
-//                weights[i][j] = weightInitializer.get();
-//            }
-//        }
-//
-//        for (int i = 0; i < size; i++) {
-//            biases[i] = biasInitializer.get();
-//        }
-//
-//        for (int i = 0; i < size; i++) {
-//            activations[i] = activationInitializer.get();
-//        }
-//    }
-
     public void setActivations(float[] activations) {
         this.activations = activations;
     }

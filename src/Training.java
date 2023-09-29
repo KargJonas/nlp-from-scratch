@@ -10,16 +10,15 @@ import preprocessing.vectorization.OneHotVectorizer;
 import telemetry.TrainingMonitor;
 import util.Activations;
 import util.LossFunctions;
-import util.ModelReader;
 
-public class Train {
+public class Training {
   public static void main(String[] args) {
     var dir = "/home/jonas/code/nlp-from-scratch/";
 
     int inputSize = 40;
     var reader = new TextFileReader(dir + "assets/odyssey_short.txt", 1);
     var preprocessor = new TrainingDataPreprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), inputSize, 1, 20);
-    var model = new LanguageModel("basic-lm");
+    var model = new LanguageModel();
     var trainingMonitor = new TrainingMonitor(dir + "metrics");
     var checkpointManager = new CheckpointManager(dir + "checkpoints");
 
@@ -32,6 +31,7 @@ public class Train {
     var sml = SoftmaxLayer.build(tokenRefSize);
 
     model
+      .setName("basic-lm")
       .setPreprocessor(preprocessor)
       .addLayer(il)
       .addLayer(dl0)
@@ -42,7 +42,7 @@ public class Train {
       .initialize()
       .attachTelemetry(trainingMonitor)
       .attachCheckpointManager(checkpointManager)
-      .train(preprocessor, 1, 0.04f)
+      .train(1, 0.04f) // TODO: Fix this. There should be no need for setting preproc twice
       .createCheckpoint()
       .commitMetrics();
 
