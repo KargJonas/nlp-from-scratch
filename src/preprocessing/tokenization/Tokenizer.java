@@ -2,6 +2,7 @@ package preprocessing.tokenization;
 
 import preprocessing.datasources.TextSource;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 

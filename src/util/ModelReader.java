@@ -21,13 +21,8 @@ public class ModelReader {
       throw new RuntimeException(e);
     }
 
-    if (!file.exists()) {
-      throw new RuntimeException("The provided file does not exist.");
-    }
-
-    if (file.isDirectory() || type == null) {
-      throw new RuntimeException("The provided path references an invalid object.");
-    }
+    if (!file.exists())     throw new RuntimeException("The provided file does not exist.");
+    if (file.isDirectory()) throw new RuntimeException("The provided path references an invalid object.");
 
     Model model = null;
 

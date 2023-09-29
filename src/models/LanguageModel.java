@@ -12,9 +12,12 @@ public class LanguageModel extends Model {
 
   transient Preprocessor preprocessor;
 
-  public LanguageModel() {}
+  public LanguageModel(String name) {
+    super(name);
+  }
 
   public LanguageModel(Model model) {
+    super(model.name);
     this.trainingMonitor = model.trainingMonitor;
     this.checkpointManager = model.checkpointManager;
     this.layers = model.layers;
@@ -38,15 +41,6 @@ public class LanguageModel extends Model {
     float[][] encodedPrompt = promptPreprocessor.encode(prompt);
 
     for (int i = 0; i < outputLength; i++) {
-//      double[] flatEncodedPrompt = Arrays.stream(encodedPrompt)
-//        .flatMapToDouble(Arrays::stream)
-//        .toArray();
-
-//      float[] flatEncodedPrompt = Arrays.stream(encodedPrompt)
-//        .flatMapToDouble(Arrays::stream)
-//        .mapToObj(d -> (float) d)
-//        .toArray(Float[]::new);
-
       float[] flatEncodedPrompt = floatFlat(encodedPrompt);
 
       forwardPass(flatEncodedPrompt);

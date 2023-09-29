@@ -3,7 +3,6 @@ import layers.DenseLayer;
 import layers.InputLayer;
 import layers.SoftmaxLayer;
 import models.LanguageModel;
-import models.Model;
 import preprocessing.TrainingDataPreprocessor;
 import preprocessing.datasources.TextFileReader;
 import preprocessing.tokenization.CharTokenizer;
@@ -13,14 +12,14 @@ import util.Activations;
 import util.LossFunctions;
 import util.ModelReader;
 
-public class Main {
+public class Train {
   public static void main(String[] args) {
-    int inputSize = 40;
-
     var dir = "/home/jonas/code/nlp-from-scratch/";
-    var reader = new TextFileReader(dir + "assets/odyssey.txt", 1);
+
+    int inputSize = 40;
+    var reader = new TextFileReader(dir + "assets/odyssey_short.txt", 1);
     var preprocessor = new TrainingDataPreprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), inputSize, 1, 20);
-    var model = new LanguageModel();
+    var model = new LanguageModel("basic-lm");
     var trainingMonitor = new TrainingMonitor(dir + "metrics");
     var checkpointManager = new CheckpointManager(dir + "checkpoints");
 
@@ -44,19 +43,10 @@ public class Main {
       .attachTelemetry(trainingMonitor)
       .attachCheckpointManager(checkpointManager)
       .train(preprocessor, 1, 0.04f)
-      .createCheckpoint();
+      .createCheckpoint()
+      .commitMetrics();
 
     String output = model.generateOutput("for there are scoffers who maintain", 1000);
     System.out.printf("\nOutput:\n%s\n", output);
-
-    var importedModel = ModelReader.read(dir + "checkpoints/test.bin");
-    var importedLM = new LanguageModel(importedModel);
-
-    LanguageModel model1 = (LanguageModel) importedLM
-      .setPreprocessor(preprocessor)
-      .initialize();
-
-    String output1 = model1.generateOutput("for there are scoffers who maintain", 1000);
-    System.out.printf("\nOutput:\n%s\n", output1);
   }
 }

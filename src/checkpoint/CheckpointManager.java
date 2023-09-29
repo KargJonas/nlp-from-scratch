@@ -15,8 +15,8 @@ public class CheckpointManager extends DirectoryHandler {
     super(outDirectory);
   }
 
-  public void createCheckpoint(Model model) {
-    String fileName = String.format("%s/%s.bin", outDirectory, "test");
+  public <T extends Model>void createCheckpoint(T model) {
+    String fileName = String.format("%s/%s.%s.model", outDirectory, model.name, dateTime);
 
     try {
       FileOutputStream fileOutputStream = new FileOutputStream(fileName);
@@ -25,5 +25,9 @@ public class CheckpointManager extends DirectoryHandler {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public void createCheckpoint() {
+
   }
 }

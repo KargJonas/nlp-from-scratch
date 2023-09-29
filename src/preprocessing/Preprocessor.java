@@ -9,6 +9,7 @@ import preprocessing.vectorization.Sample;
 import preprocessing.vectorization.VectorizationStrategy;
 import preprocessing.vectorization.Vectorizer;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
  * Reads data from a text file, splits it into tokens, encodes those to vectors
  * and then collects the vectors into portions that can be passed into a network.
  */
-public class Preprocessor {
+public class Preprocessor implements Serializable {
 
   protected TokenizationStrategy tokenizationStrategy;
   protected VectorizationStrategy vectorizationStrategy;

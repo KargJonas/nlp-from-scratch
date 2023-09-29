@@ -13,11 +13,16 @@ import java.util.ArrayList;
 
 public class Model implements Serializable {
 
+  public String name;
   transient TrainingMonitor trainingMonitor;
   transient CheckpointManager checkpointManager;
   ArrayList<Layer<?>> layers = new ArrayList<>();
   LossFn lossFunction;
   long checkpointNumber = 0;
+
+  public Model(String name) {
+    this.name = name;
+  }
 
   public Model addLayer(Layer<?> layer) {
     if (layers.isEmpty() && layer.layerType != LayerType.INPUT) {
@@ -145,7 +150,6 @@ public class Model implements Serializable {
       System.out.printf("\tNumber of epochs: %s\tBatch size: %s\n\n", nEpochs, preprocessor.getBatchSize());
 
       long totalBatches = nEpochs * preprocessor.getBatchCount();
-      float lastBatchLoss = Float.POSITIVE_INFINITY; // TODO: For num. instab. detection
 
       for (int i = 0; i < nEpochs; i++) {
         int batchNumber = 0;
@@ -176,7 +180,6 @@ public class Model implements Serializable {
           float percentage = ((float) batchNumber / totalBatches) * 100;
           System.out.printf("Epoch: %s/%s (%.0f%%)   Batch loss: %s\n", i, nEpochs, percentage, meanError);
 
-          lastBatchLoss = meanError;
           batchNumber++;
 
           // TODO remove. this is for testing
@@ -185,10 +188,7 @@ public class Model implements Serializable {
       }
     } catch (Exception e) {
       System.out.println("Training failed:");
-      System.out.println(e);
-    } finally {
-      commitMetrics();
-      createCheckpoint();
+      throw e;
     }
 
     return this;
@@ -205,11 +205,15 @@ public class Model implements Serializable {
     return flatArray;
   }
 
-  public void commitMetrics() {
-    if (trainingMonitor != null) trainingMonitor.commit();
+  public Model commitMetrics() {
+    if (trainingMonitor == null) throw new RuntimeException("Cant commit training metrics: No training monitor configured.");
+    trainingMonitor.commit();
+    return this;
   }
 
-  public void createCheckpoint() {
-    if (checkpointManager != null) checkpointManager.createCheckpoint(this);
+  public Model createCheckpoint() {
+    if (checkpointManager == null) throw new RuntimeException("Cant create checkpoint: No checkpoint manager configured.");
+    checkpointManager.createCheckpoint(this);
+    return this;
   }
 }

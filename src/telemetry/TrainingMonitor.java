@@ -11,8 +11,6 @@ import java.util.Date;
 
 public class TrainingMonitor extends DirectoryHandler {
 
-  static final SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy-HHmmss");
-  final Date now = new Date();
   ArrayList<Float> metric = new ArrayList<>();
 
   public TrainingMonitor(String outDirectory) {
@@ -24,7 +22,7 @@ public class TrainingMonitor extends DirectoryHandler {
   }
 
   public void commit() {
-    String fileName = String.format("%s/%s.csv", outDirectory, sdf.format(now));
+    String fileName = String.format("%s/%s.csv", outDirectory, dateTime);
     PrintWriter writer;
 
     try {

@@ -5,36 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/checkpoints/test.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/280923-164017.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/280923-164159.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/280923-164226.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/280923-164426.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/280923-164545.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/280923-173331.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/280923-181633.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/280923-192101.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/280923-192117.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/280923-193552.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/280923-193636.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/280923-193723.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/ModelReader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checkpoints/basic-lm.280923-220039.model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/checkpoints/basic-lm.280923-221030.model" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/280923-220039.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/280923-221030.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Inference.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/odyssey_short.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/odyssey_short.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/checkpoints/test.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Train.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/checkpoint/CheckpointManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/checkpoint/CheckpointManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/InputLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/InputLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/Layer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/SoftmaxLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/SoftmaxLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/LanguageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/LanguageModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/Preprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/Preprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/tokenization/TokenizationStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/tokenization/TokenizationStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/tokenization/Tokenizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/tokenization/Tokenizer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/vectorization/VectorizationStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/vectorization/VectorizationStrategy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/telemetry/TrainingMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/telemetry/TrainingMonitor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Activations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Activations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/FsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DirectoryHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Initializers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Initializers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/LayerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/LayerType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/LossFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/LossFunctions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Shape.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DirectoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DirectoryHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/ModelReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/ModelReader.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,17 +118,28 @@
       <recent name="preprocessing" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+  <component name="RunManager" selected="Application.Inference">
+    <configuration name="Inference" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Inference" />
       <module name="nlp-1" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Train" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Train" />
+      <module name="nlp-1" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Inference" />
+      <item itemvalue="Application.Train" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Train" />
       </list>
     </recent_temporary>
   </component>
@@ -167,7 +166,7 @@
       <workItem from="1694518184584" duration="5614000" />
       <workItem from="1694552869456" duration="98000" />
       <workItem from="1694714596328" duration="40000" />
-      <workItem from="1695837717546" duration="20554000" />
+      <workItem from="1695837717546" duration="23735000" />
     </task>
     <task id="LOCAL-00001" summary="Added InputLayer, DenseLayer, Model, Initializers, Activation">
       <created>1676065472857</created>
@@ -287,6 +286,11 @@
           <properties class="java.io.NotSerializableException" package="java.io" />
           <option name="timeStamp" value="14" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Inference.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
