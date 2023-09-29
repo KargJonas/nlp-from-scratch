@@ -1,3 +1,5 @@
 package preprocessing.datasources;
 
-public interface TextSource extends Iterable<String> { }
+import java.io.Serializable;
+
+public interface TextSource extends Iterable<String>, Serializable { }

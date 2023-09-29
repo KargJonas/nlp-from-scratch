@@ -1,5 +1,6 @@
 package preprocessing.vectorization;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Iterator;
  * that can then be passed into the network. This aggregation step
  * is necessary for networks that do not have memory.
  */
-public class SampleAggregator implements Iterable<Sample> {
+public class SampleAggregator implements Iterable<Sample>, Serializable {
 
   Vectorizer vectorizer;
   int nInputTokens;

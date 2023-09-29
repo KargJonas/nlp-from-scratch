@@ -3,9 +3,10 @@ package preprocessing.batching;
 import preprocessing.vectorization.Sample;
 import preprocessing.vectorization.SampleAggregator;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
-public class Batcher implements Iterable<Sample[]> {
+public class Batcher implements Iterable<Sample[]>, Serializable {
 
   SampleAggregator sampleAggregator;
   int batchSize;

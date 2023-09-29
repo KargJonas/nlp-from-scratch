@@ -10,7 +10,7 @@ import preprocessing.PromptPreprocessor;
  */
 public class LanguageModel extends Model {
 
-  transient Preprocessor preprocessor;
+  Preprocessor preprocessor;
 
   public LanguageModel(String name) {
     super(name);

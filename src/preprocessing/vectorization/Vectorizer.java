@@ -2,12 +2,13 @@ package preprocessing.vectorization;
 
 import preprocessing.tokenization.Tokenizer;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
  * Converts tokens (integers which represent tokens) to vectors (float arrays).
  */
-public class Vectorizer implements Iterable<float[]> {
+public class Vectorizer implements Iterable<float[]>, Serializable {
 
   VectorizationStrategy strategy;
   Tokenizer tokenizer;

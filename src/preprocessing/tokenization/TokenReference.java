@@ -2,10 +2,11 @@ package preprocessing.tokenization;
 
 import preprocessing.datasources.TextSource;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class TokenReference {
+public class TokenReference implements Serializable {
   HashMap<Integer, String> tokenReference;
   HashMap<String, Integer> tokenBackReference;
   private int tokenReferenceSize = 0;

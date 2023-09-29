@@ -26,8 +26,4 @@ public class CheckpointManager extends DirectoryHandler {
       throw new RuntimeException(e);
     }
   }
-
-  public void createCheckpoint() {
-
-  }
 }

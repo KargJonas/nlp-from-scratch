@@ -7,13 +7,14 @@ import preprocessing.vectorization.Sample;
 import preprocessing.vectorization.SampleAggregator;
 import preprocessing.vectorization.VectorizationStrategy;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
  * Reads data from a text file, splits it into tokens, encodes those to vectors
  * and then collects the vectors into portions that can be passed into a network.
  */
-public class TrainingDataPreprocessor extends Preprocessor implements Iterable<Sample[]> {
+public class TrainingDataPreprocessor extends Preprocessor implements Iterable<Sample[]>, Serializable {
 
   private final Batcher batcher;
   private final int batchSize;

@@ -10,7 +10,7 @@ import java.util.Iterator;
  * Reads words from a data source (PlainTextReader), builds a reference of
  * tokens and words, and splits the input text into a sequence of token numbers.
  */
-public class Tokenizer implements Iterable<Integer> {
+public class Tokenizer implements Iterable<Integer>, Serializable {
 
   private final TokenReference tokenReference;
   private final TextSource textSource;
