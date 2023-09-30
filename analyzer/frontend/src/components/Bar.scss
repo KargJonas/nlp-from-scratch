@@ -1,0 +1,34 @@
+
+.Bar {
+  width: 400px;
+  height: 100vh;
+  margin-right: 20px;
+
+  .fixed-container {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    padding: 20px;
+    box-shadow: 10px 0 10px mix(#3D4366, #FEF5EB, 10%);
+    overflow-y: scroll;
+
+    .list {
+      list-style: none;
+      padding-left: 20px;
+      font-size: 17px;
+
+      li {
+        user-select: none;
+        cursor: default;
+
+        &:hover {
+          font-weight: bold;
+        }
+
+        &.active {
+          color: #EF6461;
+        }
+      }
+    }
+  }
+}

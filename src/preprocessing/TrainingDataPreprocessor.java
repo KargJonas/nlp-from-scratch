@@ -22,11 +22,10 @@ public class TrainingDataPreprocessor extends Preprocessor implements Iterable<S
     TextSource textSource,
     TokenizationStrategy tokenizationStrategy,
     VectorizationStrategy vectorizationStrategy,
-    int inputSize,
     int stepOver,
     int batchSize
   ) {
-    super(textSource, tokenizationStrategy, vectorizationStrategy, inputSize, stepOver);
+    super(textSource, tokenizationStrategy, vectorizationStrategy, stepOver);
 
 //    SampleAggregator sampleAggregator = new SampleAggregator(vectorizer, inputSize, stepOver);
     batcher = new Batcher(vectorizer, batchSize);

@@ -27,14 +27,12 @@ public class Preprocessor implements Serializable {
   public Vectorizer vectorizer;
 
   Shape inputShape;
-  int inputSize;
   int stepOver;
 
   public Preprocessor(
     TextSource textSource,
     TokenizationStrategy tokenizationStrategy,
     VectorizationStrategy vectorizationStrategy,
-    int inputSize,
     int stepOver
   ) {
     this.tokenizationStrategy = tokenizationStrategy;
@@ -44,9 +42,8 @@ public class Preprocessor implements Serializable {
     tokenReference = tokenizer.getTokenReference();
     vectorizationStrategy.setTokenReference(tokenReference);
     vectorizer = new Vectorizer(tokenizer, vectorizationStrategy);
-    inputShape = Shape.build(inputSize, tokenReference.getTokenReferenceSize());
+    inputShape = Shape.build(1, tokenReference.getTokenReferenceSize());
 
-    this.inputSize = inputSize;
     this.stepOver = stepOver;
   }
 
@@ -57,7 +54,6 @@ public class Preprocessor implements Serializable {
     // Use config directly from provided preprocessor.
     tokenizationStrategy  = preprocessor.tokenizationStrategy;
     vectorizationStrategy = preprocessor.vectorizationStrategy;
-    inputSize = preprocessor.inputSize;
     stepOver  = preprocessor.stepOver;
 
     // TODO: Don't forget that tokenReference.wordCount still refers to training data word count
@@ -67,7 +63,8 @@ public class Preprocessor implements Serializable {
     tokenizer        = new Tokenizer(textSource, preprocessor.tokenizationStrategy, tokenReference);
     vectorizer       = new Vectorizer(tokenizer, vectorizationStrategy);
 
-    inputShape = Shape.build(preprocessor.inputSize, tokenReference.getTokenReferenceSize());
+    // TODO: FIX
+    inputShape = Shape.build(1, tokenReference.getTokenReferenceSize());
   }
 
   public Shape getInputShape() {

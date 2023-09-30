@@ -17,9 +17,9 @@ public class PromptPreprocessor {
     TextSource textSource = new StringReader(prompt, prompt.length());
     Preprocessor preprocessor = new Preprocessor(textSource, parentPreprocessor);
     Iterator<float[]> vectorIterator = preprocessor.vectorizer.iterator();
-    float[][] vector = new float[preprocessor.inputSize][preprocessor.getTokenReferenceSize()];
+    float[][] vector = new float[prompt.length()][preprocessor.getTokenReferenceSize()];
 
-    for (int i = 0; i < preprocessor.inputSize; i++) {
+    for (int i = 0; i < prompt.length(); i++) {
       vector[i] = vectorIterator.next();
     }
 
