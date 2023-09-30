@@ -3,7 +3,7 @@ package layers;
 import util.LayerType;
 import util.Shape;
 
-public class InputLayer extends Layer<InputLayer> {
+public class InputLayer extends GenericLayer<InputLayer> {
     Shape shape;
 
     public InputLayer(Shape shape) {

@@ -22,12 +22,12 @@ public class Finetuning {
     // TODO: Add tokenReference compatibility check
 
     var importedModel = modelReader
-      .read(dir + "checkpoints/basic-lm.300923-122028.model")
+      .read(dir + "checkpoints/basic-lm.300923-153900.model")
       .attachTelemetry(trainingMonitor)
       .attachCheckpointManager(checkpointManager)
       .setPreprocessor(preprocessor)
       .initialize()
-      .train(10, 0.005f)
+      .train(10, 0.0003f)
       .createCheckpoint()
       .commitMetrics();
   }

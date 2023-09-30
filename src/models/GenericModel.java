@@ -1,7 +1,7 @@
 package models;
 
 import checkpoint.CheckpointManager;
-import layers.Layer;
+import layers.GenericLayer;
 import preprocessing.TrainingDataPreprocessor;
 import preprocessing.vectorization.Sample;
 import telemetry.TrainingMonitor;
@@ -16,7 +16,7 @@ public class GenericModel implements Model, Serializable {
   public String name = "unnamed-model";
   transient TrainingMonitor trainingMonitor;
   transient CheckpointManager checkpointManager;
-  ArrayList<Layer<?>> layers = new ArrayList<>();
+  ArrayList<GenericLayer<?>> layers = new ArrayList<>();
   LossFn lossFunction;
   long checkpointNumber = 0;
 
@@ -25,7 +25,7 @@ public class GenericModel implements Model, Serializable {
     return checkpointManager;
   }
 
-  public GenericModel addLayer(Layer<?> layer) {
+  public GenericModel addLayer(GenericLayer<?> layer) {
     if (layers.isEmpty() && layer.layerType != LayerType.INPUT) {
       throw new RuntimeException("First layer must be of type InputLayer.");
     }
@@ -85,7 +85,7 @@ public class GenericModel implements Model, Serializable {
       layers.get(i).setParentLayer(layers.get(i - 1));
     }
 
-    for (Layer<?> layer : layers) {
+    for (GenericLayer<?> layer : layers) {
       // Create arrays for weights and biases of appropriate size.
       layer.initialize(); // !! this must call initialize for
 
@@ -145,7 +145,7 @@ public class GenericModel implements Model, Serializable {
    * Returns the last/output layer of the network.
    * @return The output layer of the network.
    */
-  Layer<?> getLastLayer() {
+  GenericLayer<?> getLastLayer() {
     return layers.get(layers.size() - 1);
   }
 
@@ -192,7 +192,7 @@ public class GenericModel implements Model, Serializable {
           batchNumber++;
 
           // TODO remove. this is for testing
-          if (batchNumber > 350) break;
+//          if (batchNumber > 350) break;
         }
       }
     } catch (Exception e) {

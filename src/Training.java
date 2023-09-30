@@ -1,6 +1,7 @@
 import checkpoint.CheckpointManager;
 import layers.DenseLayer;
 import layers.InputLayer;
+import layers.RecurrentLayer;
 import layers.SoftmaxLayer;
 import models.LanguageModel;
 import preprocessing.TrainingDataPreprocessor;
@@ -25,8 +26,9 @@ public class Training {
     var tokenRefSize = preprocessor.getTokenReferenceSize();
 
     var il = InputLayer.build(preprocessor.getInputShape());
-    var dl0 = DenseLayer.build(inputSize * tokenRefSize).setActivationFn(Activations.TANH);
-    var dl1 = DenseLayer.build(inputSize * tokenRefSize).setActivationFn(Activations.TANH);
+    var dl0 = DenseLayer.build(inputSize * tokenRefSize).setActivationFn(Activations.RELU);
+    var rl = RecurrentLayer.build(inputSize * tokenRefSize).setActivationFn(Activations.TANH);
+    var dl1 = DenseLayer.build(128).setActivationFn(Activations.TANH);
     var dl2 = DenseLayer.build(tokenRefSize).setActivationFn(Activations.SOFTPLUS);
     var sml = SoftmaxLayer.build(tokenRefSize);
 
@@ -35,14 +37,15 @@ public class Training {
       .setPreprocessor(preprocessor)
       .addLayer(il)
       .addLayer(dl0)
-//      .addLayer(dl1)
+      .addLayer(rl)
+      .addLayer(dl1)
       .addLayer(dl2)
       .addLayer(sml)
       .setLossFunction(LossFunctions.CATEGORICAL_CROSSENTROPY)
       .initialize()
       .attachTelemetry(trainingMonitor)
       .attachCheckpointManager(checkpointManager)
-      .train(1, 0.04f) // TODO: Fix this. There should be no need for setting preproc twice
+      .train(5, 0.04f)
       .createCheckpoint()
       .commitMetrics();
 

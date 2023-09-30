@@ -2,7 +2,7 @@ package layers;
 
 import util.LayerType;
 
-public class SoftmaxLayer extends Layer<SoftmaxLayer> {
+public class SoftmaxLayer extends GenericLayer<SoftmaxLayer> {
     SoftmaxLayer(int size) {
         super(size);
         layerType = LayerType.SOFTMAX;

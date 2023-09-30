@@ -7,7 +7,7 @@ public class Inference {
     var modelReader = new ModelReader<LanguageModel>();
 
     var importedModel = modelReader
-      .read(dir + "checkpoints/basic-lm.300923-143742.model")
+      .read(dir + "checkpoints/basic-lm.300923-154146.model")
       .initialize();
 
     String output1 = importedModel.generateOutput("then eurymachus son of polybus answered", 1000);

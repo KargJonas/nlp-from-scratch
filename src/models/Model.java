@@ -1,15 +1,14 @@
 package models;
 
 import checkpoint.CheckpointManager;
-import layers.Layer;
-import preprocessing.Preprocessor;
+import layers.GenericLayer;
 import preprocessing.TrainingDataPreprocessor;
 import telemetry.TrainingMonitor;
 import util.LossFunctions;
 
 public interface Model {
 
-  Model addLayer(Layer<?> layer);
+  Model addLayer(GenericLayer<?> layer);
 
   CheckpointManager getCheckpointManager();
 

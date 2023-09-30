@@ -1,8 +1,7 @@
 package models;
 
 import checkpoint.CheckpointManager;
-import layers.Layer;
-import preprocessing.Preprocessor;
+import layers.GenericLayer;
 import preprocessing.PromptPreprocessor;
 import preprocessing.TrainingDataPreprocessor;
 import telemetry.TrainingMonitor;
@@ -61,7 +60,7 @@ public class LanguageModel implements Model, Serializable {
   }
 
   @Override
-  public LanguageModel addLayer(Layer<?> layer) {
+  public LanguageModel addLayer(GenericLayer<?> layer) {
     model.addLayer(layer);
     return this;
   }

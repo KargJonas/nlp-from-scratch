@@ -2,7 +2,7 @@ package layers;
 
 import util.LayerType;
 
-public class DenseLayer extends Layer<DenseLayer> {
+public class DenseLayer extends GenericLayer<DenseLayer> {
     DenseLayer(int size) {
         super(size);
         layerType  = LayerType.DENSE;

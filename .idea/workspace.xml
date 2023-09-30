@@ -5,29 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/assets/odyssey_medium.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoints/odyssey_short/basic-lm.300923-121316.model" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoints/odyssey_short/basic-lm.300923-121926.model" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoints/odyssey_short/basic-lm.300923-122028.model" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/checkpoints/odyssey_short/basic-lm.300923-143742.model" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/odyssey_short/300923-121316.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/odyssey_short/300923-121926.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/odyssey_short/300923-122028.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/odyssey_short/300923-143742.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Finetuning.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-150426.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-150937.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-151214.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-151345.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-151444.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-151841.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-151924.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-152122.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-152550.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-152723.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-152821.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-152904.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-153228.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-153342.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-153748.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-153900.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/300923-154146.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layers/RecurrentLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkpoints/basic-lm.300923-015000.model" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/checkpoints/basic-lm.300923-015230.model" beforeDir="false" afterPath="$PROJECT_DIR$/checkpoints/odyssey_short/basic-lm.300923-015230.model" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/metrics/300923-015230.csv" beforeDir="false" afterPath="$PROJECT_DIR$/metrics/odyssey_short/300923-015230.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/odyssey_medium.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/odyssey_medium.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Finetuning.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Finetuning.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Inference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inference.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Training.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Training.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/checkpoint/CheckpointManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/checkpoint/CheckpointManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/Layer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/BasicModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/GenericModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/DenseLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/DenseLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/InputLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/InputLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/GenericLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/SoftmaxLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/SoftmaxLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/GenericModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/GenericModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/LanguageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/LanguageModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/telemetry/TrainingMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/telemetry/TrainingMonitor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +45,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -307,6 +314,11 @@
           <properties class="java.lang.RuntimeException" package="java.lang" />
           <option name="timeStamp" value="32" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/models/GenericModel.java</url>
+          <line>106</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>

@@ -6,7 +6,7 @@ import util.LayerType;
 
 import java.io.Serializable;
 
-public abstract class Layer<T extends Layer<T>> implements Serializable {
+public abstract class GenericLayer<T extends GenericLayer<T>> implements Serializable {
     public LayerType layerType = LayerType.ABSTRACT;
     private int layerIndex;
     private final int size;
@@ -14,21 +14,21 @@ public abstract class Layer<T extends Layer<T>> implements Serializable {
     protected float[] biases;
     transient protected float[] activations;
     private Integer weightsPerUnit;
-    protected Layer<?> parentLayer;
+    protected GenericLayer<?> parentLayer;
     protected Activations.ActivationFn activationFn = Activations.IDENTITY;
 
     private Initializers.Supplier weightInitializer;
     private Initializers.Supplier biasInitializer = Initializers.ZEROS();
     private Initializers.Supplier activationInitializer = Initializers.GAUSSIAN(0, 0.01f);
 
-    Layer(int size) {
+    GenericLayer(int size) {
         this.size = size;
         weightInitializer = Initializers.GLOROT(size);
     }
 
     protected abstract T getThis();
 
-    public void setParentLayer(Layer<?> parentLayer) {
+    public void setParentLayer(GenericLayer<?> parentLayer) {
         this.parentLayer = parentLayer;
     }
 
