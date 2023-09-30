@@ -159,9 +159,9 @@ public class GenericModel implements Model, Serializable {
       System.out.printf("\tNumber of epochs: %s\tBatch size: %s\n\n", nEpochs, preprocessor.getBatchSize());
 
       long totalBatches = nEpochs * preprocessor.getBatchCount();
+      int batchNumber = 0;
 
       for (int i = 0; i < nEpochs; i++) {
-        int batchNumber = 0;
 
         for (Sample[] batch : preprocessor) {
 
@@ -170,7 +170,8 @@ public class GenericModel implements Model, Serializable {
           for (Sample sample : batch) {
 
             // TODO: This just here for testing purposes and is a MAJOR bottleneck
-            float[] input = floatFlat(sample.data());
+//            float[] input = Model.floatFlat(sample.data());
+            float[] input = sample.data();
             float[] label = sample.label();
 
             forwardPass(input);
@@ -190,9 +191,6 @@ public class GenericModel implements Model, Serializable {
           System.out.printf("Epoch: %s/%s (%.0f%%)   Batch loss: %s\n", i, nEpochs, percentage, meanError);
 
           batchNumber++;
-
-          // TODO remove. this is for testing
-//          if (batchNumber > 350) break;
         }
       }
     } catch (Exception e) {
@@ -201,17 +199,6 @@ public class GenericModel implements Model, Serializable {
     }
 
     return this;
-  }
-
-  public static float[] floatFlat(float[][] input) {
-    final int cols = input[0].length;
-    float[] flatArray = new float[input.length * cols];
-
-    for (int i = 0; i < input.length; i++) {
-      System.arraycopy(input[i], 0, flatArray, i * cols, cols);
-    }
-
-    return flatArray;
   }
 
   @Override

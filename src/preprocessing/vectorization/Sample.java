@@ -1,3 +1,3 @@
 package preprocessing.vectorization;
 
-public record Sample(float[][] data, float[] label) { }
+public record Sample(float[] data, float[] label) { }

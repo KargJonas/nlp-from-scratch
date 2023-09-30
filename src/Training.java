@@ -26,8 +26,8 @@ public class Training {
     var tokenRefSize = preprocessor.getTokenReferenceSize();
 
     var il = InputLayer.build(preprocessor.getInputShape());
-    var dl0 = DenseLayer.build(inputSize * tokenRefSize).setActivationFn(Activations.RELU);
-    var rl = RecurrentLayer.build(inputSize * tokenRefSize).setActivationFn(Activations.TANH);
+    var dl0 = DenseLayer.build(tokenRefSize).setActivationFn(Activations.RELU);
+    var rl = RecurrentLayer.build(tokenRefSize).setActivationFn(Activations.TANH);
     var dl1 = DenseLayer.build(128).setActivationFn(Activations.TANH);
     var dl2 = DenseLayer.build(tokenRefSize).setActivationFn(Activations.SOFTPLUS);
     var sml = SoftmaxLayer.build(tokenRefSize);

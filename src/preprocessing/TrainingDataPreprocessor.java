@@ -4,7 +4,6 @@ import preprocessing.batching.Batcher;
 import preprocessing.datasources.TextSource;
 import preprocessing.tokenization.TokenizationStrategy;
 import preprocessing.vectorization.Sample;
-import preprocessing.vectorization.SampleAggregator;
 import preprocessing.vectorization.VectorizationStrategy;
 
 import java.io.Serializable;
@@ -29,8 +28,8 @@ public class TrainingDataPreprocessor extends Preprocessor implements Iterable<S
   ) {
     super(textSource, tokenizationStrategy, vectorizationStrategy, inputSize, stepOver);
 
-    SampleAggregator sampleAggregator = new SampleAggregator(vectorizer, inputSize, stepOver);
-    batcher = new Batcher(sampleAggregator, batchSize);
+//    SampleAggregator sampleAggregator = new SampleAggregator(vectorizer, inputSize, stepOver);
+    batcher = new Batcher(vectorizer, batchSize);
     this.batchSize = batchSize;
   }
 

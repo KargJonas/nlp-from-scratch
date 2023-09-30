@@ -5,36 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/metrics/300923-150426.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-150937.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-151214.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-151345.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-151444.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-151841.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-151924.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-152122.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-152550.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-152723.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-152821.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-152904.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-153228.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-153342.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-153748.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-153900.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-154146.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layers/RecurrentLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/odyssey_medium.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/odyssey_medium.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Finetuning.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Finetuning.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Inference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/dataset.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataset/src/Cleanup.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Training.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Training.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/DenseLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/DenseLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/InputLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/InputLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/GenericLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/SoftmaxLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/SoftmaxLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/GenericModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/GenericModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/LanguageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/LanguageModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/TrainingDataPreprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/TrainingDataPreprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/batching/Batcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/batching/Batcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/vectorization/Sample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/vectorization/Sample.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

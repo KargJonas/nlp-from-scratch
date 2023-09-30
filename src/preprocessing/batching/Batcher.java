@@ -1,25 +1,25 @@
 package preprocessing.batching;
 
 import preprocessing.vectorization.Sample;
-import preprocessing.vectorization.SampleAggregator;
+import preprocessing.vectorization.Vectorizer;
 
 import java.io.Serializable;
 import java.util.Iterator;
 
 public class Batcher implements Iterable<Sample[]>, Serializable {
 
-  SampleAggregator sampleAggregator;
+  Vectorizer vectorizer;
   int batchSize;
 
-  public Batcher(SampleAggregator sampleAggregator, int batchSize) {
-    this.sampleAggregator = sampleAggregator;
+  public Batcher(Vectorizer vectorizer, int batchSize) {
+    this.vectorizer = vectorizer;
     this.batchSize = batchSize;
   }
 
   @Override
   public Iterator<Sample[]> iterator() {
     return new Iterator<>() {
-      final Iterator<Sample> sampleIterator = sampleAggregator.iterator();
+      final Iterator<float[]> vectorIterator = vectorizer.iterator();
       Sample[] batch;
       boolean hasNext = true;
 
@@ -31,17 +31,22 @@ public class Batcher implements Iterable<Sample[]>, Serializable {
         batch = new Sample[batchSize];
 
         for (int i = 0; i < batchSize; i++) {
-          if (!updateHasNext()) break;
-          batch[i] = sampleIterator.next();
+          float[] data = vectorIterator.next();
+          if (updateHasNext()) break;
+
+          float[] label = vectorIterator.next();
+          if (updateHasNext()) break;
+
+          batch[i] = new Sample(data, label);
         }
       }
 
       private boolean updateHasNext() {
-        if (!sampleIterator.hasNext()) {
+        if (!vectorIterator.hasNext()) {
           hasNext = false;
         }
 
-        return hasNext;
+        return !hasNext;
       }
 
       @Override
