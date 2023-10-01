@@ -14,19 +14,29 @@
 
     .list {
       list-style: none;
-      padding-left: 20px;
       font-size: 17px;
 
       li {
         user-select: none;
         cursor: default;
+        padding: 0 4px;
+        margin-left: -40px;
+
+        .creation-date {
+          float: right;
+        }
 
         &:hover {
           font-weight: bold;
         }
 
         &.active {
-          color: #EF6461;
+          font-weight: bold;
+          border: 2px dashed #EF6461;
+
+          .file-name {
+            color: #EF6461;
+          }
         }
       }
     }

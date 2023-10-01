@@ -29,7 +29,7 @@ const options = {
     legend: { position: 'top' },
     title: {
       display: true,
-      text: 'sdfsdf',
+      // text: '',
     },
   },
 };
@@ -46,14 +46,14 @@ export default function Dashboard({ data, file }) {
       <div className='chart-container'>
         <Line
           options={options}
-          data={chartData}
+          data={chartDataSmoothed}
           width='100%'
           height='70%'
         />
 
         <Line
           options={options}
-          data={chartDataSmoothed}
+          data={chartData}
           width='100%'
           height='70%'
         />

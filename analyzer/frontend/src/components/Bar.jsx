@@ -1,11 +1,13 @@
 import './Bar.scss';
 import classNames from "classnames";
+import moment from "moment";
 
 function List({ files, activeFile, fileClicked }) {
 
   const lis = files.map((file, index) => {
-    const active = file === activeFile
-      ? 'active' : null;
+    const [name, stamp] = file.split('.');
+    const active = file === activeFile ? 'active' : null;
+    const creationTime = moment(Number(stamp)).fromNow().replace('minutes', 'min');
 
     return (
       <li
@@ -13,7 +15,8 @@ function List({ files, activeFile, fileClicked }) {
         key={index}
         onClick={() => fileClicked(file)}
       >
-        {file}
+        <span className='file-name'>{name}</span>
+        <span className='creation-date'>{creationTime}</span>
       </li>
     );
   });

@@ -43,6 +43,7 @@ export default function getChartData(rawData, label, rawColor, smoothing = 1) {
         data,
         borderColor,
         backgroundColor,
+        pointRadius: 0
       },
     ],
   };
