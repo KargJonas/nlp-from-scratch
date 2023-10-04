@@ -5,84 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="Added a initialIndex to the preprocessor for label generation. Bug fix in GetFlatOneHotSentenceProvider(). Added a cost function demo.">
-      <change afterPath="$PROJECT_DIR$/analyzer/.eslintrc.cjs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/backend/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/backend/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/backend/bun.lockb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/backend/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/backend/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/backend/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/bun.lockb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/public/vite.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/src/components/App.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/src/components/App.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/src/components/Bar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/src/components/Bar.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/src/components/Dashboard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/src/components/Dashboard.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/src/components/getChartData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/src/index.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/src/main.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/analyzer/frontend/vite.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/abc.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-182834.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-182854.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-182904.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183021.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183115.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183134.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183159.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183446.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183528.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183612.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183710.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183728.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183738.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183743.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183800.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183812.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183824.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183831.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183928.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-183941.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-184906.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-185016.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-185257.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-185409.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-185425.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-185546.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-185559.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-185617.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-185627.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-185707.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-185724.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-185737.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-185744.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-190022.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-190038.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-190124.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-190246.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-191304.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-191312.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-191336.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-191347.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-191359.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-191404.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/300923-191417.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analyzer/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analyzer/backend/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analyzer/backend/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analyzer/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analyzer/frontend/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/analyzer/frontend/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.attach_pid699148" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.attach_pid699788" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.attach_pid700144" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.attach_pid700299" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/odyssey_short.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/odyssey_short.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Finetuning.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Finetuning.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Inference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Training.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Training.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/LanguageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/LanguageModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/Preprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/Preprocessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/PromptPreprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/PromptPreprocessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/TrainingDataPreprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/TrainingDataPreprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzer/backend/bun.lockb" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer/backend/bun.lockb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzer/backend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer/backend/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzer/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzer/frontend/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer/frontend/src/components/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzer/frontend/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer/frontend/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/checkpoint/CheckpointManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/checkpoint/CheckpointManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/GenericModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/GenericModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/telemetry/TrainingMonitor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/telemetry/TrainingMonitor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DirectoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DirectoryHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,52 +75,54 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/jonas/code/nlp-from-scratch/assets&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
+    "last_opened_file_path": "/home/jonas/code/nlp-from-scratch/metrics",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ],
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;TEXT&quot;
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "TEXT"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/metrics" />
+      <recent name="$PROJECT_DIR$/analyzer/backend" />
       <recent name="$PROJECT_DIR$/assets" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/metrics/old1" />
       <recent name="$PROJECT_DIR$/analyzer/frontend/src/components" />
       <recent name="$PROJECT_DIR$/metrics/odyssey_short" />
       <recent name="$PROJECT_DIR$/checkpoints/oddyssey_short" />
       <recent name="$PROJECT_DIR$/assets" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="preprocessing" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Training">
+  <component name="RunManager" selected="Docker.analyzer: Compose Deployment">
     <configuration name="Finetuning" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Finetuning" />
       <module name="nlp-1" />
@@ -193,21 +137,88 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Training" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Training" />
-      <module name="nlp-1" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="analyzer: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="analyzer/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="analyzer.backend: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="backend" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="analyzer/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="analyzer.frontend: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="frontend" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="analyzer/docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="analyzer/frontend/Dockerfile frontend-builder" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="ovenbunlatest_frontend-builder" />
+          <option name="buildCliOptions" value="--target frontend-builder" />
+          <option name="buildKitEnabled" value="true" />
+          <option name="buildOnly" value="true" />
+          <option name="sourceFilePath" value="analyzer/frontend/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="frontend/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="sourceFilePath" value="analyzer/frontend/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Application.Inference" />
       <item itemvalue="Application.Finetuning" />
-      <item itemvalue="Application.Training" />
+      <item itemvalue="Docker.analyzer: Compose Deployment" />
+      <item itemvalue="Docker.analyzer.backend: Compose Deployment" />
+      <item itemvalue="Docker.analyzer.frontend: Compose Deployment" />
+      <item itemvalue="Docker.analyzer/frontend/Dockerfile frontend-builder" />
+      <item itemvalue="Docker.frontend/Dockerfile" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Training" />
+        <item itemvalue="Docker.analyzer: Compose Deployment" />
+        <item itemvalue="Docker.frontend/Dockerfile" />
+        <item itemvalue="Docker.analyzer/frontend/Dockerfile frontend-builder" />
+        <item itemvalue="Docker.analyzer.frontend: Compose Deployment" />
+        <item itemvalue="Docker.analyzer.backend: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -235,6 +246,11 @@
       <workItem from="1694552869456" duration="98000" />
       <workItem from="1694714596328" duration="40000" />
       <workItem from="1695837717546" duration="23735000" />
+      <workItem from="1696241499071" duration="459000" />
+      <workItem from="1696250583294" duration="2827000" />
+      <workItem from="1696326197922" duration="193000" />
+      <workItem from="1696326398256" duration="8734000" />
+      <workItem from="1696422836798" duration="1766000" />
     </task>
     <task id="LOCAL-00001" summary="Added InputLayer, DenseLayer, Model, Initializers, Activation">
       <created>1676065472857</created>

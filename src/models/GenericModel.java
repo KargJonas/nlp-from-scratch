@@ -52,11 +52,13 @@ public class GenericModel implements Model, Serializable {
   }
 
   public Model attachTelemetry(TrainingMonitor trainingMonitor) {
+    trainingMonitor.setName(getName());
     this.trainingMonitor = trainingMonitor;
     return this;
   }
 
   public Model attachCheckpointManager(CheckpointManager checkpointManager) {
+    checkpointManager.setName(getName());
     this.checkpointManager = checkpointManager;
     return this;
   }

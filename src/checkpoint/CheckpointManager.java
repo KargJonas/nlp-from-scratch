@@ -16,7 +16,7 @@ public class CheckpointManager extends DirectoryHandler {
   }
 
   public void createCheckpoint(Model model) {
-    String fileName = String.format("%s/%s.%s.model", outDirectory, model.getName(), dateTime);
+    String fileName = getFileName("model");
 
     try {
       FileOutputStream fileOutputStream = new FileOutputStream(fileName);

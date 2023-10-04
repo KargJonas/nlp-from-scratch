@@ -11,7 +11,8 @@
     "dev": "nodemon index.js"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "nodemon": "^3.0.1"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

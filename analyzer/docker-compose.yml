@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend
+    environment:
+      PORT: $BACKEND_PORT
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    volumes:
+      - /home/jonas/code/nlp-from-scratch/metrics:/metrics
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "${FRONTEND_PORT}:80"

@@ -22,7 +22,7 @@ public class TrainingMonitor extends DirectoryHandler {
   }
 
   public void commit() {
-    String fileName = String.format("%s/%s.csv", outDirectory, dateTime);
+    String fileName = getFileName("csv");
     PrintWriter writer;
 
     try {

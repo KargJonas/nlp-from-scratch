@@ -7,8 +7,8 @@ import java.util.Date;
 public class DirectoryHandler {
 
   protected static final SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy-HHmmss");
-  private final Date now = new Date();
-  protected final String dateTime = sdf.format(now);
+  protected String name;
+  long dateTime = System.currentTimeMillis();
 
   protected final String outDirectory;
   protected final File directory;
@@ -24,5 +24,15 @@ public class DirectoryHandler {
     if (!directory.isDirectory()) {
       throw new RuntimeException("The provided path references a non-directory object.");
     }
+  }
+
+  public String getFileName(String fileExtension) {
+    return name == null
+      ? String.format("%s/%s.%s", outDirectory, dateTime, fileExtension)
+      : String.format("%s/%s.%s.%s", outDirectory, name, dateTime, fileExtension);
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 }

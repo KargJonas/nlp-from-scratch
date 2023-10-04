@@ -24,7 +24,7 @@ export default function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    socket = io('localhost:3000');
+    socket = io('localhost:4000');
 
     socket.on('files', data => {
       const cleanedFiles = cleanFiles(data);
