@@ -3,24 +3,23 @@ import fs from 'node:fs';
 import express from 'express';
 import { Server } from 'socket.io';
 
-let port = process.env.PORT;
-// const METRICS_DIR = '/home/jonas/code/nlp-from-scratch/metrics';
+const frontendPort = process.env.FRONTEND_PORT || 5000;
+const backendPort = process.env.BACKEND_PORT || 4000;
 const METRICS_DIR = '/metrics';
-
-if (port === undefined) {
-  console.log('$PORT not in ENV. falling back to port 8000.');
-  console.log('$PORT should be set by docker-compose. did you start the server some other way?');
-  port = 8000;
-}
+const DIST_DIR = './dist';
 
 const app = express();
 const server = createServer(app);
+
 const io = new Server(server, {
-  cors: { origin: ['http://localhost:5000', 'localhost:5000'] }
+  cors: { origin: [`http://localhost:${frontendPort}`] }
 });
 
-const files = fs.readdirSync(METRICS_DIR);
-console.log(files)
+console.log('Metrics dir: ' + fs.readdirSync(METRICS_DIR));
+console.log('Dist dir: ' + fs.readdirSync(DIST_DIR));
+
+app.use(express.static(DIST_DIR));
+app.listen(frontendPort, () => console.log(`frontend running at http://localhost:${frontendPort}`));
 
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -44,6 +43,6 @@ io.on('connection', (socket) => {
   handleFilesChanged();
 });
 
-server.listen(port, () => {
-  console.log(`server running at http://localhost:${port}`);
+server.listen(backendPort, () => {
+  console.log(`backend running at http://localhost:${backendPort}`);
 });
