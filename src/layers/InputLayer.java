@@ -1,32 +1,18 @@
 package layers;
 
 import util.LayerType;
-import util.Shape;
 
-public class InputLayer extends GenericLayer<InputLayer> {
-    Shape shape;
-
-    public InputLayer(Shape shape) {
-        super(shape.getSize());
-        layerType = LayerType.INPUT;
-        this.shape = shape;
+public class InputLayer extends BasicLayer {
+    protected InputLayer(int size) {
+        super(size);
     }
 
     @Override
-    protected InputLayer getThis() {
-        return this;
+    public LayerType getLayerType() {
+        return LayerType.INPUT;
     }
 
-    @Override
-    public void initialize() {
-        // No need to initialize
-        activations = new float[getSize()];
+    public static IBasicLayer build(int size) {
+        return new InputLayer(size);
     }
-
-    public static InputLayer build(Shape shape) {
-        return new InputLayer(shape);
-    }
-
-    @Override
-    public void backprop(float[] errors, float learningRate) { }
 }

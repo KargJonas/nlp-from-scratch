@@ -26,7 +26,7 @@ public class Preprocessor implements Serializable {
   public TokenReference tokenReference;
   public Vectorizer vectorizer;
 
-  Shape inputShape;
+  int inputSize;
   int stepOver;
 
   public Preprocessor(
@@ -42,7 +42,7 @@ public class Preprocessor implements Serializable {
     tokenReference = tokenizer.getTokenReference();
     vectorizationStrategy.setTokenReference(tokenReference);
     vectorizer = new Vectorizer(tokenizer, vectorizationStrategy);
-    inputShape = Shape.build(1, tokenReference.getTokenReferenceSize());
+    inputSize = tokenReference.getTokenReferenceSize();
 
     this.stepOver = stepOver;
   }
@@ -63,12 +63,11 @@ public class Preprocessor implements Serializable {
     tokenizer        = new Tokenizer(textSource, preprocessor.tokenizationStrategy, tokenReference);
     vectorizer       = new Vectorizer(tokenizer, vectorizationStrategy);
 
-    // TODO: FIX
-    inputShape = Shape.build(1, tokenReference.getTokenReferenceSize());
+    inputSize = tokenReference.getTokenReferenceSize();
   }
 
-  public Shape getInputShape() {
-    return inputShape;
+  public int getInputSize() {
+    return inputSize;
   }
 
   public int getTokenReferenceSize() {

@@ -1,7 +1,9 @@
 package models;
 
 import checkpoint.CheckpointManager;
-import layers.GenericLayer;
+import layers.IBasicLayer;
+import layers.ILayer;
+import layers.Layer;
 import preprocessing.TrainingDataPreprocessor;
 import preprocessing.vectorization.Sample;
 import telemetry.TrainingMonitor;
@@ -16,7 +18,7 @@ public class GenericModel implements Model, Serializable {
   public String name = "unnamed-model";
   transient TrainingMonitor trainingMonitor;
   transient CheckpointManager checkpointManager;
-  ArrayList<GenericLayer<?>> layers = new ArrayList<>();
+  ArrayList<IBasicLayer> layers = new ArrayList<>();
   LossFn lossFunction;
 
   @Override
@@ -24,17 +26,15 @@ public class GenericModel implements Model, Serializable {
     return checkpointManager;
   }
 
-  public GenericModel addLayer(GenericLayer<?> layer) {
-    if (layers.isEmpty() && layer.layerType != LayerType.INPUT) {
-      throw new RuntimeException("First layer must be of type InputLayer.");
+  public GenericModel addLayer(IBasicLayer layer) {
+    if (layers.isEmpty() && layer.getLayerType() != LayerType.INPUT) {
+      throw new RuntimeException("First layer must be of type layers.InputLayer.");
     }
 
-    if (layer.layerType == LayerType.SOFTMAX
+    if (layer.getLayerType() == LayerType.SOFTMAX
       && getLastLayer().getSize() != layer.getSize()) {
       throw new RuntimeException("Softmax layer must be same shape as the layer before it.");
     }
-
-    layer.setLayerIndex(layers.size());
 
     layers.add(layer);
     return this;
@@ -81,17 +81,16 @@ public class GenericModel implements Model, Serializable {
       throw new RuntimeException("No layers in model. Aborting.");
     }
 
-    // Set parent layers
+    // Set parent layers.
+    // Its very important that this happens before layer.initialize()
+    // as that method needs to know the parent of each layer.
     for (int i = 1; i < layers.size(); i++) {
       layers.get(i).setParentLayer(layers.get(i - 1));
     }
 
-    for (GenericLayer<?> layer : layers) {
+    for (IBasicLayer layer : layers) {
       // Create arrays for weights and biases of appropriate size.
-      layer.initialize(); // !! this must call initialize for
-
-      // Initialize the values in the arrays using the provided/default Initializers.
-//      layer.initializeValues();
+      layer.initialize();
     }
 
     System.out.println("\tDone.");
@@ -146,7 +145,7 @@ public class GenericModel implements Model, Serializable {
    * Returns the last/output layer of the network.
    * @return The output layer of the network.
    */
-  GenericLayer<?> getLastLayer() {
+  IBasicLayer getLastLayer() {
     return layers.get(layers.size() - 1);
   }
 
