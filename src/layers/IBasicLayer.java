@@ -10,9 +10,20 @@ import java.io.Serializable;
 public interface IBasicLayer extends Serializable {
 
     int getSize();
+
     float[] getActivations();
+
     void setActivations(float[] activations);
+
+    void setParentLayer(IBasicLayer parentLayer);
+
+    IBasicLayer getParentLayer();
+
     void backprop(float[] errors, float learningRate);
+
     void initialize();
+
+    void computeActivations();
+
     LayerType getLayerType();
 }

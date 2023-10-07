@@ -5,17 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="Added a initialIndex to the preprocessor for label generation. Bug fix in GetFlatOneHotSentenceProvider(). Added a cost function demo.">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layers/IBasicLayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layers/ILayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/a.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/ab.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696703948286.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696703998600.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696704015914.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696704983000.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696704989552.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705004025.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705024036.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705066399.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705320641.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705695233.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705809589.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705879568.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705939799.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705963983.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696706036711.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696706045340.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696706087142.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696706106607.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696706479738.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layers/InputLayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/layers/LayerDecorator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Training.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Training.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/BasicLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/BasicLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layers/DenseLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/DenseLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/GenericLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/GenericLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/InputLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/BasicLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/GenericLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/Layer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/IBasicLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/IBasicLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/ILayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/ILayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layers/RecurrentLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/RecurrentLayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/layers/SoftmaxLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/SoftmaxLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/GenericModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/GenericModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/LayerType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/LayerType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/LanguageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/LanguageModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/Preprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/Preprocessor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +51,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -83,7 +108,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Java",
+    "settings.editor.selected.configurable": "editor.preferences.tabs",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -117,7 +142,7 @@
       <recent name="preprocessing" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Inference">
+  <component name="RunManager" selected="Application.Training">
     <configuration name="Finetuning" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Finetuning" />
       <module name="nlp-1" />
@@ -329,10 +354,10 @@
           <properties class="java.lang.RuntimeException" package="java.lang" />
           <option name="timeStamp" value="32" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/models/LanguageModel.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="36" />
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/models/GenericModel.java</url>
+          <line>104</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -340,6 +365,7 @@
       <pinned-members>
         <PinnedItemInfo parentTag="Data.Tokenizer" memberName="tokenReference" />
         <PinnedItemInfo parentTag="Data.Tokenizer" memberName="tokenReferenceSize" />
+        <PinnedItemInfo parentTag="layers.Layer" memberName="weights" />
       </pinned-members>
     </pin-to-top-manager>
   </component>

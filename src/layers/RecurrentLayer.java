@@ -36,84 +36,87 @@
 
 package layers;
 
-public class RecurrentLayer extends DenseLayer {
-  private final float[] previousActivations;
+public class RecurrentLayer extends LayerDecorator {
+  private final float[] hiddenActivations;
 
-  RecurrentLayer(int size) {
-    super(size);
-    previousActivations = new float[size];
+  RecurrentLayer(ILayer layer) {
+    super(layer);
+    hiddenActivations = new float[getSize()];
   }
 
   @Override
   public void computeActivations() {
-    if (parentLayer == null) {
+    if (getParentLayer() == null) {
       throw new RuntimeException("No parent layer");
     }
 
-    if (parentLayer.getSize() != getSize()) {
+    if (getParentLayer().getSize() != getSize()) {
       throw new RuntimeException("RecurrentLayer expects parent layer of the same size.");
     }
 
     for (int i = 0; i < getSize(); i++) {
       float weightedSum = 0;
 
-      for (int j = 0; j < parentLayer.getSize(); j++) {
-        weightedSum += parentLayer.getActivations()[j] * weights[i][j];
+      for (int j = 0; j < getParentLayer().getSize(); j++) {
+        weightedSum += getParentLayer().getActivations()[j] * getWeights()[i][j];
       }
 
       // Update the activations using the previous activations
-      activations[i] = activationFn.f(weightedSum + biases[i] + previousActivations[i]);
+      getActivations()[i] = getActivationFn().f(weightedSum + getBiases()[i] + hiddenActivations[i]);
       // Store the current activations as previous activations for the next time step
-      previousActivations[i] = activations[i];
+      hiddenActivations[i] = getActivations()[i];
     }
   }
 
   @Override
   public void backprop(float[] errors, float learningRate) {
-    float[] newBiases = new float[getSize()];
-    float[][] newWeights = new float[getSize()][weightsPerUnit];
+    IBasicLayer parentLayer = getParentLayer();
+    int weightsPerUnit = parentLayer.getSize();
+    int size = getSize();
+
+    float[] newBiases = new float[size];
+    float[][] newWeights = new float[size][weightsPerUnit];
     float[] parentActivations = parentLayer.getActivations();
 
-    for (int i = 0; i < getSize(); i++) {
+    for (int i = 0; i < size; i++) {
       // Compute delta for the output layer
-      float delta = errors[i] * activationFn.df(activations[i]);
+      float delta = errors[i] * getActivationFn().df(getActivations()[i]);
 
       // Update biases
-      newBiases[i] = biases[i] - learningRate * delta;
+      newBiases[i] = getBiases()[i] - learningRate * delta;
 
       // Update weights
       for (int j = 0; j < weightsPerUnit; j++) {
-        newWeights[i][j] = weights[i][j] - learningRate * delta * parentActivations[j];
+        newWeights[i][j] = getWeights()[i][j] - learningRate * delta * parentActivations[j];
       }
 
       // Compute delta for the hidden layer (including recurrent connections)
-      float recurrentDelta = delta * activationFn.df(activations[i]);
+      float recurrentDelta = delta * getActivationFn().df(getActivations()[i]);
 
-      for (int j = 0; j < getSize(); j++) {
-        recurrentDelta += errors[j] * weights[j][i] * activationFn.df(activations[i]);
+      for (int j = 0; j < size; j++) {
+        recurrentDelta += errors[j] * getWeights()[j][i] * getActivationFn().df(getActivations()[i]);
       }
 
       // Update biases for recurrent connections
       newBiases[i] -= learningRate * recurrentDelta;
     }
 
-    biases = newBiases;
-    weights = newWeights;
+    setWeights(newWeights);
+    setBiases(newBiases);
 
     // Compute delta for the parent layer
     float[] parentErrors = new float[parentLayer.getSize()];
 
     for (int j = 0; j < weightsPerUnit; j++) {
-      for (int i = 0; i < getSize(); i++) {
-        parentErrors[j] += errors[i] * weights[i][j] * activationFn.df(activations[i]);
+      for (int i = 0; i < size; i++) {
+        parentErrors[j] += errors[i] * getWeights()[i][j] * getActivationFn().df(getActivations()[i]);
       }
     }
 
     parentLayer.backprop(parentErrors, learningRate);
   }
 
-
   public static RecurrentLayer build(int size) {
-    return new RecurrentLayer(size);
+    return new RecurrentLayer(Layer.build(size));
   }
 }

@@ -8,7 +8,7 @@ import util.LayerType;
  * Provides the necessary functionality to construct, configure and initialize a generic layer.
  * A generic layer has weights, biases, activations, a parent layer, an activation function and initializers.
  */
-public class GenericLayer extends BasicLayer implements ILayer {
+public class Layer extends BasicLayer implements ILayer {
 
     protected float[][] weights;    // The weights connect this layer to the parent layer.
     protected float[] biases;       // The biases act as "offsets" of the weighted sums.
@@ -16,10 +16,6 @@ public class GenericLayer extends BasicLayer implements ILayer {
     // Weights per unit is the number of weights that each unit is attached with to the parent layer.
     // weightsPerUnit is always equal to the number of units in the parent layer.
     protected Integer weightsPerUnit;
-
-    // The parent layer is the neighboring layer that is closest to the model input.
-    // This layer consumes the output data of the parent layer as inputs.
-    protected IBasicLayer parentLayer;
 
     // Default value for activation function is IDENTITY
     protected Activations.ActivationFn activationFn = Activations.IDENTITY;
@@ -29,7 +25,7 @@ public class GenericLayer extends BasicLayer implements ILayer {
     private Initializers.Supplier biasInitializer;
     private Initializers.Supplier activationInitializer;
 
-    GenericLayer(int size) {
+    Layer(int size) {
         super(size);
 
         // Configuring the initializer defaults
@@ -44,33 +40,58 @@ public class GenericLayer extends BasicLayer implements ILayer {
     }
 
     @Override
-    public void setParentLayer(GenericLayer parentLayer) {
-        this.parentLayer = parentLayer;
-        this.weightsPerUnit = parentLayer.getSize();
+    public void setParentLayer(IBasicLayer parentLayer) {
+        super.setParentLayer(parentLayer);
+        if (parentLayer != null) this.weightsPerUnit = parentLayer.getSize();
     }
 
     @Override
-    public GenericLayer setWeightInitializer(Initializers.Supplier weightInitializer) {
+    public Layer setWeightInitializer(Initializers.Supplier weightInitializer) {
         this.weightInitializer = weightInitializer;
         return this;
     }
 
     @Override
-    public GenericLayer setBiasInitializer(Initializers.Supplier biasInitializer) {
+    public Layer setBiasInitializer(Initializers.Supplier biasInitializer) {
         this.biasInitializer = biasInitializer;
         return this;
     }
 
     @Override
-    public GenericLayer setActivationInitializer(Initializers.Supplier activationInitializer) {
+    public Layer setActivationInitializer(Initializers.Supplier activationInitializer) {
         this.activationInitializer = activationInitializer;
         return this;
     }
 
     @Override
-    public GenericLayer setActivationFn(Activations.ActivationFn activationFn) {
+    public Layer setActivationFn(Activations.ActivationFn activationFn) {
         this.activationFn = activationFn;
         return this;
+    }
+
+    @Override
+    public Activations.ActivationFn getActivationFn() {
+        return activationFn;
+    }
+
+    @Override
+    public float[][] getWeights() {
+        return weights;
+    }
+
+    @Override
+    public void setWeights(float[][] weights) {
+        this.weights = weights;
+    }
+
+    @Override
+    public float[] getBiases() {
+        return biases;
+    }
+
+    @Override
+    public void setBiases(float[] biases) {
+        this.biases = biases;
     }
 
     /**
@@ -152,6 +173,6 @@ public class GenericLayer extends BasicLayer implements ILayer {
     }
 
     public static ILayer build(int size) {
-        return new GenericLayer(size);
+        return new Layer(size);
     }
 }

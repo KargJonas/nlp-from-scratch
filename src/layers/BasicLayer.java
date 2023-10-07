@@ -2,7 +2,7 @@ package layers;
 
 import util.LayerType;
 
-public class BasicLayer implements IBasicLayer {
+class BasicLayer implements IBasicLayer {
 
     // The activations are marked as transient to exclude them from serialization.
     // Activations are intermediate values that are used during training/inference
@@ -11,6 +11,10 @@ public class BasicLayer implements IBasicLayer {
 
     // Number of units in the layer
     protected final int size;
+
+    // The parent layer is the neighboring layer that is closest to the model input.
+    // This layer consumes the output data of the parent layer as inputs.
+    protected IBasicLayer parentLayer;
 
     protected BasicLayer(int size) {
         this.size = size;
@@ -21,6 +25,9 @@ public class BasicLayer implements IBasicLayer {
         // No need to initialize the activations
         activations = new float[getSize()];
     }
+
+    @Override
+    public void computeActivations() { }
 
     @Override
     public LayerType getLayerType() {
@@ -40,6 +47,16 @@ public class BasicLayer implements IBasicLayer {
     @Override
     public void setActivations(float[] activations) {
         this.activations = activations;
+    }
+
+    @Override
+    public void setParentLayer(IBasicLayer parentLayer) {
+        this.parentLayer = parentLayer;
+    }
+
+    @Override
+    public IBasicLayer getParentLayer() {
+        return parentLayer;
     }
 
     @Override

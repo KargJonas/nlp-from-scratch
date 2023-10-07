@@ -1,7 +1,9 @@
 package models;
 
 import checkpoint.CheckpointManager;
-import layers.GenericLayer;
+import layers.IBasicLayer;
+import layers.ILayer;
+import layers.Layer;
 import preprocessing.TrainingDataPreprocessor;
 import preprocessing.vectorization.Sample;
 import telemetry.TrainingMonitor;
@@ -16,7 +18,7 @@ public class GenericModel implements Model, Serializable {
   public String name = "unnamed-model";
   transient TrainingMonitor trainingMonitor;
   transient CheckpointManager checkpointManager;
-  ArrayList<GenericLayer<?>> layers = new ArrayList<>();
+  ArrayList<IBasicLayer> layers = new ArrayList<>();
   LossFn lossFunction;
 
   @Override
@@ -24,12 +26,12 @@ public class GenericModel implements Model, Serializable {
     return checkpointManager;
   }
 
-  public GenericModel addLayer(GenericLayer<?> layer) {
-    if (layers.isEmpty() && layer.layerType != LayerType.INPUT) {
-      throw new RuntimeException("First layer must be of type InputLayer.");
+  public GenericModel addLayer(IBasicLayer layer) {
+    if (layers.isEmpty() && layer.getLayerType() != LayerType.INPUT) {
+      throw new RuntimeException("First layer must be of type layers.InputLayer.");
     }
 
-    if (layer.layerType == LayerType.SOFTMAX
+    if (layer.getLayerType() == LayerType.SOFTMAX
       && getLastLayer().getSize() != layer.getSize()) {
       throw new RuntimeException("Softmax layer must be same shape as the layer before it.");
     }
@@ -86,7 +88,7 @@ public class GenericModel implements Model, Serializable {
       layers.get(i).setParentLayer(layers.get(i - 1));
     }
 
-    for (GenericLayer<?> layer : layers) {
+    for (IBasicLayer layer : layers) {
       // Create arrays for weights and biases of appropriate size.
       layer.initialize();
     }
@@ -143,7 +145,7 @@ public class GenericModel implements Model, Serializable {
    * Returns the last/output layer of the network.
    * @return The output layer of the network.
    */
-  GenericLayer<?> getLastLayer() {
+  IBasicLayer getLastLayer() {
     return layers.get(layers.size() - 1);
   }
 

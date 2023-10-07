@@ -1,7 +1,8 @@
 package models;
 
 import checkpoint.CheckpointManager;
-import layers.GenericLayer;
+import layers.IBasicLayer;
+import layers.Layer;
 import preprocessing.PromptPreprocessor;
 import preprocessing.TrainingDataPreprocessor;
 import telemetry.TrainingMonitor;
@@ -46,7 +47,6 @@ public class LanguageModel implements Model, Serializable {
       forwardPass(last);
 
       float[] prediction = getOutput();
-      System.out.println(Arrays.toString(prediction));
       stringBuilder.append(preprocessor.decode(prediction));
       last = prediction;
     }
@@ -60,7 +60,7 @@ public class LanguageModel implements Model, Serializable {
   }
 
   @Override
-  public LanguageModel addLayer(GenericLayer<?> layer) {
+  public LanguageModel addLayer(IBasicLayer layer) {
     model.addLayer(layer);
     return this;
   }

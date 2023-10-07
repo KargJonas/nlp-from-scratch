@@ -4,19 +4,25 @@ import util.Activations;
 import util.Initializers;
 
 public interface ILayer extends IBasicLayer {
-    void setParentLayer(GenericLayer parentLayer);
+    ILayer setWeightInitializer(Initializers.Supplier weightInitializer);
 
-    GenericLayer setWeightInitializer(Initializers.Supplier weightInitializer);
+    ILayer setBiasInitializer(Initializers.Supplier biasInitializer);
 
-    GenericLayer setBiasInitializer(Initializers.Supplier biasInitializer);
+    ILayer setActivationInitializer(Initializers.Supplier activationInitializer);
 
-    GenericLayer setActivationInitializer(Initializers.Supplier activationInitializer);
+    ILayer setActivationFn(Activations.ActivationFn activationFn);
 
-    GenericLayer setActivationFn(Activations.ActivationFn activationFn);
+    Activations.ActivationFn getActivationFn();
+
+    float[][] getWeights();
+
+    void setWeights(float[][] weights);
+
+    float[] getBiases();
+
+    void setBiases(float[] biases);
 
     void initialize();
-
-    void computeActivations();
 
     void backprop(float[] errors, float learningRate);
 }
