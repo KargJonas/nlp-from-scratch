@@ -13,7 +13,7 @@ public abstract class GenericLayer<T extends GenericLayer<T>> implements Seriali
     protected float[][] weights;
     protected float[] biases;
     transient protected float[] activations;
-    private Integer weightsPerUnit;
+    protected Integer weightsPerUnit;
     protected GenericLayer<?> parentLayer;
     protected Activations.ActivationFn activationFn = Activations.IDENTITY;
 

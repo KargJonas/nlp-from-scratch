@@ -2,6 +2,7 @@ package telemetry;
 
 import util.DirectoryHandler;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,10 +24,15 @@ public class TrainingMonitor extends DirectoryHandler {
 
   public void commit() {
     String fileName = getFileName("csv");
+    File file = new File(fileName);
     PrintWriter writer;
 
+    if (file.exists()) {
+      throw new RuntimeException("Cannot create checkpoint, file exists.");
+    }
+
     try {
-      writer = new PrintWriter(new FileWriter(fileName, true));
+      writer = new PrintWriter(new FileWriter(file, true));
     } catch (IOException e) {
       throw new RuntimeException(e);
     }

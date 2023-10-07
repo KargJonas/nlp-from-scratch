@@ -8,6 +8,7 @@ import telemetry.TrainingMonitor;
 import util.LossFunctions;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * An extension of the models.Model class which handles some of the language-model-specific configuration and setup.
@@ -32,25 +33,9 @@ public class LanguageModel implements Model, Serializable {
   }
 
   public String generateOutput(String prompt, int outputLength) {
-    if (prompt.length() > 40) return "Max prompt size exceeded";
-
-    // TODO: If the original dataset does not include space, this will cause errors.
-//    prompt = " ".repeat(40 - prompt.length()) + prompt;
-
     var stringBuilder = new StringBuilder();
     var promptPreprocessor = new PromptPreprocessor(preprocessor);
     float[][] encodedPrompt = promptPreprocessor.encode(prompt);
-
-//    for (int i = 0; i < outputLength; i++) {
-//      float[] flatEncodedPrompt = Model.floatFlat(encodedPrompt);
-//
-//      forwardPass(flatEncodedPrompt);
-//      float[] prediction = getOutput();
-//      stringBuilder.append(preprocessor.decode(prediction));
-//      System.arraycopy(encodedPrompt, 1, encodedPrompt, 0, encodedPrompt.length - 1);
-//      encodedPrompt[encodedPrompt.length - 1] = prediction.clone();
-//    }
-
     float[] last = encodedPrompt[encodedPrompt.length - 1];
 
     for (float[] vector : encodedPrompt) {
@@ -61,6 +46,7 @@ public class LanguageModel implements Model, Serializable {
       forwardPass(last);
 
       float[] prediction = getOutput();
+      System.out.println(Arrays.toString(prediction));
       stringBuilder.append(preprocessor.decode(prediction));
       last = prediction;
     }
@@ -146,9 +132,9 @@ public class LanguageModel implements Model, Serializable {
   }
 
   @Override
-  public LanguageModel createCheckpoint() {
+  public LanguageModel commitCheckpoint() {
     if (model.getCheckpointManager() == null) throw new RuntimeException("Cant create checkpoint: No checkpoint manager configured.");
-    model.getCheckpointManager().createCheckpoint(this);
+    model.getCheckpointManager().commitCheckpoint(this);
     return this;
   }
 

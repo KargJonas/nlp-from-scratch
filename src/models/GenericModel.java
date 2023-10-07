@@ -18,7 +18,6 @@ public class GenericModel implements Model, Serializable {
   transient CheckpointManager checkpointManager;
   ArrayList<GenericLayer<?>> layers = new ArrayList<>();
   LossFn lossFunction;
-  long checkpointNumber = 0;
 
   @Override
   public CheckpointManager getCheckpointManager() {
@@ -170,9 +169,6 @@ public class GenericModel implements Model, Serializable {
           float meanError = 0;
 
           for (Sample sample : batch) {
-
-            // TODO: This just here for testing purposes and is a MAJOR bottleneck
-//            float[] input = Model.floatFlat(sample.data());
             float[] input = sample.data();
             float[] label = sample.label();
 
@@ -180,7 +176,6 @@ public class GenericModel implements Model, Serializable {
             float x = computeLoss(label);
             meanError += x;
             getLastLayer().backprop(computeError(label), learningRate);
-            checkpointNumber++;
           }
 
           meanError /= preprocessor.getBatchSize();
@@ -214,9 +209,9 @@ public class GenericModel implements Model, Serializable {
     return this;
   }
 
-  public Model createCheckpoint() {
+  public Model commitCheckpoint() {
     if (checkpointManager == null) throw new RuntimeException("Cant create checkpoint: No checkpoint manager configured.");
-    checkpointManager.createCheckpoint(this);
+    checkpointManager.commitCheckpoint(this);
     return this;
   }
 }

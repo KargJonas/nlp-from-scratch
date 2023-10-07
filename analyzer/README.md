@@ -9,3 +9,5 @@ All relevant configuration is done through environment variables. The defaults a
 Alternatively, the metrics directory can be quickly set using something like this:
 
 `$ METRICS_DIR=/my/custom/metrics/dir docker-compose -f analyzer/docker-compose.yml up`
+
+There is also a `start.sh` script which starts the analyzer by running the first command.

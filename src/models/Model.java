@@ -75,7 +75,7 @@ public interface Model {
   /**
    * Serializes the current state of the network and writes it to disk.
    */
-  Model createCheckpoint();
+  Model commitCheckpoint();
 
   /**
    * Flattens a float[][] array.

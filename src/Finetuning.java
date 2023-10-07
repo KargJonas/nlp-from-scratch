@@ -12,21 +12,29 @@ public class Finetuning {
     var dir = "/home/jonas/code/nlp-from-scratch/";
     var modelReader = new ModelReader<LanguageModel>();
 
-    var reader = new TextFileReader(dir + "assets/odyssey_short.txt", 1);
-    var preprocessor = new TrainingDataPreprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), 1, 20);
+    var reader = new TextFileReader(dir + "assets/odyssey.txt", 100);
+    var preprocessor = new TrainingDataPreprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), 3, 64);
     var trainingMonitor = new TrainingMonitor(dir + "metrics");
     var checkpointManager = new CheckpointManager(dir + "checkpoints");
 
     // TODO: Add tokenReference compatibility check
 
-    modelReader
-      .read(dir + "checkpoints/basic-lm.300923-153900.model")
+    LanguageModel model = modelReader
+//      .read(dir + "checkpoints/basic-lm.1696619402443.model");
+      .read(dir + "checkpoints/basic-lm.1696621142022.model");
+
+//  Commit in case of SIGTERM
+    Runtime.getRuntime().addShutdownHook(new Thread(() -> model
+      .commitCheckpoint()
+      .commitMetrics()));
+
+    model
       .attachTelemetry(trainingMonitor)
       .attachCheckpointManager(checkpointManager)
       .setPreprocessor(preprocessor)
       .initialize()
-      .train(10, 0.0003f)
-      .createCheckpoint()
-      .commitMetrics();
+      .train(1, 0.0003f);
+//      .commitCheckpoint()
+//      .commitMetrics();
   }
 }

@@ -3,6 +3,7 @@ package checkpoint;
 import models.Model;
 import util.DirectoryHandler;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -15,11 +16,16 @@ public class CheckpointManager extends DirectoryHandler {
     super(outDirectory);
   }
 
-  public void createCheckpoint(Model model) {
+  public void commitCheckpoint(Model model) {
     String fileName = getFileName("model");
+    File file = new File(fileName);
+
+    if (file.exists()) {
+      throw new RuntimeException("Cannot create checkpoint, file exists.");
+    }
 
     try {
-      FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+      FileOutputStream fileOutputStream = new FileOutputStream(file);
       objectOutputStream = new ObjectOutputStream(fileOutputStream);
       objectOutputStream.writeObject(model);
       System.out.printf("Successfully created checkpoint: \"%s\"\n", fileName);
