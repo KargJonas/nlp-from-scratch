@@ -4,76 +4,80 @@ import util.Activations;
 import util.Initializers;
 import util.LayerType;
 
-import java.io.Serializable;
+/**
+ * Provides the necessary functionality to construct, configure and initialize a generic layer.
+ * A generic layer has weights, biases, activations, a parent layer, an activation function and initializers.
+ */
+public class GenericLayer extends BasicLayer implements ILayer {
 
-public abstract class GenericLayer<T extends GenericLayer<T>> implements Serializable {
-    public LayerType layerType = LayerType.ABSTRACT;
-    private int layerIndex;
-    private final int size;
-    protected float[][] weights;
-    protected float[] biases;
-    transient protected float[] activations;
+    protected float[][] weights;    // The weights connect this layer to the parent layer.
+    protected float[] biases;       // The biases act as "offsets" of the weighted sums.
+
+    // Weights per unit is the number of weights that each unit is attached with to the parent layer.
+    // weightsPerUnit is always equal to the number of units in the parent layer.
     protected Integer weightsPerUnit;
-    protected GenericLayer<?> parentLayer;
+
+    // The parent layer is the neighboring layer that is closest to the model input.
+    // This layer consumes the output data of the parent layer as inputs.
+    protected IBasicLayer parentLayer;
+
+    // Default value for activation function is IDENTITY
     protected Activations.ActivationFn activationFn = Activations.IDENTITY;
 
+    // Initializers provide initial values of the weights/biases/activations
     private Initializers.Supplier weightInitializer;
-    private Initializers.Supplier biasInitializer = Initializers.ZEROS();
-    private Initializers.Supplier activationInitializer = Initializers.GAUSSIAN(0, 0.01f);
+    private Initializers.Supplier biasInitializer;
+    private Initializers.Supplier activationInitializer;
 
     GenericLayer(int size) {
-        this.size = size;
+        super(size);
+
+        // Configuring the initializer defaults
         weightInitializer = Initializers.GLOROT(size);
+        biasInitializer = Initializers.ZEROS();
+        activationInitializer = Initializers.GAUSSIAN(0, 0.01f);
     }
 
-    protected abstract T getThis();
+    @Override
+    public LayerType getLayerType() {
+        return LayerType.GENERIC;
+    }
 
-    public void setParentLayer(GenericLayer<?> parentLayer) {
+    @Override
+    public void setParentLayer(GenericLayer parentLayer) {
         this.parentLayer = parentLayer;
+        this.weightsPerUnit = parentLayer.getSize();
     }
 
-    public void setLayerIndex(int layerIndex) {
-        this.layerIndex = layerIndex;
-    }
-
-    public int getLayerIndex() {
-        return layerIndex;
-    }
-
-    public T setWeightInitializer(Initializers.Supplier weightInitializer) {
+    @Override
+    public GenericLayer setWeightInitializer(Initializers.Supplier weightInitializer) {
         this.weightInitializer = weightInitializer;
-        return getThis();
+        return this;
     }
 
-    public T setBiasInitializer(Initializers.Supplier biasInitializer) {
+    @Override
+    public GenericLayer setBiasInitializer(Initializers.Supplier biasInitializer) {
         this.biasInitializer = biasInitializer;
-        return getThis();
+        return this;
     }
 
-    public T setActivationInitializer(Initializers.Supplier activationInitializer) {
+    @Override
+    public GenericLayer setActivationInitializer(Initializers.Supplier activationInitializer) {
         this.activationInitializer = activationInitializer;
-        return getThis();
+        return this;
     }
 
-    public T setActivationFn(Activations.ActivationFn activationFn) {
+    @Override
+    public GenericLayer setActivationFn(Activations.ActivationFn activationFn) {
         this.activationFn = activationFn;
-        return getThis();
-    }
-
-    /**
-     * Set size of the weights array.
-     * This number depends on the size of the parent layer and the type of layer.
-     *
-     * @param weightsPerUnit Size of the weights array.
-     */
-    protected void setWeightsPerUnit(int weightsPerUnit) {
-        this.weightsPerUnit = weightsPerUnit;
+        return this;
     }
 
     /**
      * Allocates memory for weights[], biases[] and activations[] and initializes their
      * values using their respective initializers if necessary.
      */
+    @Override
     public void initialize() {
         if (weightsPerUnit == null) {
             throw new RuntimeException("Layer.initialize() called before setWeightsPerUnit()");
@@ -106,25 +110,14 @@ public abstract class GenericLayer<T extends GenericLayer<T>> implements Seriali
         }
     }
 
-    public void setActivations(float[] activations) {
-        this.activations = activations;
-    }
-
     /**
      * Do not remove, this is here so that there is always a callable computeActivations available,
      * even for layers where this does not make sense and is thus not implemented, e.g. input layer.
      */
-    public void computeActivations() {
-    }
+    @Override
+    public void computeActivations() { }
 
-    public int getSize() {
-        return size;
-    }
-
-    public float[] getActivations() {
-        return activations;
-    }
-
+    @Override
     public void backprop(float[] errors, float learningRate) {
         float[] newBiases = new float[size];
         float[][] newWeights = new float[size][weightsPerUnit];
@@ -156,5 +149,9 @@ public abstract class GenericLayer<T extends GenericLayer<T>> implements Seriali
         }
 
         parentLayer.backprop(parentErrors, learningRate);
+    }
+
+    public static ILayer build(int size) {
+        return new GenericLayer(size);
     }
 }

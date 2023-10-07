@@ -23,7 +23,7 @@ public class DenseLayer extends GenericLayer<DenseLayer> {
     @Override
     public void initialize() {
         int parentLayerSize = parentLayer == null ? 0 : parentLayer.getSize();
-        setWeightsPerUnit(parentLayerSize);
+//        setWeightsPerUnit(parentLayerSize);
 
         super.initialize();
     }
@@ -43,7 +43,7 @@ public class DenseLayer extends GenericLayer<DenseLayer> {
             float weightedSum = 0;
 
             for (int j = 0; j < parentLayer.getSize(); j++) {
-                weightedSum += parentLayer.activations[j] * weights[i][j];
+                weightedSum += parentLayer.getActivations()[j] * weights[i][j];
             }
 
             activations[i] = activationFn.f(weightedSum + biases[i]);

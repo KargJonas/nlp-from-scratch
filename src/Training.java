@@ -1,6 +1,6 @@
 import checkpoint.CheckpointManager;
 import layers.DenseLayer;
-import layers.InputLayer;
+import layers.BasicLayer;
 import layers.RecurrentLayer;
 import layers.SoftmaxLayer;
 import models.LanguageModel;
@@ -33,7 +33,7 @@ public class Training {
     model
       .setName("basic-lm")
       .setPreprocessor(preprocessor)
-      .addLayer(InputLayer    .build(preprocessor.getInputShape()))
+      .addLayer(BasicLayer    .build(preprocessor.getInputShape()))
       .addLayer(DenseLayer    .build(300)     .setActivationFn(Activations.TANH))
       .addLayer(RecurrentLayer.build(300)     .setActivationFn(Activations.TANH).setActivationInitializer(Initializers.ZEROS()))
       .addLayer(RecurrentLayer.build(300)     .setActivationFn(Activations.TANH).setActivationInitializer(Initializers.ZEROS()))

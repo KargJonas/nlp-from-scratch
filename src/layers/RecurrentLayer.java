@@ -58,7 +58,7 @@ public class RecurrentLayer extends DenseLayer {
       float weightedSum = 0;
 
       for (int j = 0; j < parentLayer.getSize(); j++) {
-        weightedSum += parentLayer.activations[j] * weights[i][j];
+        weightedSum += parentLayer.getActivations()[j] * weights[i][j];
       }
 
       // Update the activations using the previous activations
