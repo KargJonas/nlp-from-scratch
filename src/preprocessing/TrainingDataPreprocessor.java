@@ -32,7 +32,7 @@ public class TrainingDataPreprocessor extends Preprocessor implements Iterable<S
     this.batchSize = batchSize;
   }
 
-  public float getBatchSize() {
+  public int getBatchSize() {
     return batchSize;
   }
 

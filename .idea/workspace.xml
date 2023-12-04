@@ -5,42 +5,92 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a187adb-a92b-491d-b5a8-a5b8f6600ae5" name="Changes" comment="Added a initialIndex to the preprocessor for label generation. Bug fix in GetFlatOneHotSentenceProvider(). Added a cost function demo.">
-      <change afterPath="$PROJECT_DIR$/assets/a.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/ab.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696703948286.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696703998600.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696704015914.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696704983000.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696704989552.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705004025.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705024036.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705066399.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705320641.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705695233.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705809589.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705879568.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705939799.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696705963983.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696706036711.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696706045340.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696706087142.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696706106607.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696706479738.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layers/InputLayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/layers/LayerDecorator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696718632177.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696718651318.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696718668124.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696718676007.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696718686281.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696718698396.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696718818111.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696718872447.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696718894589.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696718911559.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719380642.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719430782.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719440778.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719455311.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719466814.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719483403.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719491153.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719494747.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719535289.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719540040.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719544293.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719574951.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719581500.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719585471.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719588885.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719593228.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719620753.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719630713.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719638532.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719644419.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719671729.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719684823.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719697310.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719713810.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719720637.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719844281.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719848747.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719926547.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719935035.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719942397.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696719951533.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720084515.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720115828.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720292514.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720437877.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720556260.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720591237.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720691161.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720693492.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720718682.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720743148.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720782173.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720811802.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696720973868.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721023875.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721039522.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721053705.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721073660.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721087023.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721130241.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721144632.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721225015.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721688382.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721713319.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721756138.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721785585.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721806977.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721826300.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721829953.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721857338.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721875964.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721923240.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1696721944059.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1701692246318.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/metrics/basic-lm.1701692664209.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzer/backend/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer/backend/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analyzer/frontend/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/analyzer/frontend/src/components/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Finetuning.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Finetuning.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Training.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Training.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/BasicLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/BasicLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layers/DenseLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/DenseLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/GenericLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/Layer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/IBasicLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/IBasicLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/ILayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/ILayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/layers/RecurrentLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/RecurrentLayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layers/SoftmaxLayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/layers/SoftmaxLayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/GenericModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/GenericModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/LanguageModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/LanguageModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/preprocessing/Preprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/Preprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/TrainingDataPreprocessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/preprocessing/TrainingDataPreprocessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/preprocessing/vectorization/SampleAggregator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Initializers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Initializers.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,35 +141,35 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "openjdk-19",
-    "last_opened_file_path": "/home/jonas/code/nlp-from-scratch/analyzer",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "editor.preferences.tabs",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/jonas/docs/algo/ue2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ],
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "TEXT"
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;TEXT&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/analyzer" />
@@ -227,6 +277,13 @@
       <workItem from="1696326398256" duration="8734000" />
       <workItem from="1696422836798" duration="11027000" />
       <workItem from="1696588989362" duration="11295000" />
+      <workItem from="1696861368115" duration="703000" />
+      <workItem from="1697911892750" duration="66000" />
+      <workItem from="1698842813851" duration="648000" />
+      <workItem from="1699209367853" duration="979000" />
+      <workItem from="1699286005217" duration="180000" />
+      <workItem from="1700390273184" duration="90000" />
+      <workItem from="1701691994281" duration="1286000" />
     </task>
     <task id="LOCAL-00001" summary="Added InputLayer, DenseLayer, Model, Initializers, Activation">
       <created>1676065472857</created>
@@ -358,6 +415,11 @@
           <url>file://$PROJECT_DIR$/src/models/GenericModel.java</url>
           <line>104</line>
           <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/layers/RecurrentLayer.java</url>
+          <line>161</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -12,8 +12,8 @@ public class Finetuning {
     var dir = "/home/jonas/code/nlp-from-scratch/";
     var modelReader = new ModelReader<LanguageModel>();
 
-    var reader = new TextFileReader(dir + "assets/odyssey.txt", 100);
-    var preprocessor = new TrainingDataPreprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), 3, 64);
+    var reader = new TextFileReader(dir + "assets/abc.txt", 100);
+    var preprocessor = new TrainingDataPreprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), 1, 10);
     var trainingMonitor = new TrainingMonitor(dir + "metrics");
     var checkpointManager = new CheckpointManager(dir + "checkpoints");
 
@@ -21,7 +21,7 @@ public class Finetuning {
 
     LanguageModel model = modelReader
 //      .read(dir + "checkpoints/basic-lm.1696619402443.model");
-      .read(dir + "checkpoints/basic-lm.1696621142022.model");
+      .read(dir + "checkpoints/basic-lm.1696718818111.model");
 
 //  Commit in case of SIGTERM
     Runtime.getRuntime().addShutdownHook(new Thread(() -> model
@@ -33,7 +33,7 @@ public class Finetuning {
       .attachCheckpointManager(checkpointManager)
       .setPreprocessor(preprocessor)
       .initialize()
-      .train(1, 0.0003f);
+      .train(10, 0.003f);
 //      .commitCheckpoint()
 //      .commitMetrics();
   }

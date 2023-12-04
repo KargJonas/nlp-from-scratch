@@ -37,7 +37,7 @@ export default function App() {
     socket.on('data', (data) => setData(cleanData(data)));
   }, []);
 
-  const handleClick = (file) => {
+  const handleClick = (finle) => {
     setActiveFile(file);
     socket?.emit('open-file', file);
   };

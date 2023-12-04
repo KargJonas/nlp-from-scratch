@@ -34,6 +34,14 @@ public class Initializers {
     }
 
     /**
+     * Kaiming initialization mean=0 and standardDeviation=2/n
+     * @param n Number of units
+     */
+    public static Supplier KAIMING(int n) {
+        return GAUSSIAN(0, 2f / n);
+    }
+
+    /**
      * Weight initializer. Gaussian with mean=0 and standardDeviation=1/sqrt(n)
      * @param n Number of units in the current layer.
      */

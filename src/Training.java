@@ -17,8 +17,8 @@ public class Training {
   public static void main(String[] args) {
     var dir = "/home/jonas/code/nlp-from-scratch/";
 
-    var reader = new TextFileReader(dir + "assets/abc.txt", 20);
-    var preprocessor = new TrainingDataPreprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), 5, 10);
+    var reader = new TextFileReader(dir + "assets/boot.txt", 20);
+    var preprocessor = new TrainingDataPreprocessor(reader, CharTokenizer.build(), OneHotVectorizer.build(), 1, 64);
     var model = new LanguageModel();
     var trainingMonitor = new TrainingMonitor(dir + "metrics");
     var checkpointManager = new CheckpointManager(dir + "checkpoints");
@@ -34,18 +34,19 @@ public class Training {
       .setName("basic-lm")
       .setPreprocessor(preprocessor)
       .addLayer(InputLayer.build(preprocessor.getInputSize()))
-      .addLayer(DenseLayer    .build(200)     .setActivationFn(Activations.TANH))
-      .addLayer(RecurrentLayer.build(200)     .setActivationFn(Activations.TANH).setActivationInitializer(Initializers.ZEROS()))
-//      .addLayer(RecurrentLayer.build(300)     .setActivationFn(Activations.TANH).setActivationInitializer(Initializers.ZEROS()))
-//      .addLayer(RecurrentLayer.build(300)     .setActivationFn(Activations.TANH).setActivationInitializer(Initializers.ZEROS()))
-      .addLayer(DenseLayer    .build(100)     .setActivationFn(Activations.TANH))
-      .addLayer(DenseLayer    .build(tokenRefSize).setActivationFn(Activations.IDENTITY))
+      .addLayer(DenseLayer
+          .build(64)
+          .setActivationFn(Activations.RELU)
+          .setActivationInitializer(Initializers.KAIMING(64)))
+      .addLayer(RecurrentLayer.build(64)     .setActivationInitializer(Initializers.KAIMING(64))) // TODO: The recurrent layers dont do shit
+      .addLayer(RecurrentLayer.build(tokenRefSize).setActivationInitializer(Initializers.KAIMING(tokenRefSize)))
+      .addLayer(DenseLayer    .build(tokenRefSize).setActivationFn(Activations.TANH))
       .addLayer(SoftmaxLayer  .build(tokenRefSize))
       .setLossFunction(LossFunctions.CATEGORICAL_CROSSENTROPY)
       .initialize()
       .attachTelemetry(trainingMonitor)
       .attachCheckpointManager(checkpointManager)
-      .train(1, 0.01f);
+      .train(10, 1f);
 //      .commitCheckpoint()
 //      .commitMetrics();
 

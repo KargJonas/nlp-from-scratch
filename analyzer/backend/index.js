@@ -27,8 +27,15 @@ io.on('connection', (socket) => {
   socket.on('open-file', (file) => {
     console.log('sending data');
 
-    const csv = fs.readFileSync(`${METRICS_DIR}/${file}`, 'utf8');
-    socket.emit('data', csv);
+    // const csv = fs.readFileSync(`${METRICS_DIR}/${file}`, 'utf8');
+    // socket.emit('data', csv);
+
+    try {
+      const csv = fs.readFileSync(`${METRICS_DIR}/${file}`, 'utf8');
+      socket.emit('data', csv);
+    } catch (error) {
+      console.error(`error while reading file "${file}": ${error.message}`);
+    }
   });
 
   const handleFilesChanged = () => {

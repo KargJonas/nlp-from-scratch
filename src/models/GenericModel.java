@@ -162,32 +162,42 @@ public class GenericModel implements Model, Serializable {
       int batchNumber = 0;
 
       for (int i = 0; i < nEpochs; i++) {
+        float meanLoss = 0;
 
         for (Sample[] batch : preprocessor) {
 
-          float meanError = 0;
+          float[] meanError = new float[preprocessor.getInputSize()]; // TODO: Should be output size
 
           for (Sample sample : batch) {
             float[] input = sample.data();
             float[] label = sample.label();
-
             forwardPass(input);
-            float x = computeLoss(label);
-            meanError += x;
-            getLastLayer().backprop(computeError(label), learningRate);
+
+            float[] error = computeError(label);
+            meanLoss += computeLoss(label);
+
+            // TODO: Try weighted errors
+            floatArrAdd(meanError, error);
           }
 
-          meanError /= preprocessor.getBatchSize();
-
-          if (trainingMonitor != null) {
-            trainingMonitor.add(meanError);
-          }
+          floatArrDiv(meanError, preprocessor.getBatchSize());
+          getLastLayer().backprop(meanError, learningRate);
 
           float percentage = ((float) batchNumber / totalBatches) * 100;
-          System.out.printf("Epoch: %s/%s (%.0f%%)   Batch loss: %s\n", i, nEpochs, percentage, meanError);
+          meanLoss /= (float)(preprocessor.getBatchSize());
+          System.out.printf("Epoch: %s/%s (%.0f%%)   Batch loss: %s\n", i, nEpochs, percentage, meanLoss);
+
+        if (trainingMonitor != null) {
+          trainingMonitor.add(meanLoss);
+        }
 
           batchNumber++;
         }
+
+//        if (trainingMonitor != null) {
+//          float epochLoss = (float) ((i + 1) * preprocessor.getBatchSize());
+//          trainingMonitor.add(epochLoss);
+//        }
       }
     } catch (Exception e) {
       System.out.println("Training failed:");
@@ -195,6 +205,14 @@ public class GenericModel implements Model, Serializable {
     }
 
     return this;
+  }
+
+  private void floatArrAdd(float[] a, float[] b) {
+    for (int i = 0; i < a.length; i++) a[i] += b[i];
+  }
+
+  private void floatArrDiv(float[] a, float factor) {
+    for (int i = 0; i < a.length; i++) a[i] /= factor;
   }
 
   @Override
